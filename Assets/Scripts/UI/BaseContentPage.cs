@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace wwild.ui
 {
     using wwild.common.itf;
-    public class ContentPage : UIBehaviour
+    public class BaseContentPage : UIBehaviour
     {
         protected static readonly int MIN_ORDER = 0;
         protected static readonly int MAX_ORDER = 3000;
