@@ -158,10 +158,10 @@ RectTransform:
   m_Father: {fileID: 1520326762}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -351}
-  m_SizeDelta: {x: 180, y: 200}
+  m_AnchoredPosition: {x: 120, y: 8}
+  m_SizeDelta: {x: 180, y: -518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41336008
 MonoBehaviour:
@@ -185,8 +185,8 @@ MonoBehaviour:
   m_StartAxis: 1
   m_CellSize: {x: 180, y: 50}
   m_Spacing: {x: 0, y: 5}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 2
+  m_ConstraintCount: 3
 --- !u!1 &172431481
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +775,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54426f45c8ec5b34bb2f0556368fc73d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1520326761}
+  m_btnNewgame: {fileID: 1665748308}
+  m_btnOption: {fileID: 617324188}
+  m_btnExist: {fileID: 1414015430}
 --- !u!114 &1520326759
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,16 +8,20 @@ namespace wwild.ui
 
     public class BasePage : UIBehaviour, IContainer<IContentPage>
     {
-        protected static readonly int MIN_ORDER = 0;
-        protected static readonly int MAX_ORDER = 3000;
+        //protected static readonly int MIN_ORDER = 0;
+        //protected static readonly int MAX_ORDER = 3000;
 
         protected Dictionary<string, IContentPage> m_containers;
 
-        [Tooltip("the page canvas component"), SerializeField]
-        protected Canvas canvas;
-
         public virtual void Init()
         { }
+
+        protected virtual void AddListeners()
+        { }
+
+        protected virtual void RemoveListeners()
+        { }
+
         public virtual void RegisterObj(string key, IContentPage obj)
         {
         }
