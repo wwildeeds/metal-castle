@@ -7,7 +7,7 @@ using System;
 namespace wwild.ui.login
 {
     using wwild.common.itf;
-    public class NewGamePage : ContentPage, IContentPage
+    public class NewGamePage : BaseContentPage, IContentPage
     {
         public int InstanceID { get; private set; }
 

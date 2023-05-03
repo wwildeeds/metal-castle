@@ -57,6 +57,8 @@ namespace wwild.ui.login
         private async UniTask OnButtonNewGameClickAsync()
         {
             await UniTask.Yield(PlayerLoopTiming.LastUpdate);
+
+            IsRegisteredObj("");
         }
 
         private async UniTask OnButtonOptionClickAsync()
