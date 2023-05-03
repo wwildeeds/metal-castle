@@ -8,20 +8,24 @@ namespace wwild.ui
 
     public class BasePage : UIBehaviour, IContainer<IContentPage>
     {
-        public void RegisterObj(string key, IContentPage obj)
+        protected Dictionary<string, IContentPage> m_containers;
+
+        public virtual void RegisterObj(string key, IContentPage obj)
         {
         }
 
-        public void UnRegisterObj(string key)
+        public virtual void UnRegisterObj(string key)
         {
         }
 
-        public void ClearAll()
+        public virtual bool IsRegisteredObj(string key)
+        {
+            return false;
+        }
+
+        public virtual void ClearAll()
         {
         }
 
-        public void Dispose()
-        {
-        }
     }
 }
