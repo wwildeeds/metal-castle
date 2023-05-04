@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace wwild.scriptableObjects
 {
-    [CreateAssetMenu(fileName = "LoginPageScriptableObject", menuName = "LoginPageScriptableObject")]
-    public class LoginPageScriptableObject : ScriptableObject
+    [CreateAssetMenu(fileName = "LoginScenePrefabs", menuName = "LoginScenePrefabs")]
+    public class LoginScenePrefabs : ScriptableObject
     {
         [SerializeField]
         private string m_newgamePage;

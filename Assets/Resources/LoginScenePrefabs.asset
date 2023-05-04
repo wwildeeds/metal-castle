@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cf6e57ec0b2f7d47b51742853ecfa05, type: 3}
-  m_Name: LoginPageScriptableObject
+  m_Name: LoginScenePrefabs
   m_EditorClassIdentifier: 
-  NewgamePage: NewgamePage
-  OptionPage: OptionPage
+  m_newgamePage: 
+  m_optionPage: 

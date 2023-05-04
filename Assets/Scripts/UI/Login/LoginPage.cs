@@ -65,7 +65,11 @@ namespace wwild.ui.login
         {
             await UniTask.Yield(PlayerLoopTiming.LastUpdate);
 
-            Debug.Log(IsRegisteredObj(((short)LoginFlags.Newgame)));
+            if (!IsRegisteredObj(((short)LoginFlags.Newgame)))
+            {
+                var obj = await Resources.LoadAsync<GameObject>("");
+                GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity);
+            }
         }
 
         private async UniTask OnButtonOptionClickAsync()
