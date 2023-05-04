@@ -108,7 +108,7 @@ namespace wwild.ui.login
                 RegisterObj(((short)LoginFlags.Newgame), go.GetComponent<NewGamePage>());
             }
 
-            await UniTask.Yield(PlayerLoopTiming.TimeUpdate);
+            await UniTask.Yield();
 
             var page = GetRegisteredObj(((short)LoginFlags.Newgame));
 

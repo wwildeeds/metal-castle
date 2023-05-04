@@ -19,6 +19,8 @@ namespace wwild.ui.login
 
         [Tooltip("cancel button"), SerializeField]
         private Button m_btnCancel;
+        [Tooltip("play button"), SerializeField]
+        private Button m_btnPlay;
 
         protected override void Awake()
         {
@@ -45,11 +47,13 @@ namespace wwild.ui.login
         protected override void AddListeners()
         {
             m_btnCancel.onClick.AddListener(() => OnButtonCancelClickAsync().Forget());
+            m_btnPlay.onClick.AddListener(() => OnButtonPlayClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
             m_btnCancel.onClick.RemoveAllListeners();
+            m_btnPlay.onClick.RemoveAllListeners();
         }
 
         public void Show()
@@ -64,14 +68,20 @@ namespace wwild.ui.login
 
         public void Dispose()
         {
+            RemoveListeners();
         }
 
         #region button events
         private async UniTask OnButtonCancelClickAsync()
         {
-            await UniTask.Yield(PlayerLoopTiming.LastTimeUpdate);
+            await UniTask.Yield();
 
             m_ibucket.PopObj().Hide();
+        }
+
+        private async UniTask OnButtonPlayClickAsync()
+        {
+            await UniTask.Yield(PlayerLoopTiming.LastTimeUpdate);
         }
         #endregion
     }
