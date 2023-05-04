@@ -7,7 +7,12 @@ namespace wwild.scriptableObjects
     [CreateAssetMenu(fileName = "LoginPageScriptableObject", menuName = "LoginPageScriptableObject")]
     public class LoginPageScriptableObject : ScriptableObject
     {
-        public string NewgamePage;
-        public string OptionPage;
+        [SerializeField]
+        private string m_newgamePage;
+        [SerializeField]
+        private string m_optionPage;
+
+        public string NewgamePage { get { return m_newgamePage; } }
+        public string OptionPage { get { return m_optionPage; } }
     }
 }
