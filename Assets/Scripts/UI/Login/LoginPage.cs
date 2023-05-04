@@ -125,6 +125,5 @@ namespace wwild.ui.login
             await UniTask.Yield(PlayerLoopTiming.LastUpdate);
         }
         #endregion
-
     }
 }
