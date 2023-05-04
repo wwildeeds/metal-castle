@@ -29,7 +29,7 @@ namespace wwild.ui.login
 
         protected override void Start()
         {
-            //AddListeners();
+            AddListeners();
         }
 
         protected override void Init()
@@ -69,7 +69,9 @@ namespace wwild.ui.login
         #region button events
         private async UniTask OnButtonCancelClickAsync()
         {
-            await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
+            await UniTask.Yield(PlayerLoopTiming.LastTimeUpdate);
+
+            m_ibucket.PopObj().Hide();
         }
         #endregion
     }
