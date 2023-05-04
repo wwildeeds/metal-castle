@@ -10,6 +10,13 @@ namespace wwild.ui.login
 
     using wwild.ui;
     using wwild.common.itf;
+
+    public enum LoginFlags : short
+    { 
+        Newgame,
+        Option
+    }
+
     public class LoginPage : BasePage, IDisposable
     {
 
@@ -32,7 +39,7 @@ namespace wwild.ui.login
 
         public override void Init()
         {
-            m_containers = new Dictionary<string, IContentPage>();
+            base.Init();
         }
 
         protected override void AddListeners()
@@ -58,7 +65,7 @@ namespace wwild.ui.login
         {
             await UniTask.Yield(PlayerLoopTiming.LastUpdate);
 
-            IsRegisteredObj("");
+            Debug.Log(IsRegisteredObj(((short)LoginFlags.Newgame)));
         }
 
         private async UniTask OnButtonOptionClickAsync()

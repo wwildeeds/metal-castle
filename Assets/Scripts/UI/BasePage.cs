@@ -6,15 +6,10 @@ namespace wwild.ui
 {
     using wwild.common.itf;
 
-    public class BasePage : UIBehaviour, IContainer<IContentPage>
+    public class BasePage : UIBehaviour, IContainer<short, IContentPage>
     {
-        //protected static readonly int MIN_ORDER = 0;
-        //protected static readonly int MAX_ORDER = 3000;
 
-        protected Dictionary<string, IContentPage> m_containers;
-
-        public virtual void Init()
-        { }
+        private Dictionary<short, IContentPage> m_containers;
 
         protected virtual void AddListeners()
         { }
@@ -22,22 +17,64 @@ namespace wwild.ui
         protected virtual void RemoveListeners()
         { }
 
-        public virtual void RegisterObj(string key, IContentPage obj)
+        
+
+        public virtual void Init()
         {
+            m_containers = new Dictionary<short, IContentPage>();
         }
 
-        public virtual void UnRegisterObj(string key)
+        public bool IsRegisteredObj(short key)
         {
+            return m_containers.ContainsKey(key);
         }
 
-        public virtual bool IsRegisteredObj(string key)
+        public void RegisterObj(short key, IContentPage obj)
         {
-            return false;
+            if (obj.Equals(null)) throw new System.NullReferenceException();
+
+            m_containers.Add(key, obj);
         }
 
-        public virtual void ClearAll()
+        public void UnRegisterObj(short key)
         {
+            if (m_containers.ContainsKey(key))
+                m_containers.Remove(key);
         }
+        public void ClearAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        //public virtual void RegisterObj(string key, IContentPage obj)
+        //{
+        //    if (string.IsNullOrEmpty(key) || obj.Equals(null)) throw new System.NullReferenceException();
+        //    if (IsRegisteredObj(key)) return;
+
+        //    m_containers.Add(key, obj);
+        //}
+
+        //public virtual void UnRegisterObj(string key)
+        //{
+        //    if (string.IsNullOrEmpty(key)) throw new System.ArgumentNullException();
+
+        //    m_containers.Remove(key);
+        //}
+
+        //public virtual bool IsRegisteredObj(string key)
+        //{
+        //    return m_containers.ContainsKey(key);
+        //}
+
+        //public virtual void ClearAll()
+        //{
+        //    foreach (var item in m_containers)
+        //    {
+        //        item.Value.Dispose();
+        //    }
+
+        //    m_containers.Clear();
+        //}
 
     }
 }

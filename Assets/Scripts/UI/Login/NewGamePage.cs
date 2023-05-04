@@ -1,39 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 
 namespace wwild.ui.login
 {
+    using Cysharp.Threading.Tasks;
+
     using wwild.common.itf;
     public class NewGamePage : BaseContentPage, IContentPage
     {
         public int InstanceID { get; private set; }
 
+        [Tooltip("cancel button"), SerializeField]
+        private Button m_btnCancel;
+
         protected override void Awake()
-        {
-            Init();
-        }
-
-        protected override void Start()
-        {
-            AddListeners();
-        }
-
-        protected override void Init()
         {
             InstanceID = this.GetInstanceID();
         }
 
+        protected override void Start()
+        {
+            Init();
+
+            //AddListeners();
+        }
+
+        protected override void Init()
+        {
+            IContainer = FindObjectOfType<LoginPage>();
+
+            if (IContainer.Equals(null))
+                throw new NullReferenceException();
+
+            IContainer.RegisterObj((short)LoginFlags.Newgame, this);
+        }
+
         protected override void AddListeners()
         {
-            base.AddListeners();
+            m_btnCancel.onClick.AddListener(() => OnButtonCancelClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
-            base.RemoveListeners();
+            m_btnCancel.onClick.RemoveAllListeners();
         }
 
         public void Show()
@@ -45,5 +58,16 @@ namespace wwild.ui.login
         {
             canvas.sortingOrder = MIN_ORDER;
         }
+
+        public void Dispose()
+        {
+        }
+
+        #region button events
+        private async UniTask OnButtonCancelClickAsync()
+        {
+            await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
+        }
+        #endregion
     }
 }

@@ -12,4 +12,12 @@ namespace wwild.common.itf
         bool IsRegisteredObj(string key);
         void ClearAll();
     }
+
+    public interface IContainer<K, T> where K : struct where T : IContentPage
+    {
+        void RegisterObj(K key, T obj);
+        void UnRegisterObj(K key);
+        bool IsRegisteredObj(K key);
+        void ClearAll();
+    }
 }
