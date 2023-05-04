@@ -10,6 +10,7 @@ namespace wwild.ui.login
 
     using wwild.ui;
     using wwild.common.itf;
+    using wwild.manager;
 
     public enum LoginFlags : short
     { 
@@ -17,8 +18,9 @@ namespace wwild.ui.login
         Option
     }
 
-    public class LoginPage : BasePage, IDisposable
+    public class LoginPage : BasePage, IBucket<IContentPage>, IDisposable
     {
+        private Stack<IContentPage> m_bucket;
 
         [Tooltip("new game button component"), SerializeField]
         private Button m_btnNewgame;
@@ -26,6 +28,8 @@ namespace wwild.ui.login
         private Button m_btnOption;
         [Tooltip("exist button component"), SerializeField]
         private Button m_btnExist;
+
+        public bool IsBucketEmpty => m_bucket.Count == 0;
 
         protected override void Awake()
         {
@@ -40,6 +44,8 @@ namespace wwild.ui.login
         public override void Init()
         {
             base.Init();
+
+            m_bucket = new Stack<IContentPage>();
         }
 
         protected override void AddListeners()
@@ -56,6 +62,36 @@ namespace wwild.ui.login
             m_btnExist.onClick.RemoveAllListeners();
         }
 
+        public void PushObj(IContentPage obj)
+        {
+            if (obj == null) throw new NullReferenceException();
+
+            if (IsBucketEmpty == false)
+            {
+                if (PeekObj().InstanceID == obj.InstanceID) return;
+
+                var temp = PopObj();
+                temp.Hide();
+            }
+
+            m_bucket.Push(obj);
+            obj.Show();
+        }
+
+        public IContentPage PeekObj()
+        {
+            if (IsBucketEmpty) return null;
+
+            return m_bucket.Peek();
+        }
+
+        public IContentPage PopObj()
+        {
+            if (IsBucketEmpty) return null;
+
+            return m_bucket.Pop();
+        }
+
         public void Dispose()
         {
         }
@@ -63,13 +99,20 @@ namespace wwild.ui.login
         #region button events
         private async UniTask OnButtonNewGameClickAsync()
         {
-            await UniTask.Yield(PlayerLoopTiming.LastUpdate);
-
-            if (!IsRegisteredObj(((short)LoginFlags.Newgame)))
+            if (IsRegisteredObj(((short)LoginFlags.Newgame)) == false)
             {
-                var obj = await Resources.LoadAsync<GameObject>("");
-                GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity);
+                var obj = await Resources.LoadAsync(LoginSceneManager.Instance.ScenePrefabs.NewgamePage) as GameObject;
+
+                var go = GameObject.Instantiate<GameObject>(obj, Vector3.zero, Quaternion.identity);
+
+                RegisterObj(((short)LoginFlags.Newgame), go.GetComponent<NewGamePage>());
             }
+
+            await UniTask.Yield(PlayerLoopTiming.TimeUpdate);
+
+            var page = GetRegisteredObj(((short)LoginFlags.Newgame));
+
+            PushObj(page);
         }
 
         private async UniTask OnButtonOptionClickAsync()
@@ -81,6 +124,8 @@ namespace wwild.ui.login
         {
             await UniTask.Yield(PlayerLoopTiming.LastUpdate);
         }
+
+        
         #endregion
 
     }

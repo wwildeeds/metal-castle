@@ -14,29 +14,32 @@ namespace wwild.ui.login
     {
         public int InstanceID { get; private set; }
 
+        private IContainer<short, IContentPage> m_icontainer;
+        private IBucket<IContentPage> m_ibucket;
+
         [Tooltip("cancel button"), SerializeField]
         private Button m_btnCancel;
 
         protected override void Awake()
         {
             InstanceID = this.GetInstanceID();
+
+            Init();
         }
 
         protected override void Start()
         {
-            Init();
-
             //AddListeners();
         }
 
         protected override void Init()
         {
-            IContainer = FindObjectOfType<LoginPage>();
+            var rootPage = FindObjectOfType<LoginPage>();
 
-            if (IContainer.Equals(null))
-                throw new NullReferenceException();
+            if (rootPage == null) throw new NullReferenceException();
 
-            IContainer.RegisterObj((short)LoginFlags.Newgame, this);
+            m_icontainer = rootPage;
+            m_ibucket = rootPage;
         }
 
         protected override void AddListeners()

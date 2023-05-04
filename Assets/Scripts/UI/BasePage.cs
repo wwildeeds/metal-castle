@@ -28,13 +28,24 @@ namespace wwild.ui
         {
             return m_containers.ContainsKey(key);
         }
-
+        
         public void RegisterObj(short key, IContentPage obj)
         {
             if (obj.Equals(null)) throw new System.NullReferenceException();
 
             m_containers.Add(key, obj);
+
+            Debug.Log($"container count {m_containers.Count}");
         }
+
+        public IContentPage GetRegisteredObj(short key)
+        {
+            if (IsRegisteredObj(key))
+                return m_containers[key];
+            return null;
+        }
+
+        
 
         public void UnRegisterObj(short key)
         {
@@ -45,6 +56,8 @@ namespace wwild.ui
         {
             throw new System.NotImplementedException();
         }
+
+        
 
         //public virtual void RegisterObj(string key, IContentPage obj)
         //{

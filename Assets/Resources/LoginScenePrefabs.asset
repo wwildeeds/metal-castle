@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf6e57ec0b2f7d47b51742853ecfa05, type: 3}
   m_Name: LoginScenePrefabs
   m_EditorClassIdentifier: 
-  m_newgamePage: 
-  m_optionPage: 
+  m_newgamePage: NewGamePage
+  m_optionPage: OptionPage

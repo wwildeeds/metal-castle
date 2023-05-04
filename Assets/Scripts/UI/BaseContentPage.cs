@@ -14,9 +14,7 @@ namespace wwild.ui
 
         [Tooltip("canvas component"), SerializeField]
         protected Canvas canvas;
-
-        protected IContainer<short, IContentPage> IContainer;
-
+        
         protected virtual void Init()
         {
         }

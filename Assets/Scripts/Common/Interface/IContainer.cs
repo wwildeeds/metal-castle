@@ -16,6 +16,7 @@ namespace wwild.common.itf
     public interface IContainer<K, T> where K : struct where T : IContentPage
     {
         void RegisterObj(K key, T obj);
+        T GetRegisteredObj(K key);
         void UnRegisterObj(K key);
         bool IsRegisteredObj(K key);
         void ClearAll();
