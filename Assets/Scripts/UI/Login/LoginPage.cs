@@ -50,14 +50,14 @@ namespace wwild.ui.login
 
         protected override void AddListeners()
         {
-            m_btnNewgame.onClick.AddListener(() => OnButtonNewGameClickAsync().Forget());
+            //m_btnNewgame.onClick.AddListener(() => OnButtonNewGameClickAsync().Forget());
             m_btnOption.onClick.AddListener(() => OnButtonOptionClickAsync().Forget());
             m_btnExist.onClick.AddListener(() => OnButtonExistClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
-            m_btnNewgame.onClick.RemoveAllListeners();
+            //m_btnNewgame.onClick.RemoveAllListeners();
             m_btnOption.onClick.RemoveAllListeners();
             m_btnExist.onClick.RemoveAllListeners();
         }
@@ -99,20 +99,22 @@ namespace wwild.ui.login
         #region button events
         private async UniTask OnButtonNewGameClickAsync()
         {
-            if (IsRegisteredObj(((short)LoginFlags.Newgame)) == false)
-            {
-                var obj = await Resources.LoadAsync(LoginSceneManager.Instance.ScenePrefabs.NewgamePage) as GameObject;
+            //if (IsRegisteredObj(((short)LoginFlags.Newgame)) == false)
+            //{
+            //    var obj = await Resources.LoadAsync(LoginSceneManager.Instance.ScenePrefabs.NewgamePage) as GameObject;
 
-                var go = GameObject.Instantiate<GameObject>(obj, Vector3.zero, Quaternion.identity);
+            //    var go = GameObject.Instantiate<GameObject>(obj, Vector3.zero, Quaternion.identity);
 
-                RegisterObj(((short)LoginFlags.Newgame), go.GetComponent<NewGamePage>());
-            }
+            //    RegisterObj(((short)LoginFlags.Newgame), go.GetComponent<NewGamePage>());
+            //}
+
+            //await UniTask.Yield();
+
+            //var page = GetRegisteredObj(((short)LoginFlags.Newgame));
+
+            //PushObj(page);
 
             await UniTask.Yield();
-
-            var page = GetRegisteredObj(((short)LoginFlags.Newgame));
-
-            PushObj(page);
         }
 
         private async UniTask OnButtonOptionClickAsync()
