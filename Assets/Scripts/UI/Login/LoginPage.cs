@@ -50,14 +50,14 @@ namespace wwild.ui.login
 
         protected override void AddListeners()
         {
-            //m_btnNewgame.onClick.AddListener(() => OnButtonNewGameClickAsync().Forget());
+            m_btnNewgame.onClick.AddListener(() => OnButtonNewGameClickAsync().Forget());
             m_btnOption.onClick.AddListener(() => OnButtonOptionClickAsync().Forget());
             m_btnExist.onClick.AddListener(() => OnButtonExistClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
-            //m_btnNewgame.onClick.RemoveAllListeners();
+            m_btnNewgame.onClick.RemoveAllListeners();
             m_btnOption.onClick.RemoveAllListeners();
             m_btnExist.onClick.RemoveAllListeners();
         }
@@ -115,6 +115,8 @@ namespace wwild.ui.login
             //PushObj(page);
 
             await UniTask.Yield();
+
+            SceneManager.Instance.LoadSceneAsync(((int)common.flags.SceneFlags.NewgameScene)).Forget();
         }
 
         private async UniTask OnButtonOptionClickAsync()

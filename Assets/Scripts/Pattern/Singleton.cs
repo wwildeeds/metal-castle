@@ -19,6 +19,8 @@ namespace wwild.pattern
                         var go = new GameObject();
                         m_instance = go.AddComponent<T>();
                         go.name = typeof(T).ToString();
+
+                        //DontDestroyOnLoad(go);
                     }
                 }
                 return m_instance;
