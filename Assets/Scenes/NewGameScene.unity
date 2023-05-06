@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frank_Katana_Skin
       objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: a96824dc2856a904f9c865f81199c0fe, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 100026, guid: a96824dc2856a904f9c865f81199c0fe, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -207,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frank_Assassin_Skin
       objectReference: {fileID: 0}
+    - target: {fileID: 100036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 100042, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -241,15 +249,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.5
+      value: 0.4394111
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8660254
+      value: 0.89828616
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_LocalRotation.z
@@ -261,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 240
+      value: 127.867
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -271,6 +279,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 1f8f36df8d8458e468401000ff3f558c, type: 2}
+    - target: {fileID: 9500000, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
 --- !u!1001 &574122839
@@ -283,6 +295,10 @@ PrefabInstance:
     - target: {fileID: 100046, guid: 15e3ec89c42b1f04f8544df9d308efe3, type: 3}
       propertyPath: m_Name
       value: Frank_2Handed_Skin
+      objectReference: {fileID: 0}
+    - target: {fileID: 100046, guid: 15e3ec89c42b1f04f8544df9d308efe3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: 15e3ec89c42b1f04f8544df9d308efe3, type: 3}
       propertyPath: m_RootOrder
@@ -402,6 +418,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1036770436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
+  m_PrefabInstance: {fileID: 459966453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1046859148
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,13 +515,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &1249005500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400036, guid: 9c5d4daae8741034db47dd6cb5e66ba2, type: 3}
   m_PrefabInstance: {fileID: 459966453}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1249005502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036770436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1249005503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036770436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fa8063cc21b284d821822eaacced29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1275297688
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +671,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1504486392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1504486393}
+  - component: {fileID: 1504486394}
+  m_Layer: 0
+  m_Name: SelectionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1504486393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504486392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1504486394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504486392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97285972acb17fb4da2f6e4a360b3e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_camera: {fileID: 1275297690}
+  m_castableLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1707956907
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frank_Dual_Skin
       objectReference: {fileID: 0}
+    - target: {fileID: 100062, guid: 7e18ab53ad9b71d4fb74a586a304061d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 100066, guid: 7e18ab53ad9b71d4fb74a586a304061d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -827,7 +925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1558840690407267664, guid: ae6bb46fc4d6a7a4aba7e0967b8ed0b3, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1558840690407267664, guid: ae6bb46fc4d6a7a4aba7e0967b8ed0b3, type: 3}
       propertyPath: m_AnchorMax.x
