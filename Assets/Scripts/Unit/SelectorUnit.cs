@@ -19,12 +19,12 @@ namespace wwild.unit.newgame
 
         public void ToIdleState()
         {
-            m_animator.CrossFade("Idle", 0.175f);
+            m_animator.CrossFade("Idle", 0.075f);
         }
 
         public void ToUniqueState()
         {
-            m_animator.CrossFade("Unique", 0.175f);
+            m_animator.CrossFade("Unique", 0.075f);
         }
 
         private void Start()

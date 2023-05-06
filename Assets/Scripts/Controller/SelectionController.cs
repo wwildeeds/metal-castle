@@ -21,8 +21,6 @@ namespace wwild.controller.newgame
         private Camera m_camera;
         [SerializeField]
         private LayerMask m_castableLayer;
-        [SerializeField]
-        private LayerMask m_ignoreLayer;
 
         public ISelectorUnit SelectedUnit { get; private set; }
         public LayerMask CastableLayer { get { return m_castableLayer; } }
