@@ -8,6 +8,7 @@ using System;
 namespace wwild.ui.newgame
 {
     using wwild.manager;
+    using wwild.controller.newgame;
     using Cysharp.Threading.Tasks;
 
     public class NewGamePage : BasePage, IDisposable
@@ -17,6 +18,13 @@ namespace wwild.ui.newgame
         [SerializeField]
         private Button m_btnCancel;
 
+        [Tooltip("description game obj"), SerializeField]
+        private GameObject m_description;
+        [Tooltip("selected class info text"), SerializeField]
+        private Text m_textHeader;
+        [Tooltip("selected class description text"), SerializeField]
+        private Text m_textDescription;
+
         protected override void Awake()
         {
             base.Awake();
@@ -24,7 +32,25 @@ namespace wwild.ui.newgame
 
         protected override void Start()
         {
+            Init();
+
             AddListeners();
+        }
+
+        public override void Init()
+        {
+            var tempCtrl = GameObject.FindObjectOfType<SelectionController>();
+            tempCtrl.OnSelectedUnit += (info, desc) =>
+            {
+                if (string.IsNullOrEmpty(info) && string.IsNullOrEmpty(desc))
+                {
+                    m_description.SetActive(false);
+                    return;
+                }
+                m_textHeader.text = info;
+                m_textDescription.text = desc;
+                m_description.SetActive(true);
+            };
         }
 
         protected override void AddListeners()

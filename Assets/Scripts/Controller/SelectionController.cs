@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using System;
 using System.Linq;
 
 namespace wwild.controller.newgame
@@ -15,7 +17,7 @@ namespace wwild.controller.newgame
         bool IsUnitSelected { get; }
         void SetUnit(ISelectorUnit unit);
     }
-    public class SelectionController : MonoBehaviour, ISelection
+    public class SelectionController : MonoBehaviour, ISelection, IDisposable
     {
         [SerializeField]
         private Camera m_camera;
@@ -25,6 +27,8 @@ namespace wwild.controller.newgame
         public ISelectorUnit SelectedUnit { get; private set; }
         public LayerMask CastableLayer { get { return m_castableLayer; } }
         public bool IsUnitSelected { get { return SelectedUnit != null; } }
+
+        public Action<string, string> OnSelectedUnit;
 
         public void SetUnit(ISelectorUnit unit)
         {
@@ -38,11 +42,24 @@ namespace wwild.controller.newgame
 
             SelectedUnit = unit;
             SelectedUnit?.ToUniqueState();
+            if (SelectedUnit == null)
+            {
+                OnSelectedUnit("", "");
+            }
+            else
+            {
+                OnSelectedUnit(SelectedUnit.UnitInfo, SelectedUnit.UnitDesc);
+            }
         }
 
         void Update()
         {
             UpdateRaycasting();  
+        }
+
+        void OnDestroy()
+        {
+            Dispose();
         }
 
         private void UpdateRaycasting()
@@ -74,5 +91,9 @@ namespace wwild.controller.newgame
             }
         }
 
+        public void Dispose()
+        {
+            OnSelectedUnit = null;
+        }
     }
 }

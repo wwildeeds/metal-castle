@@ -7,6 +7,8 @@ namespace wwild.unit.newgame
     public interface ISelectorUnit
     {
         int InstanceID { get; }
+        string UnitInfo { get; }
+        string UnitDesc { get; }
         void ToUniqueState();
         void ToIdleState();
     }
@@ -15,7 +17,16 @@ namespace wwild.unit.newgame
     {
         private Animator m_animator;
 
+        [Tooltip("class info"), SerializeField]
+        private string m_classInfo;
+        [Tooltip("class desc"), SerializeField]
+        private string m_classDesc;
+
         public int InstanceID { get; private set; }
+
+        public string UnitInfo => m_classInfo;
+
+        public string UnitDesc => m_classDesc;
 
         public void ToIdleState()
         {
