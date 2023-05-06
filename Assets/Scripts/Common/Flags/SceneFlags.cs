@@ -8,5 +8,6 @@ namespace wwild.common.flags
     {
         LoginScene,
         NewgameScene,
+        LoadingScene
     }
 }

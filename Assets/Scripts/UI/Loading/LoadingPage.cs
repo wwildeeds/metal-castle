@@ -27,6 +27,7 @@ namespace wwild.ui.loading
 
         private async UniTask AnimatingAsync()
         {
+            await UniTask.Delay(500);
 
             while (true)
             {

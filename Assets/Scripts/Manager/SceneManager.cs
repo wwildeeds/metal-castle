@@ -8,6 +8,7 @@ namespace wwild.manager
     using Cysharp.Threading.Tasks;
     using wwild.pattern;
     using wwild.common.model;
+    using wwild.common.flags;
     using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
     
     public class SceneManager : Singleton<SceneManager>
@@ -22,27 +23,34 @@ namespace wwild.manager
 
         public async UniTask LoadSceneAsync(int idx)
         {
-            AsyncOperation loadOperation = UnitySceneManager.LoadSceneAsync(idx, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-            loadOperation.completed += async done =>
+            AsyncOperation loadingScene = UnitySceneManager.LoadSceneAsync(((int)SceneFlags.LoadingScene), UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            loadingScene.completed += async done =>
             {
                 await UnitySceneManager.UnloadSceneAsync(((int)m_sceneModel.PreSceneFlag));
+            };
 
+            await UniTask.WaitUntil(() => loadingScene.progress >= 0.9f);
+            await UniTask.Delay(TimeSpan.FromSeconds(2));
+
+            AsyncOperation newScene = UnitySceneManager.LoadSceneAsync(idx, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            newScene.completed += async done =>
+            { 
+                Debug.Log("do something");
+                await UnitySceneManager.UnloadSceneAsync(((int)SceneFlags.LoadingScene));
                 m_sceneModel.SetSceneFlag(idx);
             };
-            while (loadOperation.isDone == false)
-            {
-                //Debug.Log(loadOperation.progress.ToString("P"));
 
-                if (loadOperation.progress >= 0.9f)
+            while (newScene.isDone == false)
+            {
+                if (newScene.progress >= 0.9f)
                 {
-                    loadOperation.allowSceneActivation = false;
+                    newScene.allowSceneActivation = false;
                     break;
                 }
-                
-                await UniTask.Yield();
             }
+            Debug.Log($"is done {newScene.isDone}");
+            newScene.allowSceneActivation = true;
 
-            loadOperation.allowSceneActivation = true;
         }
     }
 }
