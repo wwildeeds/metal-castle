@@ -17,8 +17,6 @@ namespace wwild.ui
         protected virtual void RemoveListeners()
         { }
 
-        
-
         public virtual void Init()
         {
             m_containers = new Dictionary<short, IContentPage>();
