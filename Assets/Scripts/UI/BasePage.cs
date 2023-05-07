@@ -57,37 +57,5 @@ namespace wwild.ui
             throw new System.NotImplementedException();
         }
 
-        
-
-        //public virtual void RegisterObj(string key, IContentPage obj)
-        //{
-        //    if (string.IsNullOrEmpty(key) || obj.Equals(null)) throw new System.NullReferenceException();
-        //    if (IsRegisteredObj(key)) return;
-
-        //    m_containers.Add(key, obj);
-        //}
-
-        //public virtual void UnRegisterObj(string key)
-        //{
-        //    if (string.IsNullOrEmpty(key)) throw new System.ArgumentNullException();
-
-        //    m_containers.Remove(key);
-        //}
-
-        //public virtual bool IsRegisteredObj(string key)
-        //{
-        //    return m_containers.ContainsKey(key);
-        //}
-
-        //public virtual void ClearAll()
-        //{
-        //    foreach (var item in m_containers)
-        //    {
-        //        item.Value.Dispose();
-        //    }
-
-        //    m_containers.Clear();
-        //}
-
     }
 }
