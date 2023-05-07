@@ -49,28 +49,30 @@ namespace wwild.ui.ingame
         protected override void AddListeners()
         {
             m_buttonPlayerInfo.onClick.AddListener(() => OnButtonPlayerInfoClickAsync().Forget());
+            m_buttonPlayerSkill.onClick.AddListener(() => OnButtonPlayerSkillClickAsync().Forget());
+            m_buttonPlayerInventory.onClick.AddListener(() => OnButtonPlayerInventoryClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
-            base.RemoveListeners();
+            m_buttonPlayerInfo.onClick.RemoveAllListeners();
+            m_buttonPlayerSkill.onClick.RemoveAllListeners();
+            m_buttonPlayerInventory.onClick.RemoveAllListeners();
         }
 
         public void PushObj(IContentPage obj)
         {
-            if (IsBucketEmpty == false)
+            if (m_bucket.ContainsKey(obj.InstanceID))
             {
-                if (m_bucket.ContainsKey(obj.InstanceID))
-                {
-                    var page = m_bucket[obj.InstanceID];
-                    if (page.IsActiveInHierarchy) page.Hide();
-                    else page.Show();
-                    return;
-                }
+                var page = m_bucket[obj.InstanceID];
+                if (page.IsActiveInHierarchy) page.Hide();
+                else page.Show();
             }
-
-            m_bucket.Add(obj.InstanceID, obj);
-            obj.Show();
+            else
+            {
+                m_bucket.Add(obj.InstanceID, obj);
+                obj.Show();
+            }
         }
 
         [Obsolete("not support in InGamePage", true)]
@@ -93,15 +95,48 @@ namespace wwild.ui.ingame
         private async UniTask OnButtonPlayerInfoClickAsync()
         {
             await UniTask.Yield();
+            var key = ((short)InGameUIFlags.PlayerInfo);
 
-            if (IsRegisteredObj(((short)InGameUIFlags.PlayerInfo)) == false)
+            if (IsRegisteredObj(key) == false)
             {
                 var obj = await Resources.LoadAsync(GameManager.Instance.InGameScenePref.PlayerInfoPage) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
-                RegisterObj(((short)InGameUIFlags.PlayerInfo), go.GetComponent<IContentPage>());
+                RegisterObj(key, go.GetComponent<IContentPage>());
             }
 
-            var page = GetRegisteredObj(((short)InGameUIFlags.PlayerInfo));
+            var page = GetRegisteredObj(key);
+            PushObj(page);
+        }
+
+        private async UniTask OnButtonPlayerSkillClickAsync()
+        {
+            await UniTask.Yield();
+            var key = ((short)InGameUIFlags.PlayerSkill);
+
+            if (IsRegisteredObj(key) == false)
+            {
+                var obj = await Resources.LoadAsync(GameManager.Instance.InGameScenePref.PlayerSkillPage) as GameObject;
+                var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
+                RegisterObj(key, go.GetComponent<IContentPage>());
+            }
+
+            var page = GetRegisteredObj(key);
+            PushObj(page);
+        }
+
+        private async UniTask OnButtonPlayerInventoryClickAsync()
+        {
+            await UniTask.Yield();
+
+            var key = ((short)InGameUIFlags.PlayerInventory);
+            if (IsRegisteredObj(key) == false)
+            {
+                var obj = await Resources.LoadAsync(GameManager.Instance.InGameScenePref.PlayerInventoryPage) as GameObject;
+                var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
+                RegisterObj(key, go.GetComponent<IContentPage>());
+            }
+
+            var page = GetRegisteredObj(key);
             PushObj(page);
         }
         #endregion

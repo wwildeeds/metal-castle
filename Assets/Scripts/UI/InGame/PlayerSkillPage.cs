@@ -6,16 +6,16 @@ using UnityEngine.UI;
 namespace wwild.ui.ingame
 {
     using Cysharp.Threading.Tasks;
-    using System;
     using wwild.common.itf;
 
-    public class PlayerInfoPage : BaseContentPage, IContentPage
+    public class PlayerSkillPage : BaseContentPage, IContentPage
     {
         [SerializeField]
         private Button m_buttonCancel;
 
         public int InstanceID { get; private set; }
-        public bool IsActiveInHierarchy { get { return canvas.gameObject.activeInHierarchy; } }
+
+        public bool IsActiveInHierarchy => canvas.gameObject.activeInHierarchy;
 
         protected override void Awake()
         {
@@ -29,6 +29,8 @@ namespace wwild.ui.ingame
 
         protected override void Init()
         {
+            base.Init();
+
             InstanceID = this.GetInstanceID();
         }
 
@@ -39,7 +41,7 @@ namespace wwild.ui.ingame
 
         protected override void RemoveListeners()
         {
-            base.RemoveListeners();
+            m_buttonCancel.onClick.RemoveAllListeners();
         }
 
         public void Show()
@@ -56,6 +58,7 @@ namespace wwild.ui.ingame
 
         public void Dispose()
         {
+            throw new System.NotImplementedException();
         }
 
         #region button events
