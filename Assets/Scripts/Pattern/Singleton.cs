@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace wwild.pattern
 {
+    using Cysharp.Threading.Tasks;
+
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         private static T m_instance;
@@ -38,6 +40,11 @@ namespace wwild.pattern
             {
                 DestroyImmediate(this);
             }
+        }
+
+        protected virtual async UniTask Start()
+        {
+            await UniTask.Yield();
         }
     }
 }

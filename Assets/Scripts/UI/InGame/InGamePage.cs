@@ -99,7 +99,7 @@ namespace wwild.ui.ingame
 
             if (IsRegisteredObj(key) == false)
             {
-                var obj = await Resources.LoadAsync(GameManager.Instance.InGameScenePref.PlayerInfoPage) as GameObject;
+                var obj = await Resources.LoadAsync(GameManager.Instance.inGameGuiModel.playerGuiSo.PlayerInfoPage) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
             }
@@ -115,7 +115,7 @@ namespace wwild.ui.ingame
 
             if (IsRegisteredObj(key) == false)
             {
-                var obj = await Resources.LoadAsync(GameManager.Instance.InGameScenePref.PlayerSkillPage) as GameObject;
+                var obj = await Resources.LoadAsync(GameManager.Instance.inGameGuiModel.playerGuiSo.PlayerSkillPage) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
             }
@@ -131,7 +131,7 @@ namespace wwild.ui.ingame
             var key = ((short)InGameUIFlags.PlayerInventory);
             if (IsRegisteredObj(key) == false)
             {
-                var obj = await Resources.LoadAsync(GameManager.Instance.InGameScenePref.PlayerInventoryPage) as GameObject;
+                var obj = await Resources.LoadAsync(GameManager.Instance.inGameGuiModel.playerGuiSo.PlayerInventoryPage) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
             }
