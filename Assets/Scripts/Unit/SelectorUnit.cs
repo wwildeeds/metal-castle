@@ -4,11 +4,14 @@ using UnityEngine;
 
 namespace wwild.unit.newgame
 {
+    using wwild.common.flags;
+
     public interface ISelectorUnit
     {
         int InstanceID { get; }
-        string UnitInfo { get; }
-        string UnitDesc { get; }
+        //string UnitInfo { get; }
+        //string UnitDesc { get; }
+        CharacterFlags UnitFlag { get; }
         void ToUniqueState();
         void ToIdleState();
     }
@@ -21,12 +24,16 @@ namespace wwild.unit.newgame
         private string m_classInfo;
         [Tooltip("class desc"), SerializeField]
         private string m_classDesc;
+        [Tooltip("character flag"), SerializeField]
+        private CharacterFlags m_characterFlag;
 
         public int InstanceID { get; private set; }
 
-        public string UnitInfo => m_classInfo;
+        //public string UnitInfo => m_classInfo;
 
-        public string UnitDesc => m_classDesc;
+        //public string UnitDesc => m_classDesc;
+
+        public CharacterFlags UnitFlag => m_characterFlag;
 
         public void ToIdleState()
         {

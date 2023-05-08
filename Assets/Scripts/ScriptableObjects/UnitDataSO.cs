@@ -9,6 +9,8 @@ namespace wwild.scriptableObjects.data
     {
         [SerializeField]
         private string m_name;
+        [SerializeField]
+        private string m_description;
 
         [SerializeField]
         private uint m_minHealth;
@@ -38,6 +40,7 @@ namespace wwild.scriptableObjects.data
         private short m_maxDefence;
 
         public string Name => m_name;
+        public string Description => m_description;
         public uint MinHealth => m_minHealth;
         public uint MaxHealth => m_maxHealth;
         public uint MinMana => m_minMana;
@@ -50,10 +53,5 @@ namespace wwild.scriptableObjects.data
         public short MinDefence => m_minDefence;
         public short MaxDefence => m_maxDefence;
 
-    }
-
-    [CreateAssetMenu( fileName = "AssassinData", menuName = "AssassinData")]
-    public class AssassinData : UnitDataSO
-    { 
     }
 }

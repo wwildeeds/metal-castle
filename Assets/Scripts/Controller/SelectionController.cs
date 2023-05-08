@@ -9,6 +9,8 @@ using System.Linq;
 namespace wwild.controller.newgame
 {
     using wwild.unit.newgame;
+    using wwild.ui.newgame;
+    using wwild.common.flags;
 
     public interface ISelection
     {
@@ -23,12 +25,12 @@ namespace wwild.controller.newgame
         private Camera m_camera;
         [SerializeField]
         private LayerMask m_castableLayer;
+        [SerializeField]
+        private NewGamePage m_newGamePage;
 
         public ISelectorUnit SelectedUnit { get; private set; }
         public LayerMask CastableLayer { get { return m_castableLayer; } }
         public bool IsUnitSelected { get { return SelectedUnit != null; } }
-
-        public Action<string, string> OnSelectedUnit;
 
         public void SetUnit(ISelectorUnit unit)
         {
@@ -44,11 +46,11 @@ namespace wwild.controller.newgame
             SelectedUnit?.ToUniqueState();
             if (SelectedUnit == null)
             {
-                OnSelectedUnit("", "");
+                m_newGamePage.OnSelectedUnit(false, CharacterFlags.None);
             }
             else
             {
-                OnSelectedUnit(SelectedUnit.UnitInfo, SelectedUnit.UnitDesc);
+                m_newGamePage.OnSelectedUnit(true, SelectedUnit.UnitFlag);
             }
         }
 
@@ -93,7 +95,7 @@ namespace wwild.controller.newgame
 
         public void Dispose()
         {
-            OnSelectedUnit = null;
+            //OnSelectedUnit = null;
         }
     }
 }

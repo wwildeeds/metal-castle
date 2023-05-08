@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07058034, g: 0.20157132, b: 0.72323775, a: 1}
+  m_IndirectSpecularColor: {r: 0.06895169, g: 0.19708481, b: 0.70789343, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -559,6 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_classInfo: assassin
   m_classDesc: assassin desc
+  m_characterFlag: 1
 --- !u!1 &1275297688
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_classInfo: axe warrior
   m_classDesc: axe warrior desc
+  m_characterFlag: 4
 --- !u!65 &1353023296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -840,6 +842,7 @@ MonoBehaviour:
   m_castableLayer:
     serializedVersion: 2
     m_Bits: 64
+  m_newGamePage: {fileID: 1558840690863294574}
 --- !u!1 &1834103956
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_classInfo: katana
   m_classDesc: katana desc
+  m_characterFlag: 3
 --- !u!1 &2074027769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_classInfo: dual
   m_classDesc: dual desc
+  m_characterFlag: 2
 --- !u!1001 &1558840690863294573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1192,3 +1197,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae6bb46fc4d6a7a4aba7e0967b8ed0b3, type: 3}
+--- !u!114 &1558840690863294574 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3762988555449202935, guid: ae6bb46fc4d6a7a4aba7e0967b8ed0b3, type: 3}
+  m_PrefabInstance: {fileID: 1558840690863294573}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a23a134ed3cb3b4c9022d452730523f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

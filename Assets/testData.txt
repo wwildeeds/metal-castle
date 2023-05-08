@@ -1,0 +1,1 @@
+{"m_name":"","m_minHealth":0,"m_maxHealth":0,"m_minMana":0,"m_maxMana":0,"m_str":0,"m_dex":0,"m_int":0,"m_minDamage":0,"m_maxDamage":0,"m_minDefence":0,"m_maxDefence":0}

@@ -6,10 +6,6 @@ namespace wwild.manager
 {
     using Cysharp.Threading.Tasks;
     using wwild.pattern;
-    using wwild.scriptableObjects;
-    using wwild.scriptableObjects.data;
-    using wwild.common.data;
-    using wwild.common.itf;
     using wwild.common.model;
 
     public class GameManager : Singleton<GameManager>
@@ -22,6 +18,8 @@ namespace wwild.manager
 
         protected override void Awake()
         {
+            base.Awake();
+
             m_characterModel = new CharacterModel();
             m_inGameGuiModel = new InGameGuiModel();
         }

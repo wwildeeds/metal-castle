@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace wwild.common.flags
 {
-    public enum CharacterFlags
+    public enum CharacterFlags : short
     {
+        None,
         Assassin,
-        Dual
+        Dual,
+        Katana,
+        Axe
     }
 }

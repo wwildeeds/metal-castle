@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Text;
 
 
 namespace wwild.ui.newgame
 {
     using wwild.manager;
     using wwild.controller.newgame;
+    using wwild.common.flags;
     using Cysharp.Threading.Tasks;
 
     public class NewGamePage : BasePage, IDisposable
@@ -25,6 +27,10 @@ namespace wwild.ui.newgame
         [Tooltip("selected class description text"), SerializeField]
         private Text m_textDescription;
 
+        private StringBuilder m_str;
+
+        public Action<bool, CharacterFlags> OnSelectedUnit;
+
         protected override void Awake()
         {
             base.Awake();
@@ -39,16 +45,22 @@ namespace wwild.ui.newgame
 
         public override void Init()
         {
-            var tempCtrl = GameObject.FindObjectOfType<SelectionController>();
-            tempCtrl.OnSelectedUnit += (info, desc) =>
+            m_str = new StringBuilder();
+
+            OnSelectedUnit += (isSelected, charFlag) => 
             {
-                if (string.IsNullOrEmpty(info) && string.IsNullOrEmpty(desc))
+                if (isSelected == false)
                 {
                     m_description.SetActive(false);
                     return;
                 }
-                m_textHeader.text = info;
-                m_textDescription.text = desc;
+
+                m_str.Clear();
+
+                var data = GameManager.Instance.characterModel.GetCharacterData(charFlag);
+                m_textHeader.text = data.Name;
+                m_str.Append($"STR: {data.STR}\nDEX: {data.DEX}\nINT: {data.INT}\nDAMAGE: {data.MinDamage}-{data.MaxDamage}\n{data.Description}");
+                m_textDescription.text = m_str.ToString();
                 m_description.SetActive(true);
             };
         }

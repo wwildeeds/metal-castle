@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1bdddaf92909e34880a48cc39971e95, type: 3}
-  m_Name: AssassinData
+  m_Name: KatanaDataSO
   m_EditorClassIdentifier: 
-  m_name: 
+  m_name: Katana
+  m_description: Katana Description
   m_minHealth: 0
   m_maxHealth: 0
   m_minMana: 0
   m_maxMana: 0
-  m_str: 0
-  m_dex: 0
-  m_int: 0
-  m_minDamage: 0
-  m_maxDamage: 0
+  m_str: 8
+  m_dex: 10
+  m_int: 5
+  m_minDamage: 5
+  m_maxDamage: 13
   m_minDefence: 0
   m_maxDefence: 0
