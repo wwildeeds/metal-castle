@@ -25,24 +25,35 @@ namespace wwild.pattern
                         //DontDestroyOnLoad(go);
                     }
                 }
+
                 return m_instance;
             }
         }
 
+        protected bool destroyable;
         protected virtual void Awake()
         {
             if (m_instance == null)
             {
                 m_instance = this as T;
-                DontDestroyOnLoad(this);
+
+                if (destroyable == false)
+                    DontDestroyOnLoad(this.gameObject);
+
+                Debug.Log("awake");
             }
             else
             {
-                DestroyImmediate(this);
+                DestroyImmediate(this.gameObject);
             }
         }
 
         protected virtual async UniTask Start()
+        {
+            await UniTask.Yield();
+        }
+
+        public virtual async UniTask InitAsync()
         {
             await UniTask.Yield();
         }

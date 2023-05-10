@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace wwild.scriptableObjects
 {
-    [CreateAssetMenu( fileName = "PlayerGuiSO", menuName = "PlayerGuiSO")]
-    public class PlayerGuiSO : ScriptableObject
+    [CreateAssetMenu( fileName = "PlayerGuiData", menuName = "PlayerGuiData")]
+    public class PlayerGuiData : ScriptableObject
     {
         [SerializeField]
         private string m_inGamePage;

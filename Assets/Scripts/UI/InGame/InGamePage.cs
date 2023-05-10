@@ -11,6 +11,7 @@ namespace wwild.ui.ingame
     using wwild.manager;
     using wwild.common.flags;
     using wwild.common.itf;
+    using wwild.scriptableObjects;
     public class InGamePage : BasePage, IBucket<IContentPage>, IDisposable
     {
         [SerializeField]
@@ -93,11 +94,12 @@ namespace wwild.ui.ingame
         private async UniTask OnButtonPlayerInfoClickAsync()
         {
             await UniTask.Yield();
-            var key = ((short)InGameUIFlags.PlayerInfo);
+            var key = ((short)PlayerGuiFlags.PlayerInfo);
 
             if (IsRegisteredObj(key) == false)
             {
-                var obj = await Resources.LoadAsync(GameManager.Instance.inGameGuiModel.playerGuiSo.PlayerInfoPage) as GameObject;
+                var path = SoManager.Instance.GetGuiData<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInfoPage;
+                var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
             }
@@ -109,11 +111,12 @@ namespace wwild.ui.ingame
         private async UniTask OnButtonPlayerSkillClickAsync()
         {
             await UniTask.Yield();
-            var key = ((short)InGameUIFlags.PlayerSkill);
+            var key = ((short)PlayerGuiFlags.PlayerSkill);
 
             if (IsRegisteredObj(key) == false)
             {
-                var obj = await Resources.LoadAsync(GameManager.Instance.inGameGuiModel.playerGuiSo.PlayerSkillPage) as GameObject;
+                var path = SoManager.Instance.GetGuiData<PlayerGuiData>(GuiFlags.PlayerGui).PlayerSkillPage;
+                var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
             }
@@ -126,10 +129,11 @@ namespace wwild.ui.ingame
         {
             await UniTask.Yield();
 
-            var key = ((short)InGameUIFlags.PlayerInventory);
+            var key = ((short)PlayerGuiFlags.PlayerInventory);
             if (IsRegisteredObj(key) == false)
             {
-                var obj = await Resources.LoadAsync(GameManager.Instance.inGameGuiModel.playerGuiSo.PlayerInventoryPage) as GameObject;
+                var path = SoManager.Instance.GetGuiData<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInventoryPage;
+                var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
             }

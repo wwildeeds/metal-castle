@@ -5,7 +5,7 @@ using UnityEngine;
 namespace wwild.scriptableObjects.data
 {
     [CreateAssetMenu(fileName ="UnitDataSO", menuName ="UnitDataSO")]
-    public class UnitDataSO : ScriptableObject
+    public class UnitData : ScriptableObject
     {
         [SerializeField]
         private string m_name;

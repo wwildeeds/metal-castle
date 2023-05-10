@@ -10,6 +10,7 @@ namespace wwild.ui.newgame
 {
     using wwild.manager;
     using wwild.controller.newgame;
+    using wwild.scriptableObjects.data;
     using wwild.common.flags;
     using Cysharp.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace wwild.ui.newgame
 
         private StringBuilder m_str;
 
-        public Action<bool, CharacterFlags> OnSelectedUnit;
+        public Action<bool, CharacterFlags> OnSelectedUnitAsync { get; private set; }
 
         protected override void Awake()
         {
@@ -46,9 +47,11 @@ namespace wwild.ui.newgame
         public override void Init()
         {
             m_str = new StringBuilder();
-
-            OnSelectedUnit += (isSelected, charFlag) => 
+            
+            OnSelectedUnitAsync += async (isSelected, flag) => 
             {
+                await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
+
                 if (isSelected == false)
                 {
                     m_description.SetActive(false);
@@ -57,7 +60,7 @@ namespace wwild.ui.newgame
 
                 m_str.Clear();
 
-                var data = GameManager.Instance.characterModel.GetCharacterData(charFlag);
+                var data = SoManager.Instance.GetCharacterData<UnitData>(flag);
                 m_textHeader.text = data.Name;
                 m_str.Append($"STR: {data.STR}\nDEX: {data.DEX}\nINT: {data.INT}\nDAMAGE: {data.MinDamage}-{data.MaxDamage}\n{data.Description}");
                 m_textDescription.text = m_str.ToString();

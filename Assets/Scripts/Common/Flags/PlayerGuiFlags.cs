@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace wwild.common.flags
 {
-    public enum InGameUIFlags : short
+    public enum PlayerGuiFlags : short
     {
         PlayerInfo,
         PlayerSkill,

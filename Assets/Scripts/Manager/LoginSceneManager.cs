@@ -10,19 +10,15 @@ namespace wwild.manager
     public class LoginSceneManager : Singleton<LoginSceneManager>
     {
         [SerializeField]
-        private LoginScenePrefabs m_scenePrefabs;
+        private LoginGuiData m_scenePrefabs;
 
-        public LoginScenePrefabs ScenePrefabs { get { return m_scenePrefabs; } }
+        public LoginGuiData ScenePrefabs { get { return m_scenePrefabs; } }
 
         protected override void Awake()
         {
             base.Awake();
 
-            m_scenePrefabs = Resources.Load<LoginScenePrefabs>(nameof(LoginScenePrefabs));
-        }
-
-        private void Start()
-        {
+            m_scenePrefabs = Resources.Load<LoginGuiData>(nameof(LoginGuiData));
         }
     }
 }

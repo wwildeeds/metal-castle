@@ -46,11 +46,11 @@ namespace wwild.controller.newgame
             SelectedUnit?.ToUniqueState();
             if (SelectedUnit == null)
             {
-                m_newGamePage.OnSelectedUnit(false, CharacterFlags.None);
+                m_newGamePage.OnSelectedUnitAsync(false, CharacterFlags.None);
             }
             else
             {
-                m_newGamePage.OnSelectedUnit(true, SelectedUnit.UnitFlag);
+                m_newGamePage.OnSelectedUnitAsync(true, SelectedUnit.UnitFlag);
             }
         }
 

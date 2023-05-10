@@ -8,9 +8,9 @@ namespace wwild.common.model
     using wwild.scriptableObjects;
     public class InGameGuiModel : IDisposable
     {
-        private PlayerGuiSO m_playerGuiSO;
+        private PlayerGuiData m_playerGuiSO;
 
-        public PlayerGuiSO playerGuiSo => m_playerGuiSO;
+        public PlayerGuiData playerGuiSo => m_playerGuiSO;
 
         public InGameGuiModel()
         { }
@@ -19,7 +19,7 @@ namespace wwild.common.model
         {
             await UniTask.Yield();
 
-            m_playerGuiSO = await Resources.LoadAsync<PlayerGuiSO>(nameof(PlayerGuiSO)) as PlayerGuiSO;
+            m_playerGuiSO = await Resources.LoadAsync<PlayerGuiData>(nameof(PlayerGuiData)) as PlayerGuiData;
         }
 
         public void Dispose()
