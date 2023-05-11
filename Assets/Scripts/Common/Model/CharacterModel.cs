@@ -5,10 +5,10 @@ using System;
 namespace wwild.common.model.so
 {
     using Cysharp.Threading.Tasks;
-    using wwild.scriptableObjects.data;
+    using wwild.scriptableObjects;
     using wwild.common.flags;
     [Serializable]
-    public class CharacterModel : IDisposable
+    public class CharacterModel : BaseModel, IDisposable
     {
         [Header("Character Scriptable Object Path")]
         [SerializeField]
@@ -32,7 +32,7 @@ namespace wwild.common.model.so
             m_dataStore = new Dictionary<short, ScriptableObject>();
         }
 
-        public async UniTask InitAsync()
+        public override async UniTask InitAsync()
         {
             await UniTask.Yield();
             m_assassinData = await Resources.LoadAsync(path_assassinData) as UnitData;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace wwild.common.itf
 {
-    using wwild.scriptableObjects.data;
+    using wwild.scriptableObjects;
     public interface IPlayerStateData
     {
         public void Init();

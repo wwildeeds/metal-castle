@@ -9,7 +9,7 @@ namespace wwild.common.model.so
     using wwild.common.flags;
 
     [Serializable]
-    public class GuiModel : IDisposable
+    public class GuiModel : BaseModel, IDisposable
     {
         [SerializeField]
         private string path_loginGuiData = "SO/LoginGuiData";
@@ -26,7 +26,7 @@ namespace wwild.common.model.so
             m_dataStore = new Dictionary<short, ScriptableObject>();
         }
 
-        public async UniTask InitAsync()
+        public override async UniTask InitAsync()
         {
             await UniTask.Yield();
 

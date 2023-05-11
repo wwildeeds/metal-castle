@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace wwild.scriptableObjects.data
+namespace wwild.scriptableObjects
 {
     [CreateAssetMenu(fileName ="UnitDataSO", menuName ="UnitDataSO")]
     public class UnitData : ScriptableObject
     {
         [SerializeField]
         private string m_name;
+        [SerializeField]
+        public int m_id;
         [SerializeField]
         private string m_description;
 
@@ -40,6 +42,7 @@ namespace wwild.scriptableObjects.data
         private short m_maxDefence;
 
         public string Name => m_name;
+        public int ID => m_id;
         public string Description => m_description;
         public uint MinHealth => m_minHealth;
         public uint MaxHealth => m_maxHealth;

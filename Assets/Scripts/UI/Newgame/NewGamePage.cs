@@ -10,7 +10,7 @@ namespace wwild.ui.newgame
 {
     using wwild.manager;
     using wwild.controller.newgame;
-    using wwild.scriptableObjects.data;
+    using wwild.scriptableObjects;
     using wwild.common.flags;
     using Cysharp.Threading.Tasks;
 
@@ -31,6 +31,7 @@ namespace wwild.ui.newgame
         private StringBuilder m_str;
 
         public Action<bool, CharacterFlags> OnSelectedUnitAsync { get; private set; }
+        private CharacterFlags m_selectedCharFlag;
 
         protected override void Awake()
         {
@@ -54,11 +55,13 @@ namespace wwild.ui.newgame
 
                 if (isSelected == false)
                 {
+                    m_selectedCharFlag = CharacterFlags.None;
                     m_description.SetActive(false);
                     return;
                 }
 
                 m_str.Clear();
+                m_selectedCharFlag = flag;
 
                 var data = SoManager.Instance.GetCharacterData<UnitData>(flag);
                 m_textHeader.text = data.Name;
@@ -90,6 +93,10 @@ namespace wwild.ui.newgame
         {
             await UniTask.Yield();
 
+            var data = SoManager.Instance.GetCharacterData<UnitData>(m_selectedCharFlag);
+            DataManager.Instance.CreatePlayer(data);
+
+            SceneManager.Instance.LoadSceneAsync(((short)SceneFlags.StageAxe)).Forget();
         }
 
         private async UniTask OnButtonCancelClickAsync()
