@@ -18,6 +18,10 @@ namespace wwild.common.model.player
         [SerializeField]
         private PlayerInventoryData m_inventoryData;
 
+        public PlayerStateData StateData => m_stateData;
+        public PlayerSkillData SkillData => m_skillData;
+        public PlayerInventoryData InventoryData => m_inventoryData;
+
         public PlayerModel()
         { }
 

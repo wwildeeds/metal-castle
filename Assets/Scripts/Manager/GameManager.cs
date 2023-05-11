@@ -16,8 +16,5 @@ namespace wwild.manager
 
             base.Awake();
         }
-
-        public void Test()
-        { }
     }
 }

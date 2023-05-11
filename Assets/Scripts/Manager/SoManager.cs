@@ -17,9 +17,7 @@ namespace wwild.manager
         [SerializeField]
         private GuiModel m_guiModel;
 
-        private bool m_initialized;
-
-        public bool Initialized => m_initialized;
+        public bool Initialized => initialized;
 
         protected override void Awake()
         {
@@ -38,7 +36,7 @@ namespace wwild.manager
             await m_characterModel.InitAsync();
             await m_guiModel.InitAsync();
 
-            m_initialized = true;
+            initialized = true;
         }
 
         public T GetCharacterData<T>(CharacterFlags flag) where T : ScriptableObject

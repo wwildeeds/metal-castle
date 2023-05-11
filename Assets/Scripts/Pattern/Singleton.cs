@@ -31,6 +31,7 @@ namespace wwild.pattern
         }
 
         protected bool destroyable;
+        protected bool initialized;
         protected virtual void Awake()
         {
             if (m_instance == null)
@@ -39,8 +40,6 @@ namespace wwild.pattern
 
                 if (destroyable == false)
                     DontDestroyOnLoad(this.gameObject);
-
-                Debug.Log("awake");
             }
             else
             {

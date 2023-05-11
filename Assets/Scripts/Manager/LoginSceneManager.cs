@@ -16,6 +16,8 @@ namespace wwild.manager
 
         protected override void Awake()
         {
+            destroyable = true;
+
             base.Awake();
 
             m_scenePrefabs = Resources.Load<LoginGuiData>(nameof(LoginGuiData));

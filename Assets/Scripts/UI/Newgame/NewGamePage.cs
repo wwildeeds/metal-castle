@@ -94,7 +94,9 @@ namespace wwild.ui.newgame
             await UniTask.Yield();
 
             var data = SoManager.Instance.GetCharacterData<UnitData>(m_selectedCharFlag);
-            DataManager.Instance.CreatePlayer(data);
+
+            await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
+            await DataManager.Instance.CreatePlayerAsync(data);
 
             SceneManager.Instance.LoadSceneAsync(((short)SceneFlags.StageAxe)).Forget();
         }
@@ -102,6 +104,8 @@ namespace wwild.ui.newgame
         private async UniTask OnButtonCancelClickAsync()
         {
             await UniTask.Yield();
+
+            Dispose();
 
             SceneManager.Instance.LoadSceneAsync(((int)common.flags.SceneFlags.LoginScene)).Forget();
         }

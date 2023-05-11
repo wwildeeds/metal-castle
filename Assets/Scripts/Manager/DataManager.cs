@@ -13,29 +13,48 @@ namespace wwild.manager
 
     public class DataManager : Singleton<DataManager>
     {
-        private string path_playerModel;
+        private string path_historyPlayerModel;
+
+        private HistoryPlayerModel m_historyPlayerModel;
         private PlayerModel m_playerModel;
 
+        public bool Initialized => initialized;
         protected override void Awake()
         {
             destroyable = false;
 
             base.Awake();
 
-            path_playerModel = string.Format("{0}/{1}", Application.persistentDataPath, "PlayerModel.txt");
+            path_historyPlayerModel = string.Format("{0}/{1}", Application.persistentDataPath, "HistoryPlayerModel.txt");
+
+            InitAsync().Forget();
         }
 
-        public override UniTask InitAsync()
+        public override async UniTask InitAsync()
         {
-            return base.InitAsync();
+            await UniTask.Yield();
+
+            m_historyPlayerModel = await FileHelper.LoadFileAsync<HistoryPlayerModel>(path_historyPlayerModel);
+            Debug.Log(m_historyPlayerModel.ToString());
+
+            initialized = true;
         }
 
-        public void CreatePlayer(UnitData data)
+        public async UniTask CreatePlayerAsync(UnitData data)
         {
+            await UniTask.Yield();
+
             m_playerModel = new PlayerModel();
             m_playerModel.Create(data);
 
-            FileHelper.SaveFile<PlayerModel>(path_playerModel, m_playerModel);
+            m_historyPlayerModel.AddPlayerModel(m_playerModel);
+
+            await FileHelper.SaveFileAsync<HistoryPlayerModel>(path_historyPlayerModel, m_historyPlayerModel);
+        }
+
+        public void LoadPlayer(int id)
+        {
+            
         }
     }
 }
