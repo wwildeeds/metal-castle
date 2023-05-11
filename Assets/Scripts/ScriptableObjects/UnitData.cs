@@ -10,8 +10,6 @@ namespace wwild.scriptableObjects
         [SerializeField]
         private string m_name;
         [SerializeField]
-        public int m_id;
-        [SerializeField]
         private string m_description;
 
         [SerializeField]
@@ -24,6 +22,8 @@ namespace wwild.scriptableObjects
         [SerializeField]
         private uint m_maxMana;
 
+        [SerializeField]
+        private short m_level;
         [SerializeField]
         private short m_str;
         [SerializeField]
@@ -42,12 +42,12 @@ namespace wwild.scriptableObjects
         private short m_maxDefence;
 
         public string Name => m_name;
-        public int ID => m_id;
         public string Description => m_description;
         public uint MinHealth => m_minHealth;
         public uint MaxHealth => m_maxHealth;
         public uint MinMana => m_minMana;
         public uint MaxMana => m_maxMana;
+        public short Level => m_level;
         public short STR => m_str;
         public short DEX => m_dex;
         public short INT => m_int;

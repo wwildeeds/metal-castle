@@ -93,7 +93,7 @@ namespace wwild.ui.newgame
         {
             await UniTask.Yield();
 
-            var data = SoManager.Instance.GetCharacterData<UnitData>(m_selectedCharFlag);
+            var data = SoManager.Instance.GetCharacterData<PlayerUnitData>(m_selectedCharFlag);
 
             await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
             await DataManager.Instance.CreatePlayerAsync(data);

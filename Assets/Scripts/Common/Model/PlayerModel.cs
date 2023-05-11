@@ -25,7 +25,7 @@ namespace wwild.common.model.player
         public PlayerModel()
         { }
 
-        public void Create(UnitData data)
+        public void Create(PlayerUnitData data)
         {
             m_stateData = new PlayerStateData(data);
         }

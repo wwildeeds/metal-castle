@@ -39,7 +39,7 @@ namespace wwild.manager
             initialized = true;
         }
 
-        public async UniTask CreatePlayerAsync(UnitData data)
+        public async UniTask CreatePlayerAsync(PlayerUnitData data)
         {
             await UniTask.Yield();
 

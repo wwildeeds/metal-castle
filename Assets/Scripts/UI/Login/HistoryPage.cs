@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
 namespace wwild.ui.login
 {
     using Cysharp.Threading.Tasks;
@@ -18,9 +18,12 @@ namespace wwild.ui.login
         private Button m_buttonCancel;
         [SerializeField]
         private Button m_buttonPlay;
+        [SerializeField]
+        private ScrollRect m_scrollRect;
+
+        private List<IHistoryButton> m_historyList;
 
         public int InstanceID { get; private set; }
-
         public bool IsActiveInHierarchy => canvas.gameObject.activeInHierarchy;
 
         protected override void Awake()
@@ -36,6 +39,7 @@ namespace wwild.ui.login
         protected override void Init()
         {
             m_parentBucket = FindObjectOfType<LoginPage>();
+            m_historyList = new List<IHistoryButton>();
         }
 
         protected override void AddListeners()
@@ -58,9 +62,43 @@ namespace wwild.ui.login
 
             var dataList = DataManager.Instance.GetPlayerHistory().StateList;
 
+            await BuildupHistoryButtonAsync(dataList.Count);
+
             for (int i = 0; i < dataList.Count; i++)
             {
+                var data = dataList[i];
+                m_historyList[i].SetData(data.Name, data.ID.ToString(), data.CharacterFlag.ToString(), data.Level.ToString());
+            }
 
+        }
+
+        private async UniTask BuildupHistoryButtonAsync(int count)
+        {
+            await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
+
+            var guiData = SoManager.Instance.GetGuiData<LoginGuiData>(GuiFlags.LoginGui);
+            var tempBtn = guiData.HistoryButton;
+
+            var curCount = m_scrollRect.content.childCount;
+            var remain = Mathf.Abs(curCount - count);
+            if (curCount > count)
+            {
+                for (int i = 0; i < remain; i++)
+                {
+                    var data = m_historyList[m_historyList.Count - 1];
+                    m_historyList.RemoveAt(m_historyList.Count - 1);
+                    data.Dispose();
+                }
+
+            }
+            else if (curCount < count)
+            {
+                for (int i = 0; i < remain; i++)
+                {
+                    var go = Instantiate<GameObject>(tempBtn);
+                    go.transform.SetParent(m_scrollRect.content);
+                    m_historyList.Add(go.GetComponent<IHistoryButton>());
+                }
             }
         }
 
@@ -72,6 +110,8 @@ namespace wwild.ui.login
         public void Show()
         {
             canvas.sortingOrder = MAX_ORDER;
+
+            InitHistoryDataAsync().Forget();
         }
 
         public void Dispose()

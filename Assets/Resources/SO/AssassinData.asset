@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd7c5aa7aef9d8e4d85c2220e00d4ecd, type: 3}
+  m_Script: {fileID: 11500000, guid: 544737c41238dea49b184cfd5ed14ce7, type: 3}
   m_Name: AssassinData
   m_EditorClassIdentifier: 
   m_name: Assassin
@@ -18,10 +18,12 @@ MonoBehaviour:
   m_maxHealth: 0
   m_minMana: 0
   m_maxMana: 0
-  m_str: 6
-  m_dex: 10
-  m_int: 7
+  m_level: 0
+  m_str: 0
+  m_dex: 0
+  m_int: 0
   m_minDamage: 0
   m_maxDamage: 0
   m_minDefence: 0
   m_maxDefence: 0
+  m_flag: 1
