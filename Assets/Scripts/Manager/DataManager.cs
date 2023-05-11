@@ -25,7 +25,7 @@ namespace wwild.manager
 
             base.Awake();
 
-            path_historyPlayerModel = string.Format("{0}/{1}", Application.persistentDataPath, "HistoryPlayerModel.txt");
+            path_historyPlayerModel = string.Format("{0}/{1}", Application.persistentDataPath, "HistoryPlayerModel.json");
 
             InitAsync().Forget();
         }
@@ -35,7 +35,6 @@ namespace wwild.manager
             await UniTask.Yield();
 
             m_historyPlayerModel = await FileHelper.LoadFileAsync<HistoryPlayerModel>(path_historyPlayerModel);
-            Debug.Log(m_historyPlayerModel.ToString());
 
             initialized = true;
         }
@@ -50,11 +49,6 @@ namespace wwild.manager
             m_historyPlayerModel.AddPlayerModel(m_playerModel);
 
             await FileHelper.SaveFileAsync<HistoryPlayerModel>(path_historyPlayerModel, m_historyPlayerModel);
-        }
-
-        public void LoadPlayer(int id)
-        {
-            
         }
     }
 }
