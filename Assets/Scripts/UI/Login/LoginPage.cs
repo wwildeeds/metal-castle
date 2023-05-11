@@ -11,11 +11,13 @@ namespace wwild.ui.login
     using wwild.ui;
     using wwild.common.itf;
     using wwild.manager;
+    using wwild.scriptableObjects;
 
     public enum LoginFlags : short
     { 
         Newgame,
-        Option
+        History,
+        Setting
     }
 
     public class LoginPage : BasePage, IBucket<IContentPage>, IDisposable
@@ -99,21 +101,6 @@ namespace wwild.ui.login
         #region button events
         private async UniTask OnButtonNewGameClickAsync()
         {
-            //if (IsRegisteredObj(((short)LoginFlags.Newgame)) == false)
-            //{
-            //    var obj = await Resources.LoadAsync(LoginSceneManager.Instance.ScenePrefabs.NewgamePage) as GameObject;
-
-            //    var go = GameObject.Instantiate<GameObject>(obj, Vector3.zero, Quaternion.identity);
-
-            //    RegisterObj(((short)LoginFlags.Newgame), go.GetComponent<NewGamePage>());
-            //}
-
-            //await UniTask.Yield();
-
-            //var page = GetRegisteredObj(((short)LoginFlags.Newgame));
-
-            //PushObj(page);
-
             await UniTask.Yield();
 
             SceneManager.Instance.LoadSceneAsync(((int)common.flags.SceneFlags.NewgameScene)).Forget();
@@ -121,8 +108,21 @@ namespace wwild.ui.login
 
         private async UniTask OnButtonHistoryClickAsync()
         {
+            await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
+
+            if (IsRegisteredObj(((short)LoginFlags.History)) == false)
+            {
+                var path = SoManager.Instance.GetGuiData<LoginGuiData>(common.flags.GuiFlags.LoginGui).HistoryPage;
+                var obj = await Resources.LoadAsync(path) as GameObject;
+                var go = GameObject.Instantiate<GameObject>(obj, Vector3.zero, Quaternion.identity);
+                RegisterObj(((short)LoginFlags.History), go.GetComponent<IContentPage>());
+            }
+
             await UniTask.Yield();
 
+            var page = GetRegisteredObj(((short)LoginFlags.History));
+
+            PushObj(page);
         }
 
         private async UniTask OnButtonExistClickAsync()

@@ -10,7 +10,7 @@ namespace wwild.common.model.player
     using wwild.common.data;
 
     [Serializable]
-    public class HistoryPlayerModel : BaseModel, IDisposable
+    public class PlayerHistoryModel : BaseModel, IDisposable
     {
         [SerializeField]
         private List<PlayerStateData> m_stateList;
@@ -19,7 +19,10 @@ namespace wwild.common.model.player
         [SerializeField]
         private List<PlayerInventoryData> m_inventoryList;
 
-        public HistoryPlayerModel()
+        public List<PlayerStateData> StateList => m_stateList;
+
+
+        public PlayerHistoryModel()
         {
             m_stateList = new List<PlayerStateData>();
             m_skillList = new List<PlayerSkillData>();

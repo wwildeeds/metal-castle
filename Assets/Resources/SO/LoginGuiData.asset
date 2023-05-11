@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: LoginGuiData
   m_EditorClassIdentifier: 
   m_newgamePage: NewGamePage
-  m_optionPage: OptionPage
+  m_historyPage: HistoryPage
+  m_settingPage: 

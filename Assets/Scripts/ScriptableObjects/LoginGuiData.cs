@@ -10,9 +10,16 @@ namespace wwild.scriptableObjects
         [SerializeField]
         private string m_newgamePage;
         [SerializeField]
-        private string m_optionPage;
+        private string m_historyPage;
+        [SerializeField]
+        private string m_settingPage;
+
+        [SerializeField]
+        private GameObject m_historyButton;
 
         public string NewgamePage { get { return m_newgamePage; } }
-        public string OptionPage { get { return m_optionPage; } }
+        public string HistoryPage { get { return m_historyPage; } }
+        public string SettingPage { get { return m_settingPage; } }
+        public GameObject HistoryButton { get { return m_historyButton; } }
     }
 }
