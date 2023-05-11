@@ -24,8 +24,8 @@ namespace wwild.ui.login
 
         [Tooltip("new game button component"), SerializeField]
         private Button m_btnNewgame;
-        [Tooltip("option button component"), SerializeField]
-        private Button m_btnOption;
+        [Tooltip("history button component"), SerializeField]
+        private Button m_btnHistory;
         [Tooltip("exist button component"), SerializeField]
         private Button m_btnExist;
 
@@ -51,14 +51,14 @@ namespace wwild.ui.login
         protected override void AddListeners()
         {
             m_btnNewgame.onClick.AddListener(() => OnButtonNewGameClickAsync().Forget());
-            m_btnOption.onClick.AddListener(() => OnButtonOptionClickAsync().Forget());
+            m_btnHistory.onClick.AddListener(() => OnButtonHistoryClickAsync().Forget());
             m_btnExist.onClick.AddListener(() => OnButtonExistClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
             m_btnNewgame.onClick.RemoveAllListeners();
-            m_btnOption.onClick.RemoveAllListeners();
+            m_btnHistory.onClick.RemoveAllListeners();
             m_btnExist.onClick.RemoveAllListeners();
         }
 
@@ -119,9 +119,10 @@ namespace wwild.ui.login
             SceneManager.Instance.LoadSceneAsync(((int)common.flags.SceneFlags.NewgameScene)).Forget();
         }
 
-        private async UniTask OnButtonOptionClickAsync()
+        private async UniTask OnButtonHistoryClickAsync()
         {
-            await UniTask.Yield(PlayerLoopTiming.LastUpdate);
+            await UniTask.Yield();
+
         }
 
         private async UniTask OnButtonExistClickAsync()
