@@ -25,6 +25,13 @@ namespace wwild.common.model.player
         public PlayerModel()
         { }
 
+        public void Set(PlayerStateData state, PlayerSkillData skill, PlayerInventoryData inven)
+        {
+            m_stateData = state;
+            m_skillData = skill;
+            m_inventoryData = inven;
+        }
+
         public void Create(PlayerUnitData data)
         {
             m_stateData = new PlayerStateData(data);

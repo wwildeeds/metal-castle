@@ -36,6 +36,21 @@ namespace wwild.common.model.player
             m_inventoryList.Add(model.InventoryData);
         }
 
+        public PlayerModel GetPlayerModel(int idx)
+        {
+            var model = new PlayerModel();
+            var state = m_stateList[idx];
+            //var skill = m_skillList[idx];
+            //var inven = m_inventoryList[idx];
+            model.Set(state, null, null);
+            return model;
+        }
+
+        public void RemovePlayerModel(int idx)
+        {
+            m_stateList.RemoveAt(idx);
+        }
+
         public override string ToString()
         {
             return $"player state count: {m_stateList.Count}";

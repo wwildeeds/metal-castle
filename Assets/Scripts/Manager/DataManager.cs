@@ -6,17 +6,14 @@ using System.IO;
 namespace wwild.manager
 {
     using wwild.pattern;
-    using wwild.common.model.player;
-    using wwild.scriptableObjects;
-    using wwild.helper;
+    using wwild.holder;
     using Cysharp.Threading.Tasks;
 
     public class DataManager : Singleton<DataManager>
     {
-        private string path_playerHistoryModel;
+        private PlayerModelHolder m_playerHolder;
 
-        private PlayerHistoryModel m_playerHistoryModel;
-        private PlayerModel m_playerModel;
+        public PlayerModelHolder PlayerHolder => m_playerHolder;
 
         public bool Initialized => initialized;
         protected override void Awake()
@@ -25,8 +22,6 @@ namespace wwild.manager
 
             base.Awake();
 
-            path_playerHistoryModel = string.Format("{0}/{1}", Application.persistentDataPath, "PlayerHistoryModel.json");
-
             InitAsync().Forget();
         }
 
@@ -34,26 +29,11 @@ namespace wwild.manager
         {
             await UniTask.Yield();
 
-            m_playerHistoryModel = await FileHelper.LoadFileAsync<PlayerHistoryModel>(path_playerHistoryModel);
+            m_playerHolder = new PlayerModelHolder();
+
+            await m_playerHolder.InitAsync();
 
             initialized = true;
-        }
-
-        public async UniTask CreatePlayerAsync(PlayerUnitData data)
-        {
-            await UniTask.Yield();
-
-            m_playerModel = new PlayerModel();
-            m_playerModel.Create(data);
-
-            m_playerHistoryModel.AddPlayerModel(m_playerModel);
-
-            await FileHelper.SaveFileAsync<PlayerHistoryModel>(path_playerHistoryModel, m_playerHistoryModel);
-        }
-
-        public PlayerHistoryModel GetPlayerHistory()
-        {
-            return m_playerHistoryModel;
         }
     }
 }

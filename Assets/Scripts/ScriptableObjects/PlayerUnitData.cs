@@ -9,10 +9,12 @@ namespace wwild.scriptableObjects
     public class PlayerUnitData : UnitData
     {
         [SerializeField]
-        private CharacterFlags m_flag;
+        private CharacterFlags m_characterflag;
+        [SerializeField]
+        private SceneFlags m_sceneFlag;
 
-
-        public CharacterFlags Flag => m_flag;
+        public CharacterFlags CharacterFlag => m_characterflag;
+        public SceneFlags SceneFlag => m_sceneFlag;
 
     }
 }

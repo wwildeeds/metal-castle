@@ -13,16 +13,19 @@ namespace wwild.common.data
     public class PlayerStateData : BaseStateData, IPlayerStateData, IDisposable
     {
         [SerializeField]
-        private CharacterFlags m_characterflag;
-
-        public CharacterFlags CharacterFlag => m_characterflag;
+        private CharacterFlags m_characterFlag;
+        [SerializeField]
+        private SceneFlags m_sceneFlag;
+        public CharacterFlags CharacterFlag => m_characterFlag;
+        public SceneFlags SceneFlag => m_sceneFlag;
         public PlayerStateData()
         {
         }
 
         public PlayerStateData(PlayerUnitData data) : base(data)
         {
-            m_characterflag = data.Flag;
+            m_characterFlag = data.CharacterFlag;
+            m_sceneFlag = data.SceneFlag;
         }
         
 

@@ -19,12 +19,18 @@ namespace wwild.ui.login
         [SerializeField]
         private Button m_buttonPlay;
         [SerializeField]
+        private Button m_buttonDelete;
+        [SerializeField]
         private ScrollRect m_scrollRect;
 
         private List<IHistoryButton> m_historyList;
+        [Tooltip("selected history button index")]
+        private int m_selectedIndex;
 
         public int InstanceID { get; private set; }
         public bool IsActiveInHierarchy => canvas.gameObject.activeInHierarchy;
+
+        public bool IsSelected => m_selectedIndex != -1;
 
         protected override void Awake()
         {
@@ -46,28 +52,44 @@ namespace wwild.ui.login
         {
             m_buttonCancel.onClick.AddListener(() => OnButtonCancelClickAsync().Forget());
             m_buttonPlay.onClick.AddListener(() => OnButtonPlayClickAsync().Forget());
+            m_buttonDelete.onClick.AddListener(() => OnButtonDeleteClickAsync().Forget());
         }
 
         protected override void RemoveListeners()
         {
             m_buttonCancel.onClick.RemoveAllListeners();
             m_buttonPlay.onClick.RemoveAllListeners();
+            m_buttonDelete.onClick.RemoveAllListeners();
+        }
+
+        private void ResetSelectableMembers()
+        {
+            m_selectedIndex = -1;
+            m_buttonPlay.interactable = false;
+            m_buttonDelete.interactable = false;
         }
 
         private async UniTask InitHistoryDataAsync()
         {
-            await UniTask.Yield();
+            ResetSelectableMembers();
 
             await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
 
-            var dataList = DataManager.Instance.GetPlayerHistory().StateList;
+            var dataList = DataManager.Instance.PlayerHolder.HistoryModel.StateList;
 
             await BuildupHistoryButtonAsync(dataList.Count);
 
             for (int i = 0; i < dataList.Count; i++)
             {
                 var data = dataList[i];
+                var idx = m_historyList[i].Index;
                 m_historyList[i].SetData(data.Name, data.ID.ToString(), data.CharacterFlag.ToString(), data.Level.ToString());
+                m_historyList[i].OnSelected += () => 
+                {
+                    m_selectedIndex = idx;
+                    m_buttonPlay.interactable = true;
+                    m_buttonDelete.interactable = true;
+                };
             }
 
         }
@@ -130,11 +152,25 @@ namespace wwild.ui.login
         {
             await UniTask.Yield();
 
-            //show loading popup
+            var model = DataManager.Instance.PlayerHolder.HistoryModel.GetPlayerModel(m_selectedIndex);
+
+            await DataManager.Instance.PlayerHolder.SetPlayerAsync(model);
+
+            SceneManager.Instance.LoadSceneAsync(((short)model.StateData.SceneFlag)).Forget();
+        }
+
+        private async UniTask OnButtonDeleteClickAsync()
+        {
+            await UniTask.Yield();
+
+            var delData = m_historyList[m_selectedIndex];
+            m_historyList.Remove(delData);
+            delData.Dispose();
+
+            await DataManager.Instance.PlayerHolder.RemoveHistoryModelAsync(m_selectedIndex);
+            await DataManager.Instance.PlayerHolder.OverwriteHistoryModelAsync();
 
             await InitHistoryDataAsync();
-
-            //hide loading popup
         }
         #endregion
     }
