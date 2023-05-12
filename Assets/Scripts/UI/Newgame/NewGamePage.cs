@@ -107,7 +107,7 @@ namespace wwild.ui.newgame
 
             Dispose();
 
-            SceneManager.Instance.LoadSceneAsync(((int)common.flags.SceneFlags.LoginScene)).Forget();
+            SceneManager.Instance.LoadSceneAsync(((int)SceneFlags.LoginScene)).Forget();
         }
         #endregion
     }
