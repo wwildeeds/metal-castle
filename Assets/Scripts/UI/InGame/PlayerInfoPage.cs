@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
+using System;
 
 namespace wwild.ui.ingame
 {
     using Cysharp.Threading.Tasks;
-    using System;
+
     using wwild.common.itf;
+    using wwild.manager;
 
     public class PlayerInfoPage : BaseContentPage, IContentPage
     {
         [SerializeField]
         private Button m_buttonCancel;
-
+        [SerializeField]
+        private Text m_textInfo;
         public int InstanceID { get; private set; }
         public bool IsActiveInHierarchy { get { return canvas.gameObject.activeInHierarchy; } }
+
+        public Action OnInfoChanged { get; private set; }
 
         protected override void Awake()
         {
@@ -30,6 +36,11 @@ namespace wwild.ui.ingame
         protected override void Init()
         {
             InstanceID = this.GetInstanceID();
+
+            OnInfoChanged += () =>
+            {
+                m_textInfo.text = DataManager.Instance.PlayerStore.PlayerData.StateData.ToString();
+            };
         }
 
         protected override void AddListeners()
@@ -45,6 +56,9 @@ namespace wwild.ui.ingame
         public void Show()
         {
             canvas.sortingOrder = MAX_ORDER;
+
+            OnInfoChanged?.Invoke();
+
             canvas.gameObject.SetActive(true);
         }
 

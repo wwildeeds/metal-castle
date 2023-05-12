@@ -6,14 +6,15 @@ using System.IO;
 namespace wwild.manager
 {
     using wwild.pattern;
-    using wwild.holder;
+    using wwild.common.data;
+    using wwild.store;
     using Cysharp.Threading.Tasks;
 
     public class DataManager : Singleton<DataManager>
     {
-        private PlayerModelHolder m_playerHolder;
+        private PlayerDataStore m_playerStore;
 
-        public PlayerModelHolder PlayerHolder => m_playerHolder;
+        public PlayerDataStore PlayerStore => m_playerStore;
 
         public bool Initialized => initialized;
         protected override void Awake()
@@ -29,9 +30,9 @@ namespace wwild.manager
         {
             await UniTask.Yield();
 
-            m_playerHolder = new PlayerModelHolder();
+            m_playerStore = new PlayerDataStore();
 
-            await m_playerHolder.InitAsync();
+            await m_playerStore.InitAsync();
 
             initialized = true;
         }

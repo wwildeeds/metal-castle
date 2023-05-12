@@ -75,7 +75,7 @@ namespace wwild.ui.login
 
             await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
 
-            var dataList = DataManager.Instance.PlayerHolder.HistoryModel.StateList;
+            var dataList = DataManager.Instance.PlayerStore.HistoryData.StateList;
 
             await BuildupHistoryButtonAsync(dataList.Count);
 
@@ -152,11 +152,11 @@ namespace wwild.ui.login
         {
             await UniTask.Yield();
 
-            var model = DataManager.Instance.PlayerHolder.HistoryModel.GetPlayerModel(m_selectedIndex);
+            var data = DataManager.Instance.PlayerStore.HistoryData.GetData(m_selectedIndex);
 
-            await DataManager.Instance.PlayerHolder.SetPlayerAsync(model);
+            await DataManager.Instance.PlayerStore.SetPlayerData(data);
 
-            SceneManager.Instance.LoadSceneAsync(((short)model.StateData.SceneFlag)).Forget();
+            SceneManager.Instance.LoadSceneAsync(((short)data.StateData.SceneFlag)).Forget();
         }
 
         private async UniTask OnButtonDeleteClickAsync()
@@ -167,8 +167,8 @@ namespace wwild.ui.login
             m_historyList.Remove(delData);
             delData.Dispose();
 
-            await DataManager.Instance.PlayerHolder.RemoveHistoryModelAsync(m_selectedIndex);
-            await DataManager.Instance.PlayerHolder.OverwriteHistoryModelAsync();
+            await DataManager.Instance.PlayerStore.RemoveHistoryDataAsync(m_selectedIndex);
+            await DataManager.Instance.PlayerStore.OverwriteHistoryDataAsync();
 
             await InitHistoryDataAsync();
         }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace wwild.common.model.player
+namespace wwild.common.data
 {
-    using Cysharp.Threading.Tasks;
-    using wwild.common.data;
+    using wwild.common.itf;
     using wwild.scriptableObjects;
+
     [Serializable]
-    public class PlayerModel : BaseModel, IDisposable
+    public class PlayerData
     {
         [SerializeField]
         private PlayerStateData m_stateData;
@@ -19,29 +19,35 @@ namespace wwild.common.model.player
         private PlayerInventoryData m_inventoryData;
 
         public PlayerStateData StateData => m_stateData;
+
         public PlayerSkillData SkillData => m_skillData;
+
         public PlayerInventoryData InventoryData => m_inventoryData;
 
-        public PlayerModel()
+        public PlayerData()
         { }
 
-        public void Set(PlayerStateData state, PlayerSkillData skill, PlayerInventoryData inven)
+        public PlayerData(PlayerUnitData data)
+        {
+            m_stateData = new PlayerStateData(data);
+            m_skillData = new PlayerSkillData();
+            m_inventoryData = new PlayerInventoryData();
+        }
+
+        public PlayerData(PlayerStateData state, PlayerSkillData skill, PlayerInventoryData inven)
         {
             m_stateData = state;
             m_skillData = skill;
             m_inventoryData = inven;
         }
 
-        public void Create(PlayerUnitData data)
-        {
-            m_stateData = new PlayerStateData(data);
-        }
-
         public void Dispose()
         {
-            m_stateData?.Dispose();
-            m_skillData?.Dispose();
-            m_inventoryData?.Dispose();
+            StateData?.Dispose();
+            SkillData?.Dispose();
+            InventoryData?.Dispose();
         }
+
+        
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-namespace wwild.common.model.player
+namespace wwild.common.data
 {
     using Cysharp.Threading.Tasks;
     using wwild.common.data;
 
     [Serializable]
-    public class PlayerHistoryModel : BaseModel, IDisposable
+    public class PlayerHistoryData : IDisposable
     {
         [SerializeField]
         private List<PlayerStateData> m_stateList;
@@ -21,32 +21,31 @@ namespace wwild.common.model.player
 
         public List<PlayerStateData> StateList => m_stateList;
 
-
-        public PlayerHistoryModel()
+        public PlayerHistoryData()
         {
             m_stateList = new List<PlayerStateData>();
             m_skillList = new List<PlayerSkillData>();
             m_inventoryList = new List<PlayerInventoryData>();
         }
 
-        public void AddPlayerModel(PlayerModel model)
+        public void AddData(PlayerData model)
         {
             m_stateList.Add(model.StateData);
             m_skillList.Add(model.SkillData);
             m_inventoryList.Add(model.InventoryData);
         }
 
-        public PlayerModel GetPlayerModel(int idx)
+        public PlayerData GetData(int idx)
         {
-            var model = new PlayerModel();
             var state = m_stateList[idx];
             //var skill = m_skillList[idx];
             //var inven = m_inventoryList[idx];
-            model.Set(state, null, null);
+
+            var model = new PlayerData(state, null, null);
             return model;
         }
 
-        public void RemovePlayerModel(int idx)
+        public void RemoveData(int idx)
         {
             m_stateList.RemoveAt(idx);
         }

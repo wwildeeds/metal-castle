@@ -96,7 +96,7 @@ namespace wwild.ui.newgame
             var data = SoManager.Instance.GetCharacterData<PlayerUnitData>(m_selectedCharFlag);
 
             await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
-            await DataManager.Instance.PlayerHolder.CreatePlayerAsync(data);
+            await DataManager.Instance.PlayerStore.CreatePlayerDataAsync(data);
 
             SceneManager.Instance.LoadSceneAsync(((short)SceneFlags.StageAxe)).Forget();
         }

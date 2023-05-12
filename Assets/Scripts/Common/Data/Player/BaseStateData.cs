@@ -12,6 +12,8 @@ namespace wwild.common.data
         [SerializeField]
         private string m_name;
         [SerializeField]
+        private string m_desc;
+        [SerializeField]
         private int m_id;
 
         [SerializeField]
@@ -52,6 +54,7 @@ namespace wwild.common.data
         private Vector3 m_eulers;
 
         public string Name { get { return m_name; } }
+        public string Desc { get { return m_desc; } }
         public int ID { get { return m_id; } }
         public uint MinHealth { get { return m_minHealth; } }
         public uint MaxHealth { get { return m_maxHealth; } }
@@ -74,6 +77,7 @@ namespace wwild.common.data
         public BaseStateData(UnitData data)
         {
             m_name = data.Name;
+            m_desc = data.Description;
             m_minHealth = data.MinHealth;
             m_maxHealth = data.MaxHealth;
             m_minMana = data.MinMana;

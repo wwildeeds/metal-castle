@@ -10,7 +10,7 @@ namespace wwild.common.data
     using wwild.scriptableObjects;
 
     [Serializable]
-    public class PlayerStateData : BaseStateData, IPlayerStateData, IDisposable
+    public class PlayerStateData : BaseStateData, IDisposable
     {
         [SerializeField]
         private CharacterFlags m_characterFlag;
@@ -18,6 +18,7 @@ namespace wwild.common.data
         private SceneFlags m_sceneFlag;
         public CharacterFlags CharacterFlag => m_characterFlag;
         public SceneFlags SceneFlag => m_sceneFlag;
+
         public PlayerStateData()
         {
         }
@@ -27,14 +28,13 @@ namespace wwild.common.data
             m_characterFlag = data.CharacterFlag;
             m_sceneFlag = data.SceneFlag;
         }
-        
 
-        public void Init()
+        public override string ToString()
         {
-        }
-
-        public void LevelUp()
-        {
+            var info = $"Character type: {CharacterFlag}\nLevel: {Level}\nSTR: {STR}\nDEX: {DEX}\nINT: {INT}" +
+                       $"\nDMG: {MinDamage}-{MaxDamage}\nDFC: {MinDefence}-{MaxDefence}\nStage: {SceneFlag}" +
+                       $"\nDesc: {Desc}";
+            return info;
         }
 
         public void Dispose()

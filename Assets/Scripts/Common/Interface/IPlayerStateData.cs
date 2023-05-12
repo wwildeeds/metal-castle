@@ -7,7 +7,7 @@ namespace wwild.common.itf
     using wwild.scriptableObjects;
     public interface IPlayerStateData
     {
-        public void Init();
-        public void LevelUp();
+        string StateInfo { get; }
+        void LevelUp();
     }
 }
