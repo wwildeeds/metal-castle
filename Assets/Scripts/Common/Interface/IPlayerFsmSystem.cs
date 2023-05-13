@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace wwild.common.data
+namespace wwild.common.itf
 {
-    public class BaseData
+    public interface IPlayerFsmSystem
     {
     }
 }

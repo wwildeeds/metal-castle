@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2dd8d68d3fe1a94cbae4548f767f2da, type: 3}
+  m_Name: AssassinSkillData
+  m_EditorClassIdentifier: 
+  m_skillList:
+  - {fileID: 11400000, guid: 18e9c7ac2d388ce4f94522442dc458d9, type: 2}
+  - {fileID: 11400000, guid: 997cd9930f4792543bc8bafeff61b8b9, type: 2}
+  - {fileID: 11400000, guid: c7e6eda08ad7d4b45bdb7e4640de6cd1, type: 2}

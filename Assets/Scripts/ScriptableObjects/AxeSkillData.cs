@@ -5,7 +5,7 @@ using UnityEngine;
 namespace wwild.scriptableObjects
 {
     [CreateAssetMenu(fileName ="AxeSkillData", menuName ="AxeSkillData")]
-    public class AxeSkillData : SkillData
+    public class AxeSkillData : ScriptableObject
     {
     }
 }

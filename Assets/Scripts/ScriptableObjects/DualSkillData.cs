@@ -5,7 +5,7 @@ using UnityEngine;
 namespace wwild.scriptableObjects
 {
     [CreateAssetMenu(fileName ="DualSkillData", menuName ="DualSkillData")]
-    public class DualSkillData : SkillData
+    public class DualSkillData : ScriptableObject
     {
     }
 }

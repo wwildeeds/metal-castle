@@ -47,7 +47,5 @@ namespace wwild.common.data
             SkillData?.Dispose();
             InventoryData?.Dispose();
         }
-
-        
     }
 }
