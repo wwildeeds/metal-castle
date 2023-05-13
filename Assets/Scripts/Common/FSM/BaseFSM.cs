@@ -6,6 +6,7 @@ using System;
 namespace wwild.common.fsm
 {
     using wwild.common.itf;
+    using wwild.common.data;
     using wwild.scriptableObjects;
     public class BaseFSM : IBaseFSM, IDisposable
     {
@@ -22,7 +23,7 @@ namespace wwild.common.fsm
 
         public BaseFSM()
         { }
-        public BaseFSM(SkillData data)
+        public BaseFSM(BaseSkillData data)
         {
             m_animName = data.AnimName;
             m_animExitTime = data.AnimExitTime;

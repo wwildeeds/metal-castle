@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace wwild.common.fsm
 {
+    using wwild.common.data;
     using wwild.scriptableObjects;
 
     public class AssassinIdelFSM : BaseFSM
     {
-        public AssassinIdelFSM(SkillData data) : base(data)
+        public AssassinIdelFSM(BaseSkillData data) : base(data)
         { }
 
         public override void OnEnter()

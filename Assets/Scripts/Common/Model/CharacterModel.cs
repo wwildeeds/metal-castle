@@ -25,11 +25,11 @@ namespace wwild.common.model.so
         private UnitData m_katanaData;
         private UnitData m_axeData;
 
-        private Dictionary<short, ScriptableObject> m_dataStore;
+        //private Dictionary<short, ScriptableObject> m_dataStore;
 
         public CharacterModel()
         {
-            m_dataStore = new Dictionary<short, ScriptableObject>();
+            modelStore = new Dictionary<short, ScriptableObject>();
         }
 
         public override async UniTask InitAsync()
@@ -40,16 +40,16 @@ namespace wwild.common.model.so
             m_katanaData = await Resources.LoadAsync(path_katanaData) as UnitData;
             m_axeData = await Resources.LoadAsync(path_axeData) as UnitData;
 
-            m_dataStore.Add(((short)CharacterFlags.Assassin), m_assassinData);
-            m_dataStore.Add(((short)CharacterFlags.Dual), m_dualData);
-            m_dataStore.Add(((short)CharacterFlags.Katana), m_katanaData);
-            m_dataStore.Add(((short)CharacterFlags.Axe), m_axeData);
+            modelStore.Add(((short)CharacterFlags.Assassin), m_assassinData);
+            modelStore.Add(((short)CharacterFlags.Dual), m_dualData);
+            modelStore.Add(((short)CharacterFlags.Katana), m_katanaData);
+            modelStore.Add(((short)CharacterFlags.Axe), m_axeData);
         }
 
         public T GetCharacterData<T>(CharacterFlags flag) where T : ScriptableObject
         {
-            if (m_dataStore.ContainsKey(((short)flag)))
-                return m_dataStore[((short)flag)] as T;
+            if (modelStore.ContainsKey(((short)flag)))
+                return modelStore[((short)flag)] as T;
             throw new NullReferenceException("not found character data");
         }
 
@@ -60,8 +60,8 @@ namespace wwild.common.model.so
             Resources.UnloadAsset(m_katanaData);
             Resources.UnloadAsset(m_axeData);
 
-            m_dataStore.Clear();
-            m_dataStore = null;
+            modelStore.Clear();
+            modelStore = null;
         }
     }
 }

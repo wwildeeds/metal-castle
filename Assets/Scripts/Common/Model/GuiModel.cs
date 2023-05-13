@@ -19,11 +19,9 @@ namespace wwild.common.model.so
         private LoginGuiData m_loginGuiData;
         private PlayerGuiData m_playerGuiData;
 
-        private Dictionary<short, ScriptableObject> m_dataStore;
-
         public GuiModel()
         {
-            m_dataStore = new Dictionary<short, ScriptableObject>();
+            modelStore = new Dictionary<short, ScriptableObject>();
         }
 
         public override async UniTask InitAsync()
@@ -33,15 +31,15 @@ namespace wwild.common.model.so
             m_loginGuiData = await Resources.LoadAsync(path_loginGuiData) as LoginGuiData;
             m_playerGuiData = await Resources.LoadAsync(path_playerGuiData) as PlayerGuiData;
 
-            m_dataStore.Add(((short)GuiFlags.LoginGui), m_loginGuiData);
-            m_dataStore.Add(((short)GuiFlags.PlayerGui), m_playerGuiData);
+            modelStore.Add(((short)GuiFlags.LoginGui), m_loginGuiData);
+            modelStore.Add(((short)GuiFlags.PlayerGui), m_playerGuiData);
         }
 
         public T GetGuiData<T>(GuiFlags flag) where T : ScriptableObject
         {
-            if (m_dataStore.ContainsKey(((short)flag)))
+            if (modelStore.ContainsKey(((short)flag)))
             {
-                return m_dataStore[((short)flag)] as T;
+                return modelStore[((short)flag)] as T;
             }
 
             throw new NullReferenceException();
@@ -52,8 +50,8 @@ namespace wwild.common.model.so
             Resources.UnloadAsset(m_loginGuiData);
             Resources.UnloadAsset(m_playerGuiData);
 
-            m_dataStore.Clear();
-            m_dataStore = null;
+            modelStore.Clear();
+            modelStore = null;
         }
     }
 }
