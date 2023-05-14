@@ -5,12 +5,15 @@ using System;
 
 namespace wwild.common.itf
 {
+    using wwild.common.flags;
     public interface IBaseFSM : IDisposable
     {
-        Action<string> EventPlayAnimation { get; }
-        Action<string> EventChangeFSM { get; }
+        //string AnimName { get; }
+        //int AnimID { get; }
+        AnimClipFlags AnimFlag { get; }
         void OnEnter();
         void OnUpdate();
         void OnExit();
+        void RegisterFsmSystem(IFSMSystem fsmSystem);
     }
 }

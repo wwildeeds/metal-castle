@@ -53,7 +53,7 @@ namespace wwild.manager
             return m_guiModel.GetGuiData<T>(flag);
         }
 
-        public T GetAnimData<T>(AnimFlags flag) where T : ScriptableObject
+        public T GetAnimData<T>(AnimScriptableObjFlags flag) where T : ScriptableObject
         {
             return m_animModel.GetAnimData<T>(flag);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace wwild.common.flags
 {
-    public enum AnimFlags : short
+    public enum AnimScriptableObjFlags : short
     {
         CommonAnim
     }

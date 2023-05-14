@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace wwild.scriptableObjects
 {
+    using wwild.common.flags;
+
     [CreateAssetMenu(fileName = "SkillData", menuName = "SkillData")]
     public class SkillData : ScriptableObject
     {
@@ -16,19 +18,31 @@ namespace wwild.scriptableObjects
         [SerializeField]
         private Sprite m_skillIcon;
 
+        //[SerializeField]
+        //private string m_animName;
         [SerializeField]
-        private string m_animName;
+        private AnimClipFlags m_animFlag;
         [SerializeField]
-        private float m_animExistTime;
+        private int m_animFrameLength;
         [SerializeField]
-        private float[] m_animEventTimes;
+        private int m_animTranslationFrame;
+        [SerializeField]
+        private int[] m_animEventFrames;
+        [SerializeField]
+        private float m_animExistTime = 0.99f;
+        
 
         public string SkillName => m_skillName;
         public string SkillDesc => m_skillDesc;
         public float SkillCooltime => m_skillCooltime;
         public Sprite SkillIcon => m_skillIcon;
-        public string AnimName => m_animName;
+
+
+        //public string AnimName => m_animName;
+        public AnimClipFlags AnimFlag => m_animFlag;
+        public int AnimFrameLength => m_animFrameLength;
+        public int AnimTranslationFrame => m_animTranslationFrame;
+        public int[] AnimEventFrames => m_animEventFrames;
         public float AnimExitTime => m_animExistTime;
-        public float[] AnimEventTimes => m_animEventTimes;
     }
 }

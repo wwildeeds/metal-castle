@@ -5,70 +5,78 @@ using UnityEngine;
 namespace wwild.player
 {
     using Cysharp.Threading.Tasks;
-    using wwild.common.fsm;
-    using wwild.common.flags;
     using wwild.common.itf;
-    using wwild.scriptableObjects;
-    using wwild.manager;
-    public class PlayerFsmSystem : BaseSystem, IPlayerFsmSystem
+    using wwild.common.flags;
+    using wwild.helper;
+    public class PlayerFsmSystem : BaseSystem, IFSMSystem
     {
-        private Dictionary<string, IBaseFSM> m_fsmDic;
+        private Dictionary<AnimClipFlags, IBaseFSM> m_fsmDic;
+        private Queue<AnimClipFlags> m_fsmQueue;
+        private AnimClipFlags m_fsmFlag;
+
+        [SerializeField]
+        private Animator m_animator;
 
         public override async UniTask InitAsync()
         {
             await UniTask.Yield();
 
-            m_fsmDic = new Dictionary<string, IBaseFSM>();
+            m_fsmDic = new Dictionary<AnimClipFlags, IBaseFSM>();
+            m_fsmQueue = new Queue<AnimClipFlags>();
 
-            await CreateFSM();
-        }
+            var fsmList = await FsmHelper.CreatePlayerFSMAsync();
 
-        private async UniTask CreateFSM()
-        {
-            var charFlag = DataManager.Instance.PlayerStore.PlayerData.StateData.CharacterFlag;
-
-            switch(charFlag)
+            for (int i = 0; i < fsmList.Count; i++)
             {
-                case CharacterFlags.Assassin:
-                    await CreateAssassinFSM();
-                    break;
+                var fsm = fsmList[i];
+                fsm.RegisterFsmSystem(this);
 
-                case CharacterFlags.Axe:
-                    await CreateAxeFSM();
-                    break;
-
-                case CharacterFlags.Dual:
-                    await CreateDualFSM();
-                    break;
-
-                case CharacterFlags.Katana:
-                    await CreateKatanaFSM();
-                    break;
+                RegisterFSM(fsm.AnimFlag, fsm);
             }
         }
 
-        private async UniTask CreateAssassinFSM()
+        private void RegisterFSM(AnimClipFlags key, IBaseFSM fsm)
         {
-            var animData = SoManager.Instance.GetAnimData<AnimCommonData>(AnimFlags.CommonAnim);
-            var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
+            if (m_fsmDic.ContainsKey(key)) throw new System.Exception();
 
-            var idle = new AssassinIdelFSM(skillData.GetSkill(animData.Idle));
-
-
-
+            m_fsmDic.Add(key, fsm);
         }
-
-        private async UniTask CreateAxeFSM()
-        { }
-
-        private async UniTask CreateDualFSM()
-        { }
-
-        private async UniTask CreateKatanaFSM()
-        { }
 
         protected override void UpdateSystem()
         {
+            m_fsmDic[m_fsmFlag]?.OnUpdate();
         }
+
+        public void InputFSM(AnimClipFlags flag)
+        {
+            m_fsmQueue.Enqueue(flag);
+        }
+
+        public void PlayFSM(AnimClipFlags flag)
+        {
+            m_animator.Play(flag.ToString());
+        }
+
+        public void ChangeFSM(AnimClipFlags flag)
+        {
+            if (m_fsmFlag == flag) return;
+
+            m_fsmDic[m_fsmFlag].OnExit();
+            m_fsmFlag = flag;
+            m_fsmDic[m_fsmFlag].OnEnter();
+        }
+
+        public void ChangeNextFSM()
+        {
+            var fsm = m_fsmQueue.Dequeue();
+            ChangeFSM(fsm);
+        }
+
+        public bool HasNextFSM()
+        {
+            return m_fsmQueue.Count > 0;
+        }
+
+        
     }
 }

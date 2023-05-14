@@ -10,7 +10,7 @@ namespace wwild.common.model.so
     public class AnimModel : BaseModel, IDisposable
     {
         [SerializeField]
-        private string path_animData;
+        private string path_animData = "SO/Skill/AnimCommonData";
 
         private AnimCommonData m_animData;
 
@@ -20,10 +20,10 @@ namespace wwild.common.model.so
 
             m_animData = await Resources.LoadAsync(path_animData) as AnimCommonData;
 
-            modelStore.Add(((short)AnimFlags.CommonAnim), m_animData);
+            modelStore.Add(((short)AnimScriptableObjFlags.CommonAnim), m_animData);
         }
 
-        public T GetAnimData<T>(AnimFlags flag) where T : ScriptableObject
+        public T GetAnimData<T>(AnimScriptableObjFlags flag) where T : ScriptableObject
         {
             if (modelStore.ContainsKey(((short)flag)))
                 return modelStore[((short)flag)] as T;
