@@ -5,7 +5,7 @@ using UnityEngine;
 namespace wwild.common.itf
 {
     using wwild.common.flags;
-    public interface IFSMSystem
+    public interface IFSMSystem : IBaseSystem
     {
         void InputFSM(AnimClipFlags flag);
         void PlayFSM(AnimClipFlags flag);

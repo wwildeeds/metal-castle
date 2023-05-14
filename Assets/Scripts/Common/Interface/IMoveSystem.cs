@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace wwild.player
+namespace wwild.common.itf
 {
-    public class PlayerMoveSystem : BaseSystem
+    public interface IMoveSystem
     {
     }
 }

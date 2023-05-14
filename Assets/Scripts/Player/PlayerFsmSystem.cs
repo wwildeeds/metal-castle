@@ -8,6 +8,8 @@ namespace wwild.player
     using wwild.common.itf;
     using wwild.common.flags;
     using wwild.helper;
+    using wwild.controller;
+
     public class PlayerFsmSystem : BaseSystem, IFSMSystem
     {
         private Dictionary<AnimClipFlags, IBaseFSM> m_fsmDic;
@@ -17,9 +19,21 @@ namespace wwild.player
         [SerializeField]
         private Animator m_animator;
 
+        public PlayerController PlayerCtrl { get; private set; }
+        public bool Initialized { get; private set; }
+
+        void Start()
+        {
+            InitAsync().Forget();
+        }
+
         public override async UniTask InitAsync()
         {
             await UniTask.Yield();
+
+            PlayerCtrl = GetComponent<PlayerController>();
+
+            m_animator = GetComponent<Animator>();
 
             m_fsmDic = new Dictionary<AnimClipFlags, IBaseFSM>();
             m_fsmQueue = new Queue<AnimClipFlags>();
@@ -33,6 +47,8 @@ namespace wwild.player
 
                 RegisterFSM(fsm.AnimFlag, fsm);
             }
+
+            Initialized = true;
         }
 
         private void RegisterFSM(AnimClipFlags key, IBaseFSM fsm)
@@ -42,13 +58,11 @@ namespace wwild.player
             m_fsmDic.Add(key, fsm);
         }
 
-        protected override void UpdateSystem()
-        {
-            m_fsmDic[m_fsmFlag]?.OnUpdate();
-        }
-
         public void InputFSM(AnimClipFlags flag)
         {
+            if (m_fsmQueue.Peek() == flag) return;
+            else m_fsmQueue.Dequeue();
+
             m_fsmQueue.Enqueue(flag);
         }
 
@@ -77,6 +91,13 @@ namespace wwild.player
             return m_fsmQueue.Count > 0;
         }
 
-        
+        public void UpdateSystem()
+        {
+            m_fsmDic[m_fsmFlag]?.OnUpdate();
+        }
+
+        public void Dispose()
+        {
+        }
     }
 }
