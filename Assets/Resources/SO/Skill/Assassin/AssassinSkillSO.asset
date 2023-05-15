@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2dd8d68d3fe1a94cbae4548f767f2da, type: 3}
-  m_Name: AssassinSkillData
+  m_Script: {fileID: 11500000, guid: a498a229a76580040b884d8f5a7d8e07, type: 3}
+  m_Name: AssassinSkillSO
   m_EditorClassIdentifier: 
   m_skillList:
   - {fileID: 11400000, guid: 18e9c7ac2d388ce4f94522442dc458d9, type: 2}
   - {fileID: 11400000, guid: 997cd9930f4792543bc8bafeff61b8b9, type: 2}
-  - {fileID: 11400000, guid: c7e6eda08ad7d4b45bdb7e4640de6cd1, type: 2}

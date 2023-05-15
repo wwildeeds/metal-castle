@@ -48,6 +48,18 @@ namespace wwild.helper
 
         private static async UniTask<List<IBaseFSM>> CreateAxeFSM()
         {
+            //await UniTask.Yield();
+
+            //var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
+            //var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
+            //var fsmList = new List<IBaseFSM>();
+            //var idle = new AssassinIdleFSM(skillData.GetSkill(commonData.Idle));
+            //var run = new AssassinRunFSM(skillData.GetSkill(commonData.Run));
+
+            //fsmList.Add(idle);
+            //fsmList.Add(run);
+
+            //return fsmList;
             return null;
         }
 

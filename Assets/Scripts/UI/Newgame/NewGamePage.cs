@@ -100,16 +100,19 @@ namespace wwild.ui.newgame
             switch (statData.CharacterFlag)
             {
                 case CharacterFlags.Assassin:
-                    skilldata = SoManager.Instance.GetSkillModel<AssassinSkillData>(SkillModelFlags.AssassinSkillModel).SkillList;
+                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.AssassinSkillModel).SkillList;
                     break;
 
                 case CharacterFlags.Axe:
+                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.AxeSkillModel).SkillList;
                     break;
 
                 case CharacterFlags.Dual:
+                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.DualSkillModel).SkillList;
                     break;
 
                 case CharacterFlags.Katana:
+                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.KatanaSkillModel).SkillList;
                     break;
             }
 

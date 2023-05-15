@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace wwild.scriptableObjects
 {
-    [CreateAssetMenu(fileName ="AssassinSkillData", menuName ="AssassinSkillData")]
-    public class AssassinSkillData : ScriptableObject
+    [CreateAssetMenu(fileName = "SkillListSO", menuName = "SkillListSO")]
+    public class SkillListSO : ScriptableObject
     {
         [SerializeField]
         private SkillData[] m_skillList;
