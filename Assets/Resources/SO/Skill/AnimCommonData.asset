@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d9c29ae361aea4a93cf2702945bb17, type: 3}
   m_Name: AnimCommonData
   m_EditorClassIdentifier: 
-  m_idle: Idel
+  m_idle: Idle
   m_run: Run
   m_dead: Dead
   m_guard: Guard

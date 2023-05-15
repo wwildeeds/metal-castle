@@ -55,6 +55,7 @@ MonoBehaviour:
   m_finalDistance: 0
   m_minDistance: 1
   m_maxDistance: 10
+  m_staticEulers: {x: 45, y: 0, z: 0}
 --- !u!1 &1055832223121436644
 GameObject:
   m_ObjectHideFlags: 0

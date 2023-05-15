@@ -112,7 +112,7 @@ namespace wwild.ui.login
 
             if (IsRegisteredObj(((short)LoginFlags.History)) == false)
             {
-                var path = SoManager.Instance.GetGuiData<LoginGuiData>(common.flags.GuiFlags.LoginGui).HistoryPage;
+                var path = SoManager.Instance.GetGuiModel<LoginGuiData>(common.flags.GuiFlags.LoginGui).HistoryPage;
                 var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = GameObject.Instantiate<GameObject>(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(((short)LoginFlags.History), go.GetComponent<IContentPage>());

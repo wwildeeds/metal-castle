@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: GuardSkillData
   m_EditorClassIdentifier: 
   m_skillName: Guard
+  m_skillDesc: 
   m_skillCooltime: 2
-  m_skillSprite: {fileID: 0}
-  m_animName: Guard
+  m_skillIcon: {fileID: 0}
+  m_animFlag: 3
+  m_animFrameLength: 0
+  m_animTranslationFrame: 0
+  m_animEventFrames: 
   m_animExistTime: 0
-  m_animEventTimes: []

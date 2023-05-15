@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: RunSkillData
   m_EditorClassIdentifier: 
   m_skillName: Run
+  m_skillDesc: 
   m_skillCooltime: 0
-  m_skillSprite: {fileID: 0}
-  m_animName: Run
+  m_skillIcon: {fileID: 0}
+  m_animFlag: 1
+  m_animFrameLength: 0
+  m_animTranslationFrame: 0
+  m_animEventFrames: 
   m_animExistTime: 0
-  m_animEventTimes: []

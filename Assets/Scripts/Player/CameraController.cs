@@ -33,15 +33,20 @@ namespace wwild.controller
         private Vector3 m_finalDir;
         private Vector3 m_normalizedDir;
 
+        [SerializeField]
+        private Vector3 m_staticEulers;
+
         private void Start()
         {
-            //m_target = FindObjectOfType<PlayerController>().transform;
+            m_target = FindObjectOfType<PlayerController>()?.transform;
 
             m_rotX = transform.rotation.eulerAngles.x;
             m_rotY = transform.rotation.eulerAngles.y;
 
             m_normalizedDir = m_playerCam.transform.localPosition.normalized;
             m_finalDistance = m_playerCam.transform.localPosition.magnitude;
+
+            transform.rotation = Quaternion.Euler(m_staticEulers);
         }
 
         private void Update()

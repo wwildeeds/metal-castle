@@ -98,7 +98,7 @@ namespace wwild.ui.login
         {
             await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
 
-            var guiData = SoManager.Instance.GetGuiData<LoginGuiData>(GuiFlags.LoginGui);
+            var guiData = SoManager.Instance.GetGuiModel<LoginGuiData>(GuiFlags.LoginGui);
             var tempBtn = guiData.HistoryButton;
 
             var curCount = m_scrollRect.content.childCount;

@@ -25,6 +25,11 @@ namespace wwild.common.model
         {
             SetSceneFlag((SceneFlags)idx);
         }
+        public string GetSceneName(int idx)
+        {
+            return ((SceneFlags)idx).ToString();
+        }
+
         public void SetSceneFlag(SceneFlags flag)
         {
             m_curSceneFlag = m_preSceneFlag = flag;

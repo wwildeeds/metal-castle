@@ -99,7 +99,7 @@ namespace wwild.ui.ingame
             if (IsRegisteredObj(key) == false)
             {
                 await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
-                var path = SoManager.Instance.GetGuiData<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInfoPage;
+                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInfoPage;
                 var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
@@ -117,7 +117,7 @@ namespace wwild.ui.ingame
             if (IsRegisteredObj(key) == false)
             {
                 await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
-                var path = SoManager.Instance.GetGuiData<PlayerGuiData>(GuiFlags.PlayerGui).PlayerSkillPage;
+                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerSkillPage;
                 var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());
@@ -135,7 +135,7 @@ namespace wwild.ui.ingame
             if (IsRegisteredObj(key) == false)
             {
                 await UniTask.WaitUntil(() => SoManager.Instance.Initialized);
-                var path = SoManager.Instance.GetGuiData<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInventoryPage;
+                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInventoryPage;
                 var obj = await Resources.LoadAsync(path) as GameObject;
                 var go = Instantiate(obj, Vector3.zero, Quaternion.identity);
                 RegisterObj(key, go.GetComponent<IContentPage>());

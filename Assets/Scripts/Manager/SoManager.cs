@@ -18,6 +18,8 @@ namespace wwild.manager
         private GuiModel m_guiModel;
         [SerializeField]
         private AnimModel m_animModel;
+        [SerializeField]
+        private SkillModel m_skillModel;
 
         public bool Initialized => initialized;
 
@@ -30,6 +32,7 @@ namespace wwild.manager
             m_characterModel = new CharacterModel();
             m_guiModel = new GuiModel();
             m_animModel = new AnimModel();
+            m_skillModel = new SkillModel();
 
             InitAsync().Forget();
         }
@@ -39,24 +42,30 @@ namespace wwild.manager
             await m_characterModel.InitAsync();
             await m_guiModel.InitAsync();
             await m_animModel.InitAsync();
+            await m_skillModel.InitAsync();
 
             initialized = true;
         }
 
-        public T GetCharacterData<T>(CharacterFlags flag) where T : ScriptableObject
+        public T GetCharacterModel<T>(CharacterFlags flag) where T : ScriptableObject
         {
             return m_characterModel.GetCharacterData<T>(flag);
         }
 
-        public T GetGuiData<T>(GuiFlags flag) where T : ScriptableObject
+        public T GetGuiModel<T>(GuiFlags flag) where T : ScriptableObject
         {
             return m_guiModel.GetGuiData<T>(flag);
         }
 
-        public T GetAnimData<T>(AnimScriptableObjFlags flag) where T : ScriptableObject
+        public T GetAnimModel<T>(AnimScriptableObjFlags flag) where T : ScriptableObject
         {
             return m_animModel.GetAnimData<T>(flag);
 
+        }
+
+        public T GetSkillModel<T>(SkillModelFlags flag) where T : ScriptableObject
+        {
+            return m_skillModel.GetModel<T>(flag);
         }
     }
 }

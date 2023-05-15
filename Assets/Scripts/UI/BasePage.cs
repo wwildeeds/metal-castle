@@ -43,8 +43,6 @@ namespace wwild.ui
             return null;
         }
 
-        
-
         public void UnRegisterObj(short key)
         {
             if (m_containers.ContainsKey(key))

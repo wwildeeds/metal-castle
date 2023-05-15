@@ -63,7 +63,7 @@ namespace wwild.ui.newgame
                 m_str.Clear();
                 m_selectedCharFlag = flag;
 
-                var data = SoManager.Instance.GetCharacterData<UnitData>(flag);
+                var data = SoManager.Instance.GetCharacterModel<UnitData>(flag);
                 m_textHeader.text = data.Name;
                 m_str.Append($"STR: {data.STR}\nDEX: {data.DEX}\nINT: {data.INT}\nDAMAGE: {data.MinDamage}-{data.MaxDamage}\n{data.Description}");
                 m_textDescription.text = m_str.ToString();
@@ -92,13 +92,52 @@ namespace wwild.ui.newgame
         private async UniTask OnButtonPlayClickAsync()
         {
             await UniTask.Yield();
+            await UniTask.WaitUntil(() => DataManager.Instance.Initialized && SoManager.Instance.Initialized);
 
-            var data = SoManager.Instance.GetCharacterData<PlayerUnitData>(m_selectedCharFlag);
+            var statData = SoManager.Instance.GetCharacterModel<PlayerUnitData>(m_selectedCharFlag);
 
-            await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
-            await DataManager.Instance.PlayerStore.CreatePlayerDataAsync(data);
+            SkillData[] skilldata = null;
+            switch (statData.CharacterFlag)
+            {
+                case CharacterFlags.Assassin:
+                    skilldata = SoManager.Instance.GetSkillModel<AssassinSkillData>(SkillModelFlags.AssassinSkillModel).SkillList;
+                    break;
 
-            SceneManager.Instance.LoadSceneAsync(((short)SceneFlags.StageAxe)).Forget();
+                case CharacterFlags.Axe:
+                    break;
+
+                case CharacterFlags.Dual:
+                    break;
+
+                case CharacterFlags.Katana:
+                    break;
+            }
+
+            
+            await DataManager.Instance.PlayerStore.CreatePlayerDataAsync(statData, skilldata);
+
+            SceneManager.Instance.LoadSceneAsync(((short)SceneFlags.StageAxe), () => 
+            {
+                var goList = new List<GameObject>();
+                if (GameManager.Instance.PlayerPool.HasPlayer)
+                {
+                }
+                else
+                {
+                    GameManager.Instance.PlayerPool.CreatePlayer();
+                }
+                if (GameManager.Instance.PlayerPool.HasCamera)
+                { }
+                else
+                {
+                    GameManager.Instance.PlayerPool.CreateCamera();
+                }
+
+                goList.Add(GameManager.Instance.PlayerPool.MyPlayer);
+                goList.Add(GameManager.Instance.PlayerPool.MyCamera);
+                return goList.ToArray();
+
+            }).Forget();
         }
 
         private async UniTask OnButtonCancelClickAsync()

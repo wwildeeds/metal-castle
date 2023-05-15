@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Threading.Tasks;
 
 namespace wwild.manager
 {
@@ -21,7 +22,7 @@ namespace wwild.manager
             m_sceneModel = new SceneModel();    
         }
 
-        public async UniTask LoadSceneAsync(int idx)
+        public async UniTask LoadSceneAsync(int idx, Func<GameObject[]> callback = null)
         {
             AsyncOperation loadingScene = UnitySceneManager.LoadSceneAsync(((int)SceneFlags.LoadingScene), UnityEngine.SceneManagement.LoadSceneMode.Additive);
             loadingScene.completed += async done =>
@@ -34,9 +35,20 @@ namespace wwild.manager
 
             AsyncOperation newScene = UnitySceneManager.LoadSceneAsync(idx, UnityEngine.SceneManagement.LoadSceneMode.Additive);
             newScene.completed += async done =>
-            { 
-                Debug.Log("do something");
+            {
+
+                if (callback != null)
+                {
+                    var objs = callback.Invoke();
+                    for (int i = 0; i < objs.Length; i++)
+                    {
+                        var scene = UnitySceneManager.GetSceneByName(m_sceneModel.GetSceneName(idx));
+                        UnitySceneManager.MoveGameObjectToScene(objs[i], scene);
+                    }
+                }
+
                 await UnitySceneManager.UnloadSceneAsync(((int)SceneFlags.LoadingScene));
+
                 m_sceneModel.SetSceneFlag(idx);
             };
 
@@ -48,9 +60,8 @@ namespace wwild.manager
                     break;
                 }
             }
-            Debug.Log($"is done {newScene.isDone}");
-            newScene.allowSceneActivation = true;
 
+            newScene.allowSceneActivation = true;
         }
     }
 }

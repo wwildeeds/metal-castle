@@ -34,11 +34,19 @@ namespace wwild.store
         public async UniTask CreatePlayerDataAsync(PlayerUnitData data)
         {
             m_playerData = new PlayerData(data);
-
             m_historyData.AddData(m_playerData);
 
             await OverwriteHistoryDataAsync();
         }
+
+        public async UniTask CreatePlayerDataAsync(PlayerUnitData state, SkillData[] skill)
+        {
+            m_playerData = new PlayerData(state, skill);
+            m_historyData.AddData(m_playerData);
+
+            await OverwriteHistoryDataAsync();
+        }
+
 
         public async UniTask SetPlayerData(PlayerData data)
         {
