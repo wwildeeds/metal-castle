@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace wwild.common.itf
 {
-    public interface IMoveSystem
+    public interface IMoveSystem : IBaseSystem
     {
+        void SetMoveDirection(Vector3 dir);
+        void Movement();
+        void Rotatement();
     }
 }

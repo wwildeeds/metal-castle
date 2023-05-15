@@ -22,14 +22,7 @@ namespace wwild.player
 
         void LateUpdate()
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-            {
-                PlayerCtrl.FsmSystem.PlayFSM(AnimClipFlags.Run);
-            }
-            else
-            {
-                PlayerCtrl.FsmSystem.PlayFSM(AnimClipFlags.Idle);
-            }
+            OnInputKeyboard();
         }
 
         public override async UniTask InitAsync()
@@ -39,9 +32,29 @@ namespace wwild.player
             PlayerCtrl = GetComponent<PlayerController>();
         }
 
+        private void OnInputKeyboard()
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.forward);
+            }
+            else if(Input.GetKey(KeyCode.S))
+            {
+                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.back);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.left);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.right);
+            }
+        }
+
         public void UpdateSystem()
         {
-            throw new System.NotImplementedException();
         }
 
         public void Dispose()

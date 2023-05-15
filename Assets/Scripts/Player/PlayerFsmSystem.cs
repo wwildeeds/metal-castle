@@ -37,6 +37,7 @@ namespace wwild.player
 
             m_fsmDic = new Dictionary<AnimClipFlags, IBaseFSM>();
             m_fsmQueue = new Queue<AnimClipFlags>();
+            m_fsmFlag = AnimClipFlags.Idle;
 
             var fsmList = await FsmHelper.CreatePlayerFSMAsync();
 
@@ -68,6 +69,9 @@ namespace wwild.player
 
         public void PlayFSM(AnimClipFlags flag)
         {
+            //if (m_fsmFlag == flag) return;
+
+            m_fsmFlag = flag;
             m_animator.Play(flag.ToString());
         }
 
