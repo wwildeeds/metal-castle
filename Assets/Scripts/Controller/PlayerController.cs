@@ -27,6 +27,20 @@ namespace wwild.controller
             InitAsync().Forget();
         }
 
+        private void Update()
+        {
+            InputSystem.UpdateSystem();
+            FsmSystem.UpdateSystem();
+            MoveSystem.UpdateSystem();
+        }
+
+        private void LateUpdate()
+        {
+            InputSystem.LateUpdateSystem();
+            FsmSystem.LateUpdateSystem();
+            MoveSystem.LateUpdateSystem();
+        }
+
         private async UniTask InitAsync()
         {
             m_fsmSystem = GetComponent<PlayerFsmSystem>();

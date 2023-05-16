@@ -31,14 +31,6 @@ namespace wwild.player
             Initialized = true;
         }
 
-        void Update()
-        {
-            if (Initialized == false) return;
-
-            Rotatement();
-            Movement();
-        }
-
         public void SetMoveDirection(Vector3 dir)
         {
             m_curDirection += dir;
@@ -77,10 +69,20 @@ namespace wwild.player
 
         public void UpdateSystem()
         {
+            if (Initialized == false) return;
+
+            Rotatement();
+            Movement();
+        }
+
+        public void LateUpdateSystem()
+        {
         }
 
         public void Dispose()
         {
         }
+
+        
     }
 }

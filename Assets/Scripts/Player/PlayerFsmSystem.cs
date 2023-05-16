@@ -61,16 +61,17 @@ namespace wwild.player
 
         public void InputFSM(AnimClipFlags flag)
         {
-            if (m_fsmQueue.Peek() == flag) return;
-            else m_fsmQueue.Dequeue();
+            if (HasNextFSM())
+            {
+                if (m_fsmQueue.Peek() == flag) return;
+                else m_fsmQueue.Dequeue();
+            }
 
             m_fsmQueue.Enqueue(flag);
         }
 
         public void PlayFSM(AnimClipFlags flag)
         {
-            //if (m_fsmFlag == flag) return;
-
             m_fsmFlag = flag;
             m_animator.Play(flag.ToString());
         }
@@ -97,11 +98,19 @@ namespace wwild.player
 
         public void UpdateSystem()
         {
+            if (Initialized == false) return;
+
             m_fsmDic[m_fsmFlag]?.OnUpdate();
+        }
+
+        public void LateUpdateSystem()
+        {
         }
 
         public void Dispose()
         {
         }
+
+       
     }
 }

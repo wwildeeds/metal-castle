@@ -48,29 +48,50 @@ namespace wwild.helper
 
         private static async UniTask<List<IBaseFSM>> CreateAxeFSM()
         {
-            //await UniTask.Yield();
+            await UniTask.Yield();
 
-            //var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
-            //var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
-            //var fsmList = new List<IBaseFSM>();
-            //var idle = new AssassinIdleFSM(skillData.GetSkill(commonData.Idle));
-            //var run = new AssassinRunFSM(skillData.GetSkill(commonData.Run));
+            var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
+            var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
+            var fsmList = new List<IBaseFSM>();
+            var idle = new AxeIdleFSM(skillData.GetSkill(commonData.Idle));
+            var run = new AxeRunFSM(skillData.GetSkill(commonData.Run));
 
-            //fsmList.Add(idle);
-            //fsmList.Add(run);
+            fsmList.Add(idle);
+            fsmList.Add(run);
 
-            //return fsmList;
-            return null;
+            return fsmList;
         }
 
         private static async UniTask<List<IBaseFSM>> CreateDualFSM()
         {
-            return null;
+            await UniTask.Yield();
+
+            var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
+            var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
+            var fsmList = new List<IBaseFSM>();
+            var idle = new DualIdleFSM(skillData.GetSkill(commonData.Idle));
+            var run = new DualRunFSM(skillData.GetSkill(commonData.Run));
+
+            fsmList.Add(idle);
+            fsmList.Add(run);
+
+            return fsmList;
         }
 
         private static async UniTask<List<IBaseFSM>> CreateKatanaFSM()
         {
-            return null;
+            await UniTask.Yield();
+
+            var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
+            var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
+            var fsmList = new List<IBaseFSM>();
+            var idle = new KatanaIdleFSM(skillData.GetSkill(commonData.Idle));
+            var run = new KatanaRunFSM(skillData.GetSkill(commonData.Run));
+
+            fsmList.Add(idle);
+            fsmList.Add(run);
+
+            return fsmList;
         }
     }
 }

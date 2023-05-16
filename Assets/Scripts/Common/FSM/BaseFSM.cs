@@ -31,13 +31,16 @@ namespace wwild.common.fsm
             AnimFlag = data.AnimFlag;
             AnimTranslationTime = FrameToTime * data.AnimTranslationFrame;
             AnimExitTime = FrameToTime * data.AnimExitTime;
-            AnimEventTimes = new float[data.AnimEventFrames.Length];
-            for (int i = 0; i < data.AnimEventFrames.Length; i++)
+            if (data.AnimEventFrames != null)
             {
-                AnimEventTimes[i] = FrameToTime * data.AnimEventFrames[i];
-            }
+                AnimEventTimes = new float[data.AnimEventFrames.Length];
+                for (int i = 0; i < data.AnimEventFrames.Length; i++)
+                {
+                    AnimEventTimes[i] = FrameToTime * data.AnimEventFrames[i];
+                }
 
-            AnimEventToggles = new bool[AnimEventTimes.Length];
+                AnimEventToggles = new bool[AnimEventTimes.Length];
+            }
         }
 
         public virtual void OnEnter()

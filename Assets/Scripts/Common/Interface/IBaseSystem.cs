@@ -11,5 +11,6 @@ namespace wwild.common.itf
         bool Initialized { get; }
 
         void UpdateSystem();
+        void LateUpdateSystem();
     }
 }

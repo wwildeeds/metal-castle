@@ -20,16 +20,13 @@ namespace wwild.player
             InitAsync().Forget();
         }
 
-        void LateUpdate()
-        {
-            OnInputKeyboard();
-        }
-
         public override async UniTask InitAsync()
         {
             await UniTask.Yield();
 
             PlayerCtrl = GetComponent<PlayerController>();
+
+            Initialized = true;
         }
 
         private void OnInputKeyboard()
@@ -53,13 +50,34 @@ namespace wwild.player
             }
         }
 
+        private void OnInputMouse()
+        {
+            
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            { }
+
+            if(Input.GetKeyDown(KeyCode.Mouse1))
+            { }
+        }
+
         public void UpdateSystem()
         {
+            if (Initialized == false) return;
+        }
+
+        public void LateUpdateSystem()
+        {
+            if (Initialized == false) return;
+
+            OnInputKeyboard();
+            OnInputMouse();
         }
 
         public void Dispose()
         {
             throw new System.NotImplementedException();
         }
+
+        
     }
 }
