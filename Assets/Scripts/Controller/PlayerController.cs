@@ -9,18 +9,24 @@ namespace wwild.controller
     using wwild.player;
     using wwild.common.itf;
 
-    [RequireComponent(typeof(PlayerFsmSystem))]
-    [RequireComponent(typeof(PlayerInputSystem))]
-    [RequireComponent(typeof(PlayerMoveSystem))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayerController
     {
-        private IFSMSystem m_fsmSystem;
-        private IInputSystem m_inputSystem;
-        private IMoveSystem m_moveSystem;
+        public bool Initialized { get; private set; }
+        public Transform trans { get; private set; }
+        public Animator animator { get; private set; }
 
-        public IFSMSystem FsmSystem => m_fsmSystem;
-        public IInputSystem InputSystem => m_inputSystem;
-        public IMoveSystem MoveSystem => m_moveSystem;
+        public IFSMSystem FsmSystem { get; private set; }
+
+        public IInputSystem InputSystem { get; private set; }
+
+        public IMoveSystem MoveSystem { get; private set; }
+
+        public IStateSystem StateSystem { get; private set; }
+
+        void Awake()
+        {
+            
+        }
 
         private void Start()
         {
@@ -29,25 +35,42 @@ namespace wwild.controller
 
         private void Update()
         {
+            if (Initialized == false) return;
+
             InputSystem.UpdateSystem();
             FsmSystem.UpdateSystem();
             MoveSystem.UpdateSystem();
+            StateSystem.UpdateSystem();
         }
 
         private void LateUpdate()
         {
+            if (Initialized == false) return;
+
             InputSystem.LateUpdateSystem();
             FsmSystem.LateUpdateSystem();
             MoveSystem.LateUpdateSystem();
+            StateSystem.LateUpdateSystem();
         }
 
         private async UniTask InitAsync()
         {
-            m_fsmSystem = GetComponent<PlayerFsmSystem>();
-            m_inputSystem = GetComponent<PlayerInputSystem>();
-            m_moveSystem = GetComponent<PlayerMoveSystem>();
+            trans = this.transform;
+            
+            animator = GetComponent<Animator>();
 
-            await UniTask.WaitUntil(() => m_fsmSystem.Initialized && m_inputSystem.Initialized && m_moveSystem.Initialized);
+
+            FsmSystem = new PlayerFsmSystem(this);
+            InputSystem = new PlayerInputSystem(this);
+            MoveSystem = new PlayerMoveSystem(this);
+            StateSystem = new PlayerStateSystem(this);
+
+            await FsmSystem.InitAsync();
+            await InputSystem.InitAsync();
+            await MoveSystem.InitAsync();
+            await StateSystem.InitAsync();
+
+            Initialized = true;
         }
     }
 }

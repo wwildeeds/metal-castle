@@ -5,9 +5,9 @@ using UnityEngine;
 namespace wwild.player
 {
     using Cysharp.Threading.Tasks;
-
-    public abstract class BaseSystem : MonoBehaviour
+    using wwild.common.itf;
+    public abstract class BaseSystem
     {
-        public virtual async UniTask InitAsync() { await UniTask.Yield(); }
+        protected IPlayerController IPlayerCtrl { get; set; }
     }
 }

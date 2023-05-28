@@ -37,11 +37,19 @@ namespace wwild.helper
             var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
             var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
             var fsmList = new List<IBaseFSM>();
-            var idle = new AssassinIdleFSM(skillData.GetSkill(commonData.Idle));
-            var run = new AssassinRunFSM(skillData.GetSkill(commonData.Run));
+            var idle = new AssassinIdleFSM(skillData.GetSkill(AnimClipFlags.Idle));
+            var run = new AssassinRunFSM(skillData.GetSkill(AnimClipFlags.Run));
+            var atkA = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackA));
+            //var atkB = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackB));
+            //var atkC = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackC));
+            //var atkD = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackD));
 
             fsmList.Add(idle);
             fsmList.Add(run);
+            fsmList.Add(atkA);
+            //fsmList.Add(atkB);
+            //fsmList.Add(atkC);
+            //fsmList.Add(atkD);
 
             return fsmList;
         }

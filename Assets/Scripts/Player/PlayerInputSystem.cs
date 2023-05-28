@@ -12,19 +12,20 @@ namespace wwild.player
 
     public class PlayerInputSystem : BaseSystem, IInputSystem
     {
-        public PlayerController PlayerCtrl { get; private set; }
         public bool Initialized { get; private set; }
 
-        void Start()
+
+        public PlayerInputSystem()
+        { }
+
+        public PlayerInputSystem(IPlayerController ipc)
         {
-            InitAsync().Forget();
+            IPlayerCtrl = ipc;
         }
 
-        public override async UniTask InitAsync()
+        public async UniTask InitAsync()
         {
             await UniTask.Yield();
-
-            PlayerCtrl = GetComponent<PlayerController>();
 
             Initialized = true;
         }
@@ -33,20 +34,20 @@ namespace wwild.player
         {
             if (Input.GetKey(KeyCode.W))
             {
-                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.forward);
+                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.forward);
             }
             else if(Input.GetKey(KeyCode.S))
             {
-                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.back);
+                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.back);
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.left);
+                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.left);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                PlayerCtrl.MoveSystem.SetMoveDirection(Vector3.right);
+                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.right);
             }
         }
 
@@ -54,7 +55,36 @@ namespace wwild.player
         {
             
             if (Input.GetKeyDown(KeyCode.Mouse0))
-            { }
+            {
+                if (IPlayerCtrl.StateSystem.CurStateFlag == UnitStateFlags.Normal)
+                {
+                    IPlayerCtrl.FsmSystem.PlayFSM(AnimClipFlags.AttackA);
+                }
+                else
+                {
+                    switch (IPlayerCtrl.FsmSystem.CurFsmFlag)
+                    {
+                        case AnimClipFlags.AttackA:
+                            IPlayerCtrl.FsmSystem.InputFSM(AnimClipFlags.AttackB);
+                            break;
+
+                        case AnimClipFlags.AttackB:
+                            IPlayerCtrl.FsmSystem.InputFSM(AnimClipFlags.AttackC);
+                            break;
+
+                        case AnimClipFlags.AttackC:
+                            IPlayerCtrl.FsmSystem.InputFSM(AnimClipFlags.AttackD);
+                            break;
+
+                        case AnimClipFlags.AttackD:
+                            IPlayerCtrl.FsmSystem.InputFSM(AnimClipFlags.AttackA);
+                            break;
+                        default:
+                            IPlayerCtrl.FsmSystem.InputFSM(AnimClipFlags.AttackA);
+                            break;
+                    }
+                }
+            }
 
             if(Input.GetKeyDown(KeyCode.Mouse1))
             { }

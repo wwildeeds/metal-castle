@@ -16,24 +16,21 @@ namespace wwild.player
         private Queue<AnimClipFlags> m_fsmQueue;
         private AnimClipFlags m_fsmFlag;
 
-        [SerializeField]
-        private Animator m_animator;
-
-        public PlayerController PlayerCtrl { get; private set; }
         public bool Initialized { get; private set; }
 
-        void Start()
+        public AnimClipFlags CurFsmFlag => m_fsmFlag;
+
+        public PlayerFsmSystem()
+        { }
+
+        public PlayerFsmSystem(IPlayerController ipc)
         {
-            InitAsync().Forget();
+            IPlayerCtrl = ipc;
         }
 
-        public override async UniTask InitAsync()
+        public async UniTask InitAsync()
         {
             await UniTask.Yield();
-
-            PlayerCtrl = GetComponent<PlayerController>();
-
-            m_animator = GetComponent<Animator>();
 
             m_fsmDic = new Dictionary<AnimClipFlags, IBaseFSM>();
             m_fsmQueue = new Queue<AnimClipFlags>();
@@ -72,8 +69,7 @@ namespace wwild.player
 
         public void PlayFSM(AnimClipFlags flag)
         {
-            m_fsmFlag = flag;
-            m_animator.Play(flag.ToString());
+            IPlayerCtrl.animator.Play(m_fsmFlag.ToString());
         }
 
         public void ChangeFSM(AnimClipFlags flag)

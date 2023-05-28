@@ -53,6 +53,8 @@ namespace wwild.common.fsm
         {
             EventTimer = 0f;
 
+            if (AnimEventToggles == null) return;
+
             for (int i = 0; i < AnimEventToggles.Length; i++)
             {
                 AnimEventToggles[i] = false;

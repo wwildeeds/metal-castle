@@ -6,6 +6,7 @@ using System.Linq;
 namespace wwild.common.data
 {
     using wwild.scriptableObjects;
+    using wwild.common.flags;
 
     [Serializable]
     public class PlayerSkillData : IDisposable
@@ -30,6 +31,12 @@ namespace wwild.common.data
         public BaseSkillData GetSkill(string name)
         {
             var temp = m_skillList.Find(skill => skill.AnimName.Equals(name));
+            return temp;
+        }
+
+        public BaseSkillData GetSkill(AnimClipFlags flag)
+        {
+            var temp = m_skillList.Find(skill => skill.AnimFlag.Equals(flag));
             return temp;
         }
 

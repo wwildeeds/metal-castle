@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +6,16 @@ namespace wwild.common.fsm
 {
     using wwild.common.data;
     using wwild.common.flags;
-    public class AssassinAttackAFSM : BaseFSM
+
+    public class AssassinAttackBFSM : BaseFSM
     {
-        public AssassinAttackAFSM(BaseSkillData data) : base(data)
+        public AssassinAttackBFSM(BaseSkillData data) : base(data)
         { }
 
         public override void OnEnter()
         {
             IFsmSystem.PlayFSM(AnimFlag);
         }
-
 
         public override void OnUpdate()
         {

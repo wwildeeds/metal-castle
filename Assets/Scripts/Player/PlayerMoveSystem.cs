@@ -11,22 +11,21 @@ namespace wwild.player
 
     public class PlayerMoveSystem : BaseSystem, IMoveSystem
     {
-        private CharacterController m_characterCtrl;
         private Vector3 m_curDirection;
-
-        public PlayerController PlayerCtrl { get; private set; }
         public bool Initialized { get; private set; }
 
-        void Start()
+
+        public PlayerMoveSystem()
+        { }
+
+        public PlayerMoveSystem(IPlayerController ipc)
         {
-            InitAsync().Forget();
+            IPlayerCtrl = ipc;
         }
 
-        public override async UniTask InitAsync()
+        public async UniTask InitAsync()
         {
             await UniTask.Yield();
-
-            PlayerCtrl = GetComponent<PlayerController>();
 
             Initialized = true;
         }
@@ -35,20 +34,18 @@ namespace wwild.player
         {
             m_curDirection += dir;
             m_curDirection = m_curDirection.normalized;
-
-            PlayerCtrl.FsmSystem.PlayFSM(AnimClipFlags.Run);
         }
 
         public void Movement()
         {
             if (m_curDirection == Vector3.zero)
             {
-                PlayerCtrl.FsmSystem.PlayFSM(AnimClipFlags.Idle);
+                IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Idle);
                 return;
             }
 
-            
-            transform.position += m_curDirection * Time.deltaTime * 2f;
+            IPlayerCtrl.trans.position += m_curDirection * Time.deltaTime * 2f;
+            IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Run);
 
             m_curDirection = Vector3.zero;
         }
@@ -60,11 +57,11 @@ namespace wwild.player
                 return;
             }
 
-            var dir = (transform.position + m_curDirection) - transform.position;
-            var from = transform.rotation;
+            var dir = (IPlayerCtrl.trans.position + m_curDirection) - IPlayerCtrl.trans.position;
+            var from = IPlayerCtrl.trans.rotation;
             var to = Quaternion.LookRotation(dir);
-            
-            transform.rotation = Quaternion.Slerp(from, to, 0.2f);
+
+            IPlayerCtrl.trans.rotation = Quaternion.Slerp(from, to, 0.2f);
         }
 
         public void UpdateSystem()
@@ -82,7 +79,5 @@ namespace wwild.player
         public void Dispose()
         {
         }
-
-        
     }
 }

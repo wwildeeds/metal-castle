@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b8b78d8fbd4bb45a886e1725f59ee5, type: 3}
   m_Name: IdleSkillData
   m_EditorClassIdentifier: 
-  m_skillName: 
+  m_skillName: Idle
   m_skillDesc: 
   m_skillCooltime: 0
   m_skillIcon: {fileID: 0}

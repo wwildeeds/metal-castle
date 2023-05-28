@@ -13,10 +13,14 @@ namespace wwild.common.data
     public class PlayerStateData : BaseStateData, IDisposable
     {
         [SerializeField]
+        private UnitStateFlags m_stateFlag;
+        [SerializeField]
         private CharacterFlags m_characterFlag;
         [SerializeField]
         private SceneFlags m_sceneFlag;
+
         public CharacterFlags CharacterFlag => m_characterFlag;
+        public UnitStateFlags StateFlag => m_stateFlag;
         public SceneFlags SceneFlag => m_sceneFlag;
 
         public PlayerStateData()
@@ -27,6 +31,8 @@ namespace wwild.common.data
         {
             m_characterFlag = data.CharacterFlag;
             m_sceneFlag = data.SceneFlag;
+
+            m_stateFlag = UnitStateFlags.Normal;
         }
 
         public override string ToString()

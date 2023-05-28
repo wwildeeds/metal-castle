@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14b8b78d8fbd4bb45a886e1725f59ee5, type: 3}
-  m_Name: RunSkillData
+  m_Name: AttackASkillData
   m_EditorClassIdentifier: 
-  m_skillName: Run
+  m_skillName: Attack A
   m_skillDesc: 
   m_skillCooltime: 0
   m_skillIcon: {fileID: 0}
-  m_animFlag: 1
-  m_animFrameLength: 0
-  m_animTranslationFrame: 0
+  m_animFlag: 4
+  m_animFrameLength: 34
+  m_animTranslationFrame: 32
   m_animEventFrames: 
   m_animExistTime: 0.99
