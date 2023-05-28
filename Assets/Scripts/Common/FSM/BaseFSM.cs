@@ -19,7 +19,7 @@ namespace wwild.common.fsm
         protected float[] AnimEventTimes { get; private set; }
         protected bool[] AnimEventToggles { get; private set; }
 
-        protected float FrameToTime => 1 / 30;
+        protected float FrameToTime { get; private set; }
         protected float EventTimer { get; set; }
 
         protected IFSMSystem IFsmSystem { get; private set; }
@@ -29,8 +29,10 @@ namespace wwild.common.fsm
         public BaseFSM(BaseSkillData data)
         {
             AnimFlag = data.AnimFlag;
+            FrameToTime = 1f / 60f;//data.AnimFrameLength;
             AnimTranslationTime = FrameToTime * data.AnimTranslationFrame;
             AnimExitTime = FrameToTime * data.AnimExitTime;
+            
             if (data.AnimEventFrames != null)
             {
                 AnimEventTimes = new float[data.AnimEventFrames.Length];

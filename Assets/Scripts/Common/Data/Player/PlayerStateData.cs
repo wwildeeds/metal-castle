@@ -35,6 +35,11 @@ namespace wwild.common.data
             m_stateFlag = UnitStateFlags.Normal;
         }
 
+        public void ChangePlayerState(UnitStateFlags flag)
+        {
+            m_stateFlag = flag;
+        }
+
         public override string ToString()
         {
             var info = $"Character type: {CharacterFlag}\nLevel: {Level}\nSTR: {STR}\nDEX: {DEX}\nINT: {INT}" +

@@ -38,8 +38,8 @@ namespace wwild.controller
             if (Initialized == false) return;
 
             InputSystem.UpdateSystem();
-            FsmSystem.UpdateSystem();
             MoveSystem.UpdateSystem();
+            FsmSystem.UpdateSystem();
             StateSystem.UpdateSystem();
         }
 
@@ -48,8 +48,8 @@ namespace wwild.controller
             if (Initialized == false) return;
 
             InputSystem.LateUpdateSystem();
-            FsmSystem.LateUpdateSystem();
             MoveSystem.LateUpdateSystem();
+            FsmSystem.LateUpdateSystem();
             StateSystem.LateUpdateSystem();
         }
 

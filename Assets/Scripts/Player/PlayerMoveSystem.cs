@@ -36,26 +36,23 @@ namespace wwild.player
             m_curDirection = m_curDirection.normalized;
         }
 
+        public void SetMoveSensitivity(float x, float z)
+        {
+            m_curDirection.x = x;
+            m_curDirection.z = z;
+            m_curDirection = m_curDirection.normalized;
+        }
+
         public void Movement()
         {
-            if (m_curDirection == Vector3.zero)
-            {
-                IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Idle);
-                return;
-            }
+            if (m_curDirection == Vector3.zero) return;
 
             IPlayerCtrl.trans.position += m_curDirection * Time.deltaTime * 2f;
-            IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Run);
-
-            m_curDirection = Vector3.zero;
         }
 
         public void Rotatement()
         {
-            if (m_curDirection == Vector3.zero)
-            {
-                return;
-            }
+            if (m_curDirection == Vector3.zero) return;
 
             var dir = (IPlayerCtrl.trans.position + m_curDirection) - IPlayerCtrl.trans.position;
             var from = IPlayerCtrl.trans.rotation;
@@ -79,5 +76,7 @@ namespace wwild.player
         public void Dispose()
         {
         }
+
+        
     }
 }

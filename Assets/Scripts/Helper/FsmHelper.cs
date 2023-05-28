@@ -34,7 +34,6 @@ namespace wwild.helper
         {
             await UniTask.Yield();
 
-            var commonData = SoManager.Instance.GetAnimModel<AnimCommonData>(AnimScriptableObjFlags.CommonAnim);
             var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
             var fsmList = new List<IBaseFSM>();
             var idle = new AssassinIdleFSM(skillData.GetSkill(AnimClipFlags.Idle));

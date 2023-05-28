@@ -32,23 +32,16 @@ namespace wwild.player
 
         private void OnInputKeyboard()
         {
-            if (Input.GetKey(KeyCode.W))
-            {
-                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.forward);
-            }
-            else if(Input.GetKey(KeyCode.S))
-            {
-                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.back);
-            }
+            if (IPlayerCtrl.StateSystem.CurStateFlag != UnitStateFlags.Normal) return;
 
-            if (Input.GetKey(KeyCode.A))
-            {
-                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.left);
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.right);
-            }
+            var x = Input.GetAxisRaw("Horizontal");
+            var z = Input.GetAxisRaw("Vertical");
+            IPlayerCtrl.MoveSystem.SetMoveSensitivity(x, z);
+
+            if (x == 0.0f && z == 0.0f)
+                IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Idle);
+            else
+                IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Run);
         }
 
         private void OnInputMouse()
@@ -58,7 +51,7 @@ namespace wwild.player
             {
                 if (IPlayerCtrl.StateSystem.CurStateFlag == UnitStateFlags.Normal)
                 {
-                    IPlayerCtrl.FsmSystem.PlayFSM(AnimClipFlags.AttackA);
+                    IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.AttackA);
                 }
                 else
                 {

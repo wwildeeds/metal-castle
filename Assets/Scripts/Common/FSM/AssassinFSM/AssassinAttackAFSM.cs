@@ -9,7 +9,9 @@ namespace wwild.common.fsm
     public class AssassinAttackAFSM : BaseFSM
     {
         public AssassinAttackAFSM(BaseSkillData data) : base(data)
-        { }
+        {
+        }
+
 
         public override void OnEnter()
         {

@@ -36,10 +36,26 @@ namespace wwild.player
 
         public void UpdateSystem()
         {
+            if (CompareFsmState(AnimClipFlags.Idle) || CompareFsmState(AnimClipFlags.Run))
+            {
+                m_playerData.StateData.ChangePlayerState(UnitStateFlags.Normal);
+            }
+
+            if (CompareFsmState(AnimClipFlags.AttackA) || CompareFsmState(AnimClipFlags.AttackB) || 
+                CompareFsmState(AnimClipFlags.AttackC) || CompareFsmState(AnimClipFlags.AttackD))
+            {
+                m_playerData.StateData.ChangePlayerState(UnitStateFlags.Attack);
+            }
         }
 
         public void LateUpdateSystem()
         {
+            
+        }
+
+        private bool CompareFsmState(AnimClipFlags flag)
+        {
+            return IPlayerCtrl.FsmSystem.CurFsmFlag == flag; 
         }
 
         public void Dispose()
