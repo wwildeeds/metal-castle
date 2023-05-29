@@ -32,10 +32,20 @@ namespace wwild.player
 
         private void OnInputKeyboard()
         {
-            if (IPlayerCtrl.StateSystem.CurStateFlag != UnitStateFlags.Normal) return;
-
             var x = Input.GetAxisRaw("Horizontal");
             var z = Input.GetAxisRaw("Vertical");
+
+            if (IPlayerCtrl.StateSystem.CurStateFlag != UnitStateFlags.Normal)
+            {
+                if (x != 0.0f || z != 0.0f)
+                {
+                    IPlayerCtrl.FsmSystem.ClearFSM();
+                }
+
+                IPlayerCtrl.MoveSystem.SetMoveDirection(Vector3.zero);
+                return;
+            }
+
             IPlayerCtrl.MoveSystem.SetMoveSensitivity(x, z);
 
             if (x == 0.0f && z == 0.0f)

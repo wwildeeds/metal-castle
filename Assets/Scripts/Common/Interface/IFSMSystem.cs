@@ -13,5 +13,6 @@ namespace wwild.common.itf
         void ChangeFSM(AnimClipFlags flag);
         void ChangeNextFSM();
         bool HasNextFSM();
+        void ClearFSM();
     }
 }

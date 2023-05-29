@@ -39,16 +39,16 @@ namespace wwild.helper
             var idle = new AssassinIdleFSM(skillData.GetSkill(AnimClipFlags.Idle));
             var run = new AssassinRunFSM(skillData.GetSkill(AnimClipFlags.Run));
             var atkA = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackA));
-            //var atkB = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackB));
-            //var atkC = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackC));
-            //var atkD = new AssassinAttackAFSM(skillData.GetSkill(AnimClipFlags.AttackD));
+            var atkB = new AssassinAttackBFSM(skillData.GetSkill(AnimClipFlags.AttackB));
+            var atkC = new AssassinAttackCFSM(skillData.GetSkill(AnimClipFlags.AttackC));
+            var atkD = new AssassinAttackDFSM(skillData.GetSkill(AnimClipFlags.AttackD));
 
             fsmList.Add(idle);
             fsmList.Add(run);
             fsmList.Add(atkA);
-            //fsmList.Add(atkB);
-            //fsmList.Add(atkC);
-            //fsmList.Add(atkD);
+            fsmList.Add(atkB);
+            fsmList.Add(atkC);
+            fsmList.Add(atkD);
 
             return fsmList;
         }

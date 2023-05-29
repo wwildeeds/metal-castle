@@ -40,9 +40,8 @@ namespace wwild.player
             {
                 m_playerData.StateData.ChangePlayerState(UnitStateFlags.Normal);
             }
-
-            if (CompareFsmState(AnimClipFlags.AttackA) || CompareFsmState(AnimClipFlags.AttackB) || 
-                CompareFsmState(AnimClipFlags.AttackC) || CompareFsmState(AnimClipFlags.AttackD))
+            else if (CompareFsmState(AnimClipFlags.AttackA) || CompareFsmState(AnimClipFlags.AttackB) || 
+                     CompareFsmState(AnimClipFlags.AttackC) || CompareFsmState(AnimClipFlags.AttackD))
             {
                 m_playerData.StateData.ChangePlayerState(UnitStateFlags.Attack);
             }

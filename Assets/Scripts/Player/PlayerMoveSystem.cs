@@ -32,12 +32,16 @@ namespace wwild.player
 
         public void SetMoveDirection(Vector3 dir)
         {
+            m_curDirection = Vector3.zero;
+
             m_curDirection += dir;
             m_curDirection = m_curDirection.normalized;
         }
 
         public void SetMoveSensitivity(float x, float z)
         {
+            m_curDirection = Vector3.zero;
+
             m_curDirection.x = x;
             m_curDirection.z = z;
             m_curDirection = m_curDirection.normalized;

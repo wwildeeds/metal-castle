@@ -92,6 +92,12 @@ namespace wwild.player
             return m_fsmQueue.Count > 0;
         }
 
+        public void ClearFSM()
+        {
+            if (HasNextFSM())
+                m_fsmQueue.Clear();
+        }
+
         public void UpdateSystem()
         {
             if (Initialized == false) return;
@@ -106,5 +112,7 @@ namespace wwild.player
         public void Dispose()
         {
         }
+
+        
     }
 }
