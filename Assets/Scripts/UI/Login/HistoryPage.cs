@@ -156,7 +156,27 @@ namespace wwild.ui.login
 
             await DataManager.Instance.PlayerStore.SetPlayerData(data);
 
-            SceneManager.Instance.LoadSceneAsync(((short)data.StateData.SceneFlag)).Forget();
+            SceneManager.Instance.LoadSceneAsync(((short)data.StateData.SceneFlag), () => 
+            {
+                var goList = new List<GameObject>();
+                if (GameManager.Instance.PlayerPool.HasPlayer)
+                {
+                }
+                else
+                {
+                    GameManager.Instance.PlayerPool.CreatePlayer();
+                }
+                if (GameManager.Instance.PlayerPool.HasCamera)
+                { }
+                else
+                {
+                    GameManager.Instance.PlayerPool.CreateCamera();
+                }
+
+                goList.Add(GameManager.Instance.PlayerPool.MyPlayer);
+                goList.Add(GameManager.Instance.PlayerPool.MyCamera);
+                return goList.ToArray();
+            }).Forget();
         }
 
         private async UniTask OnButtonDeleteClickAsync()

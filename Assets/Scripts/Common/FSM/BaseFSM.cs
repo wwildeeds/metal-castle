@@ -28,6 +28,8 @@ namespace wwild.common.fsm
         { }
         public BaseFSM(BaseSkillData data)
         {
+            if (data == null)
+                throw new NullReferenceException($"{nameof(BaseFSM)} param {nameof(BaseSkillData)} is null");
             AnimFlag = data.AnimFlag;
             FrameToTime = 1f / 60f;//data.AnimFrameLength;
             AnimTranslationTime = FrameToTime * data.AnimTranslationFrame;

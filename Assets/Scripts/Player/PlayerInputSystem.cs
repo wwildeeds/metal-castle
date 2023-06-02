@@ -58,6 +58,8 @@ namespace wwild.player
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+
                 if (IPlayerCtrl.StateSystem.CurStateFlag == UnitStateFlags.Normal)
                 {
                     IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.AttackA);
