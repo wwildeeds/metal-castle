@@ -38,10 +38,10 @@ namespace wwild.common.data
         public PlayerData GetData(int idx)
         {
             var state = m_stateList[idx];
-            //var skill = m_skillList[idx];
+            var skill = m_skillList[idx];
             //var inven = m_inventoryList[idx];
 
-            var model = new PlayerData(state, null, null);
+            var model = new PlayerData(state, skill, null);
             return model;
         }
 
