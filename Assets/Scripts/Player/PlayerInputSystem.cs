@@ -30,7 +30,7 @@ namespace wwild.player
             Initialized = true;
         }
 
-        private void OnInputKeyboard()
+        private void OnInputMovementKey()
         {
             var x = Input.GetAxisRaw("Horizontal");
             var z = Input.GetAxisRaw("Vertical");
@@ -54,9 +54,8 @@ namespace wwild.player
                 IPlayerCtrl.FsmSystem.ChangeFSM(AnimClipFlags.Run);
         }
 
-        private void OnInputMouse()
+        private void OnInputAttackKey()
         {
-            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (IPlayerCtrl.StateSystem.CurStateFlag == UnitStateFlags.Normal)
@@ -88,10 +87,13 @@ namespace wwild.player
                     }
                 }
             }
-
-            if(Input.GetKeyDown(KeyCode.Mouse1))
-            { }
         }
+
+        private void OnInputSkillKey()
+        { }
+
+        private void OnInputGuardKey()
+        { }
 
         public void UpdateSystem()
         {
@@ -102,15 +104,14 @@ namespace wwild.player
         {
             if (Initialized == false) return;
 
-            OnInputKeyboard();
-            OnInputMouse();
+            OnInputMovementKey();
+            OnInputAttackKey();
+            OnInputGuardKey();
+            OnInputSkillKey();
         }
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
         }
-
-        
     }
 }

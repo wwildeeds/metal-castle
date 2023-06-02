@@ -18,6 +18,6 @@ MonoBehaviour:
   m_skillIcon: {fileID: 0}
   m_animFlag: 5
   m_animFrameLength: 34
-  m_animTranslationFrame: 32
+  m_animTranslationFrame: 23
   m_animEventFrames: 
-  m_animExistTime: 0.99
+  m_animExistTime: 33
