@@ -23,11 +23,6 @@ namespace wwild.controller
 
         public IStateSystem StateSystem { get; private set; }
 
-        void Awake()
-        {
-            
-        }
-
         private void Start()
         {
             InitAsync().Forget();
@@ -58,7 +53,7 @@ namespace wwild.controller
             trans = this.transform;
             
             animator = GetComponent<Animator>();
-
+            animator.applyRootMotion = false;
 
             FsmSystem = new PlayerFsmSystem(this);
             InputSystem = new PlayerInputSystem(this);
