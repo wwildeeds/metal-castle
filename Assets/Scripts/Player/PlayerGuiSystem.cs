@@ -16,6 +16,11 @@ namespace wwild.player
     {
         public bool Initialized { get; private set; }
 
+        /// <summary>
+        /// InGamePage content interface
+        /// </summary>
+        private InGamePage m_gamePage;
+
         public IInfoPage InfoPage { get; private set; }
 
         public ISkillPage SkillPage { get; private set; }
@@ -24,11 +29,7 @@ namespace wwild.player
 
         public IActbarPage ActbarPage { get; private set; }
 
-        /// <summary>
-        /// InGamePage content interface
-        /// </summary>
-        private InGamePage m_gamePage;
-
+       
         public PlayerGuiSystem(IPlayerController ipc)
         {
             IPlayerCtrl = ipc;

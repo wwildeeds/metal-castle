@@ -42,7 +42,8 @@ namespace wwild.common.data
 
         public override string ToString()
         {
-            var info = $"Character type: {CharacterFlag}\nLevel: {Level}\nSTR: {STR}\nDEX: {DEX}\nINT: {INT}" +
+            var info = $"Character type: {CharacterFlag}\nLevel: {Level}\nSTR: {STR}\nHP: {MinHealth}-{MaxHealth}\nEnerge: {MinMana}-{MaxMana}" +
+                       $"\nDEX: {DEX}\nINT: {INT}" +
                        $"\nDMG: {MinDamage}-{MaxDamage}\nDFC: {MinDefence}-{MaxDefence}\nStage: {SceneFlag}" +
                        $"\nDesc: {Desc}";
             return info;

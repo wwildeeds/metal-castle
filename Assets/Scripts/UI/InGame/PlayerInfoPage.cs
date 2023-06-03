@@ -13,7 +13,10 @@ namespace wwild.ui.ingame
     using wwild.manager;
 
     public interface IInfoPage
-    { }
+    {
+        Action OnInfoChanged { get; }
+    }
+
     public class PlayerInfoPage : BaseContentPage, IContentPage, IInfoPage
     {
         [SerializeField]

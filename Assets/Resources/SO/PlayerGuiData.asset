@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791d023e4aedfe6488f7285ab2f2174c, type: 3}
   m_Name: PlayerGuiData
   m_EditorClassIdentifier: 
-  m_inGamePage: InGamePage
-  m_playerInfoPage: PlayerInfoPage
-  m_playerSkillPage: PlayerSkillPage
-  m_playerInventoryPage: PlayerInventoryPage
+  m_inGamePage: Page/InGamePage
+  m_playerInfoPage: Page/PlayerInfoPage
+  m_playerSkillPage: Page/PlayerSkillPage
+  m_playerInventoryPage: Page/PlayerInventoryPage
+  m_playerActbarPage: Page/PlayerActbarPage
