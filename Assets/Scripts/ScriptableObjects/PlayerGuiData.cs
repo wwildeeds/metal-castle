@@ -15,10 +15,13 @@ namespace wwild.scriptableObjects
         private string m_playerSkillPage;
         [SerializeField]
         private string m_playerInventoryPage;
+        [SerializeField]
+        private string m_playerActbarPage;
 
         public string InGamePage => m_inGamePage;
         public string PlayerInfoPage => m_playerInfoPage;
         public string PlayerSkillPage => m_playerSkillPage;
         public string PlayerInventoryPage => m_playerInventoryPage;
+        public string PlayerActbarPage => m_playerActbarPage;
     }
 }

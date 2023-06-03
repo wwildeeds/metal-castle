@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System;
 
 namespace wwild.ui.ingame
@@ -12,6 +13,7 @@ namespace wwild.ui.ingame
     using wwild.common.flags;
     using wwild.common.itf;
     using wwild.scriptableObjects;
+
     public class InGamePage : BasePage, IBucket<IContentPage>, IDisposable
     {
         [SerializeField]
@@ -43,6 +45,7 @@ namespace wwild.ui.ingame
             base.Init();
 
             m_bucket = new Dictionary<int, IContentPage>();
+
         }
 
         protected override void AddListeners()

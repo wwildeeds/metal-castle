@@ -611,8 +611,9 @@ GameObject:
   - component: {fileID: 4583772006331848170}
   - component: {fileID: 4101817078354954992}
   - component: {fileID: 6421394959469923133}
+  - component: {fileID: -1873910508659173447}
   m_Layer: 5
-  m_Name: PlayerActionbarPage
+  m_Name: PlayerActbarPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,6 +702,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-1873910508659173447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7888295849410336628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da97ba7ffd1c2c644b5fb53eb0e0706b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 4583772006331848170}
 --- !u!1 &8423581000381427496
 GameObject:
   m_ObjectHideFlags: 0

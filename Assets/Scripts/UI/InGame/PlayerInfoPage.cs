@@ -12,7 +12,9 @@ namespace wwild.ui.ingame
     using wwild.common.itf;
     using wwild.manager;
 
-    public class PlayerInfoPage : BaseContentPage, IContentPage
+    public interface IInfoPage
+    { }
+    public class PlayerInfoPage : BaseContentPage, IContentPage, IInfoPage
     {
         [SerializeField]
         private Button m_buttonCancel;
@@ -50,7 +52,6 @@ namespace wwild.ui.ingame
 
         protected override void RemoveListeners()
         {
-            base.RemoveListeners();
         }
 
         public void Show()
@@ -78,6 +79,11 @@ namespace wwild.ui.ingame
             await UniTask.Yield();
 
             Hide();
+        }
+
+        public T GetContentInterface<T>() where T : class
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

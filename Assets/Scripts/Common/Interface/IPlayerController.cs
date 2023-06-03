@@ -13,6 +13,7 @@ namespace wwild.common.itf
         IInputSystem InputSystem { get; }
         IMoveSystem MoveSystem { get; }
         IStateSystem StateSystem { get; }
+        IGuiSystem GuiSystem { get; }
 
     }
 }

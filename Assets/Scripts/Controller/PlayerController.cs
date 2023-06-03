@@ -23,9 +23,33 @@ namespace wwild.controller
 
         public IStateSystem StateSystem { get; private set; }
 
+        public IGuiSystem GuiSystem { get; private set; }
+
         private void Start()
         {
             InitAsync().Forget();
+        }
+
+        private async UniTask InitAsync()
+        {
+            trans = this.transform;
+
+            animator = GetComponent<Animator>();
+            animator.applyRootMotion = false;
+
+            FsmSystem = new PlayerFsmSystem(this);
+            InputSystem = new PlayerInputSystem(this);
+            MoveSystem = new PlayerMoveSystem(this);
+            StateSystem = new PlayerStateSystem(this);
+            GuiSystem = new PlayerGuiSystem(this);
+
+            await FsmSystem.InitAsync();
+            await InputSystem.InitAsync();
+            await MoveSystem.InitAsync();
+            await StateSystem.InitAsync();
+            await GuiSystem.InitAsync();
+
+            Initialized = true;
         }
 
         private void Update()
@@ -48,24 +72,6 @@ namespace wwild.controller
             StateSystem.LateUpdateSystem();
         }
 
-        private async UniTask InitAsync()
-        {
-            trans = this.transform;
-            
-            animator = GetComponent<Animator>();
-            animator.applyRootMotion = false;
-
-            FsmSystem = new PlayerFsmSystem(this);
-            InputSystem = new PlayerInputSystem(this);
-            MoveSystem = new PlayerMoveSystem(this);
-            StateSystem = new PlayerStateSystem(this);
-
-            await FsmSystem.InitAsync();
-            await InputSystem.InitAsync();
-            await MoveSystem.InitAsync();
-            await StateSystem.InitAsync();
-
-            Initialized = true;
-        }
+        
     }
 }

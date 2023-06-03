@@ -192,6 +192,12 @@ namespace wwild.ui.login
 
             await InitHistoryDataAsync();
         }
+
+        [System.Obsolete("not support in this class", true)]
+        public T GetContentInterface<T>() where T : class
+        {
+            throw new System.NotImplementedException();
+        }
         #endregion
     }
 }

@@ -7,22 +7,18 @@ namespace wwild.ui
 {
     using wwild.common.itf;
 
-    public class BaseContentPage : UIBehaviour
+    public abstract class BaseContentPage : UIBehaviour
     {
         protected static readonly int MIN_ORDER = 0;
         protected static readonly int MAX_ORDER = 3000;
 
         [Tooltip("canvas component"), SerializeField]
         protected Canvas canvas;
-        
-        protected virtual void Init()
-        {
-        }
 
-        protected virtual void AddListeners()
-        { }
+        protected abstract void Init();
 
-        protected virtual void RemoveListeners()
-        { }
+        protected abstract void AddListeners();
+
+        protected abstract void RemoveListeners();
     }
 }

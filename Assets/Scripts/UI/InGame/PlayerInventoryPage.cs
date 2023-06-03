@@ -7,6 +7,9 @@ namespace wwild.ui.ingame
 {
     using Cysharp.Threading.Tasks;
     using wwild.common.itf;
+
+    public interface IInventoryPage
+    { }
     public class PlayerInventoryPage : BaseContentPage, IContentPage
     {
         [SerializeField]
@@ -28,7 +31,6 @@ namespace wwild.ui.ingame
 
         protected override void Init()
         {
-            base.Init();
 
             InstanceID = this.GetInstanceID();
         }
@@ -63,6 +65,11 @@ namespace wwild.ui.ingame
         {
             await UniTask.Yield();
             Hide();
+        }
+
+        public T GetContentInterface<T>() where T : class
+        {
+            throw new System.NotImplementedException();
         }
         #endregion
 

@@ -8,6 +8,7 @@ namespace wwild.common.flags
     {
         PlayerInfo,
         PlayerSkill,
-        PlayerInventory
+        PlayerInventory,
+        PlayerActbar
     }
 }

@@ -8,7 +8,6 @@ namespace wwild.ui
 
     public class BasePage : UIBehaviour, IContainer<short, IContentPage>
     {
-
         private Dictionary<short, IContentPage> m_containers;
 
         protected virtual void AddListeners()
@@ -32,8 +31,6 @@ namespace wwild.ui
             if (obj.Equals(null)) throw new System.NullReferenceException();
 
             m_containers.Add(key, obj);
-
-            Debug.Log($"container count {m_containers.Count}");
         }
 
         public IContentPage GetRegisteredObj(short key)
@@ -50,7 +47,6 @@ namespace wwild.ui
         }
         public void ClearAll()
         {
-            throw new System.NotImplementedException();
         }
 
     }

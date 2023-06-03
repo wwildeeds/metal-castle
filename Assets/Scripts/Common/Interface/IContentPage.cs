@@ -11,5 +11,7 @@ namespace wwild.common.itf
         bool IsActiveInHierarchy { get; }
         void Show();
         void Hide();
+
+        T GetContentInterface<T>() where T : class;
     }
 }
