@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b8b78d8fbd4bb45a886e1725f59ee5, type: 3}
   m_Name: SkillDData
   m_EditorClassIdentifier: 
-  m_skillName: Skill A
+  m_skillName: Skill D
   m_skillDesc: 
   m_skillCooltime: 5
   m_skillIcon: {fileID: 0}
-  m_animFlag: 8
+  m_animFlag: 11
   m_animFrameLength: 63
   m_animTranslationFrame: 33
   m_animEventFrames: 
