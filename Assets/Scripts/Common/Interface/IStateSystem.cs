@@ -8,5 +8,6 @@ namespace wwild.common.itf
     public interface IStateSystem : IBaseSystem
     {
         UnitStateFlags CurStateFlag { get; }
+        bool CompareState(UnitStateFlags flag);
     }
 }

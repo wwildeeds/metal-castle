@@ -13,13 +13,13 @@ namespace wwild.manager
     public class SoManager : Singleton<SoManager>
     {
         [SerializeField]
-        private CharacterModel m_characterModel;
+        private CharacterSoHolder m_characterSoHolder;
         [SerializeField]
-        private GuiModel m_guiModel;
+        private GuiSoHolder m_guiSoHolder;
         [SerializeField]
-        private AnimModel m_animModel;
+        private AnimSoHolder m_animSoHolder;
         [SerializeField]
-        private SkillModel m_skillModel;
+        private SkillSoHolder m_skillSoHolder;
 
         public bool Initialized => initialized;
 
@@ -29,43 +29,43 @@ namespace wwild.manager
 
             base.Awake();
 
-            m_characterModel = new CharacterModel();
-            m_guiModel = new GuiModel();
-            m_animModel = new AnimModel();
-            m_skillModel = new SkillModel();
+            m_characterSoHolder = new CharacterSoHolder();
+            m_guiSoHolder = new GuiSoHolder();
+            m_animSoHolder = new AnimSoHolder();
+            m_skillSoHolder = new SkillSoHolder();
 
             InitAsync().Forget();
         }
 
         public override async UniTask InitAsync()
         {
-            await m_characterModel.InitAsync();
-            await m_guiModel.InitAsync();
-            await m_animModel.InitAsync();
-            await m_skillModel.InitAsync();
+            await m_characterSoHolder.InitAsync();
+            await m_guiSoHolder.InitAsync();
+            await m_animSoHolder.InitAsync();
+            await m_skillSoHolder.InitAsync();
 
             initialized = true;
         }
 
-        public T GetCharacterModel<T>(CharacterFlags flag) where T : ScriptableObject
+        public T GetCharacterSo<T>(CharacterFlags flag) where T : ScriptableObject
         {
-            return m_characterModel.GetCharacterData<T>(flag);
+            return m_characterSoHolder.GetCharacterSo<T>(flag);
         }
 
-        public T GetGuiModel<T>(GuiFlags flag) where T : ScriptableObject
+        public T GetGuiSo<T>(GuiSoFlags flag) where T : ScriptableObject
         {
-            return m_guiModel.GetGuiData<T>(flag);
+            return m_guiSoHolder.GetGuiSo<T>(flag);
         }
 
-        public T GetAnimModel<T>(AnimScriptableObjFlags flag) where T : ScriptableObject
+        public T GetAnimSo<T>(AnimSoFlags flag) where T : ScriptableObject
         {
-            return m_animModel.GetAnimData<T>(flag);
+            return m_animSoHolder.GetAnimSo<T>(flag);
 
         }
 
-        public T GetSkillModel<T>(SkillModelFlags flag) where T : ScriptableObject
+        public T GetSkillSo<T>(SkillSoFlags flag) where T : ScriptableObject
         {
-            return m_skillModel.GetModel<T>(flag);
+            return m_skillSoHolder.GetSkillSo<T>(flag);
         }
     }
 }

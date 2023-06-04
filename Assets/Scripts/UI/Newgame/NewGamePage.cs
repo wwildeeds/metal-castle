@@ -31,7 +31,7 @@ namespace wwild.ui.newgame
         private StringBuilder m_str;
 
         public Action<bool, CharacterFlags> OnSelectedUnitAsync { get; private set; }
-        private CharacterFlags m_selectedCharFlag;
+        private CharacterFlags m_selectedCharSoFlag;
 
         protected override void Awake()
         {
@@ -55,15 +55,15 @@ namespace wwild.ui.newgame
 
                 if (isSelected == false)
                 {
-                    m_selectedCharFlag = CharacterFlags.None;
+                    m_selectedCharSoFlag = CharacterFlags.None;
                     m_description.SetActive(false);
                     return;
                 }
 
                 m_str.Clear();
-                m_selectedCharFlag = flag;
+                m_selectedCharSoFlag = flag;
 
-                var data = SoManager.Instance.GetCharacterModel<UnitData>(flag);
+                var data = SoManager.Instance.GetCharacterSo<UnitData>(flag);
                 m_textHeader.text = data.Name;
                 m_str.Append($"STR: {data.STR}\nDEX: {data.DEX}\nINT: {data.INT}\nDAMAGE: {data.MinDamage}-{data.MaxDamage}\n{data.Description}");
                 m_textDescription.text = m_str.ToString();
@@ -94,25 +94,25 @@ namespace wwild.ui.newgame
             await UniTask.Yield();
             await UniTask.WaitUntil(() => DataManager.Instance.Initialized && SoManager.Instance.Initialized);
 
-            var statData = SoManager.Instance.GetCharacterModel<PlayerUnitData>(m_selectedCharFlag);
+            var statData = SoManager.Instance.GetCharacterSo<PlayerUnitData>(m_selectedCharSoFlag);
 
             SkillData[] skilldata = null;
             switch (statData.CharacterFlag)
             {
                 case CharacterFlags.Assassin:
-                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.AssassinSkillModel).SkillList;
+                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.AssassinSkillModel).SkillList;
                     break;
 
                 case CharacterFlags.Axe:
-                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.AxeSkillModel).SkillList;
+                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.AxeSkillModel).SkillList;
                     break;
 
                 case CharacterFlags.Dual:
-                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.DualSkillModel).SkillList;
+                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.DualSkillModel).SkillList;
                     break;
 
                 case CharacterFlags.Katana:
-                    skilldata = SoManager.Instance.GetSkillModel<SkillListSO>(SkillModelFlags.KatanaSkillModel).SkillList;
+                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.KatanaSkillModel).SkillList;
                     break;
             }
 

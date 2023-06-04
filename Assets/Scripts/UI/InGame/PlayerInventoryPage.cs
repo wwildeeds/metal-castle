@@ -69,7 +69,9 @@ namespace wwild.ui.ingame
 
         public T GetContentInterface<T>() where T : class
         {
-            throw new System.NotImplementedException();
+            var finded = this.TryGetComponent<T>(out var cmp);
+
+            return finded ? cmp : null;
         }
         #endregion
 

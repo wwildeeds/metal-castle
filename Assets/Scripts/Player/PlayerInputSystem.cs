@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,17 +92,44 @@ namespace wwild.player
         }
 
         private void OnInputSkillKey()
-        { }
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ExecuteInputedSkill(AnimClipFlags.SkillA);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ExecuteInputedSkill(AnimClipFlags.SkillB);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ExecuteInputedSkill(AnimClipFlags.SkillC);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                ExecuteInputedSkill(AnimClipFlags.SkillD);
+            }
+        }
 
         private void OnInputGuardKey()
         { }
 
-        public void UpdateSystem()
+        private void ExecuteInputedSkill(AnimClipFlags flag)
         {
-            if (Initialized == false) return;
+            //캐릭터 상태 이상 (죽음, 스턴, 에어본, 넉백 등) 시 스킬 사용할수 없음
+
+            if (IPlayerCtrl.StateSystem.CompareState(UnitStateFlags.Normal))
+            {
+                IPlayerCtrl.FsmSystem.ChangeFSM(flag);
+            }
+            else
+            {
+                if (IPlayerCtrl.StateSystem.CompareState(UnitStateFlags.Skill) || IPlayerCtrl.StateSystem.CompareState(UnitStateFlags.Attack))
+                    IPlayerCtrl.FsmSystem.InputFSM(flag);
+            }
         }
 
-        public void LateUpdateSystem()
+        public void UpdateSystem()
         {
             if (Initialized == false) return;
 
@@ -110,6 +137,11 @@ namespace wwild.player
             OnInputAttackKey();
             OnInputGuardKey();
             OnInputSkillKey();
+        }
+
+        public void LateUpdateSystem()
+        {
+            if (Initialized == false) return;
         }
 
         public void Dispose()

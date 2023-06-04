@@ -28,13 +28,13 @@ namespace wwild.common.data
             }
         }
 
-        public BaseSkillData GetSkill(string name)
+        public BaseSkillData GetSkillByName(string name)
         {
             var temp = m_skillList.Find(skill => skill.AnimName.Equals(name));
             return temp;
         }
 
-        public BaseSkillData GetSkill(AnimClipFlags flag)
+        public BaseSkillData GetSkillByFlag(AnimClipFlags flag)
         {
             var temp = m_skillList.Find(skill => skill.AnimFlag.Equals(flag));
             return temp;

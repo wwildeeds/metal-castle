@@ -18,8 +18,6 @@ namespace wwild.scriptableObjects
         [SerializeField]
         private Sprite m_skillIcon;
 
-        //[SerializeField]
-        //private string m_animName;
         [SerializeField]
         private AnimClipFlags m_animFlag;
         [SerializeField]
@@ -38,7 +36,6 @@ namespace wwild.scriptableObjects
         public Sprite SkillIcon => m_skillIcon;
 
 
-        //public string AnimName => m_animName;
         public AnimClipFlags AnimFlag => m_animFlag;
         public int AnimFrameLength => m_animFrameLength;
         public int AnimTranslationFrame => m_animTranslationFrame;

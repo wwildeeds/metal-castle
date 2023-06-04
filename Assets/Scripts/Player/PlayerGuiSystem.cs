@@ -50,7 +50,7 @@ namespace wwild.player
 
         private async UniTask CreateInGamePageAsync()
         {
-            var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).InGamePage;
+            var path = SoManager.Instance.GetGuiSo<PlayerGuiData>(GuiSoFlags.PlayerGui).InGamePage;
             var pref = await Resources.LoadAsync(path) as GameObject;
             var obj = GameObject.Instantiate(pref, Vector3.zero, Quaternion.identity);
 
@@ -83,14 +83,14 @@ namespace wwild.player
             }
             else
             {
-                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInfoPage;
+                var path = SoManager.Instance.GetGuiSo<PlayerGuiData>(GuiSoFlags.PlayerGui).PlayerInfoPage;
                 var go = await CreatorHelper.CreateGoAsync(path);
-                InfoPage = go.GetComponent<IInfoPage>();
 
                 var contentPage = go.GetComponent<IContentPage>();
                 contentPage.Hide();
-
                 m_gamePage.RegisterObj(key, contentPage);
+
+                InfoPage = contentPage.GetContentInterface<IInfoPage>();
             }
 
         }
@@ -106,14 +106,14 @@ namespace wwild.player
             }
             else
             {
-                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerSkillPage;
+                var path = SoManager.Instance.GetGuiSo<PlayerGuiData>(GuiSoFlags.PlayerGui).PlayerSkillPage;
                 var go = await CreatorHelper.CreateGoAsync(path);
-                SkillPage = go.GetComponent<ISkillPage>();
 
                 var contentPage = go.GetComponent<IContentPage>();
                 contentPage.Hide();
-
                 m_gamePage.RegisterObj(key, contentPage);
+
+                SkillPage = contentPage.GetContentInterface<ISkillPage>();
             }
         }
 
@@ -128,13 +128,14 @@ namespace wwild.player
             }
             else
             {
-                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerInventoryPage;
+                var path = SoManager.Instance.GetGuiSo<PlayerGuiData>(GuiSoFlags.PlayerGui).PlayerInventoryPage;
                 var go = await CreatorHelper.CreateGoAsync(path);
-                InventoryPage = go.GetComponent<IInventoryPage>();
 
                 var contentPage = go.GetComponent<IContentPage>();
                 contentPage.Hide();
                 m_gamePage.RegisterObj(key, contentPage);
+
+                InventoryPage = contentPage.GetContentInterface<IInventoryPage>();
             }
         }
 
@@ -149,13 +150,14 @@ namespace wwild.player
             }
             else
             {
-                var path = SoManager.Instance.GetGuiModel<PlayerGuiData>(GuiFlags.PlayerGui).PlayerActbarPage;
+                var path = SoManager.Instance.GetGuiSo<PlayerGuiData>(GuiSoFlags.PlayerGui).PlayerActbarPage;
                 var go = await CreatorHelper.CreateGoAsync(path);
-                ActbarPage = go.GetComponent<IActbarPage>();
 
                 var contentPage = go.GetComponent<IContentPage>();
                 contentPage.Hide();
                 m_gamePage.RegisterObj(key, contentPage);
+
+                ActbarPage = contentPage.GetContentInterface<IActbarPage>();
             }
         }
 

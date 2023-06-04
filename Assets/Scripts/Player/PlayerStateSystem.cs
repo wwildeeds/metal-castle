@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace wwild.player
 {
     using Cysharp.Threading.Tasks;
+    using wwild.common.data;
     using wwild.common.flags;
     using wwild.common.itf;
-    using wwild.common.data;
     using wwild.manager;
 
     public class PlayerStateSystem : BaseSystem, IStateSystem
@@ -34,31 +30,43 @@ namespace wwild.player
             Initialized = true;
         }
 
+        public bool CompareState(UnitStateFlags flag)
+        {
+            return CurStateFlag == flag;
+        }
+
         public void UpdateSystem()
         {
             if (CompareFsmState(AnimClipFlags.Idle) || CompareFsmState(AnimClipFlags.Run))
             {
                 m_playerData.StateData.ChangePlayerState(UnitStateFlags.Normal);
             }
-            else if (CompareFsmState(AnimClipFlags.AttackA) || CompareFsmState(AnimClipFlags.AttackB) || 
+            else if (CompareFsmState(AnimClipFlags.AttackA) || CompareFsmState(AnimClipFlags.AttackB) ||
                      CompareFsmState(AnimClipFlags.AttackC) || CompareFsmState(AnimClipFlags.AttackD))
             {
                 m_playerData.StateData.ChangePlayerState(UnitStateFlags.Attack);
+            }
+            else if (CompareFsmState(AnimClipFlags.SkillA) || CompareFsmState(AnimClipFlags.SkillB) ||
+                     CompareFsmState(AnimClipFlags.SkillC) || CompareFsmState(AnimClipFlags.SkillD))
+            {
+                m_playerData.StateData.ChangePlayerState(UnitStateFlags.Skill);
             }
         }
 
         public void LateUpdateSystem()
         {
-            
+
         }
 
         private bool CompareFsmState(AnimClipFlags flag)
         {
-            return IPlayerCtrl.FsmSystem.CurFsmFlag == flag; 
+            return IPlayerCtrl.FsmSystem.CurFsmFlag == flag;
         }
 
         public void Dispose()
         {
         }
+
+        
     }
 }
