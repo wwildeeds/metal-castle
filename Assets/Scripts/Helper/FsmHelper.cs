@@ -36,15 +36,17 @@ namespace wwild.helper
 
             var skillData = DataManager.Instance.PlayerStore.PlayerData.SkillData;
             var fsmList = new List<IBaseFSM>();
-            var idle = new AssassinIdleFSM(skillData.GetSkillByFlag(AnimClipFlags.Idle));
-            var run = new AssassinRunFSM(skillData.GetSkillByFlag(AnimClipFlags.Run));
-            var atkA = new AssassinAttackAFSM(skillData.GetSkillByFlag(AnimClipFlags.AttackA));
-            var atkB = new AssassinAttackBFSM(skillData.GetSkillByFlag(AnimClipFlags.AttackB));
-            var atkC = new AssassinAttackCFSM(skillData.GetSkillByFlag(AnimClipFlags.AttackC));
-            var atkD = new AssassinAttackDFSM(skillData.GetSkillByFlag(AnimClipFlags.AttackD));
-            var skillA = new AssassinSkillAFSM(skillData.GetSkillByFlag(AnimClipFlags.SkillA));
-            var skillB = new AssassinSkillAFSM(skillData.GetSkillByFlag(AnimClipFlags.SkillB));
-            var skillC = new AssassinSkillAFSM(skillData.GetSkillByFlag(AnimClipFlags.SkillC));
+
+            var idle = new AssassinIdleFSM(skillData.GetDefaultSkillByFlag(AnimClipFlags.Idle));
+            var run = new AssassinRunFSM(skillData.GetDefaultSkillByFlag(AnimClipFlags.Run));
+            var atkA = new AssassinAttackAFSM(skillData.GetDefaultSkillByFlag(AnimClipFlags.AttackA));
+            var atkB = new AssassinAttackBFSM(skillData.GetDefaultSkillByFlag(AnimClipFlags.AttackB));
+            var atkC = new AssassinAttackCFSM(skillData.GetDefaultSkillByFlag(AnimClipFlags.AttackC));
+            var atkD = new AssassinAttackDFSM(skillData.GetDefaultSkillByFlag(AnimClipFlags.AttackD));
+
+            var skillA = new AssassinSkillAFSM(skillData.GetUniqueSkillByFlag(AnimClipFlags.SkillA));
+            var skillB = new AssassinSkillAFSM(skillData.GetUniqueSkillByFlag(AnimClipFlags.SkillB));
+            var skillC = new AssassinSkillAFSM(skillData.GetUniqueSkillByFlag(AnimClipFlags.SkillC));
 
             fsmList.Add(idle);
             fsmList.Add(run);

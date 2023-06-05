@@ -27,17 +27,10 @@ namespace wwild.common.data
         public PlayerData()
         { }
 
-        public PlayerData(PlayerUnitData data)
-        {
-            m_stateData = new PlayerStateData(data);
-            m_skillData = new PlayerSkillData();
-            m_inventoryData = new PlayerInventoryData();
-        }
-
-        public PlayerData(PlayerUnitData state, SkillData[] skill)
+        public PlayerData(PlayerUnitData state, SkillData[] defaultSkill, SkillData[] uniqueSkill)
         {
             m_stateData = new PlayerStateData(state);
-            m_skillData = new PlayerSkillData(skill);
+            m_skillData = new PlayerSkillData(defaultSkill, uniqueSkill);
             m_inventoryData = new PlayerInventoryData();
         }
 

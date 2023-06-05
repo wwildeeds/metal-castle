@@ -96,28 +96,35 @@ namespace wwild.ui.newgame
 
             var statData = SoManager.Instance.GetCharacterSo<PlayerUnitData>(m_selectedCharSoFlag);
 
-            SkillData[] skilldata = null;
+            SkillListSO tempSO = null;
+            SkillData[] defaultSkills = null;
+            SkillData[] uniqueSkills = null;
             switch (statData.CharacterFlag)
             {
                 case CharacterFlags.Assassin:
-                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.AssassinSkillModel).SkillList;
+                    tempSO = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.AssassinSkillModel);
                     break;
 
                 case CharacterFlags.Axe:
-                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.AxeSkillModel).SkillList;
+                    tempSO = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.AxeSkillModel);
                     break;
 
                 case CharacterFlags.Dual:
-                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.DualSkillModel).SkillList;
+                    tempSO = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.DualSkillModel);
                     break;
 
                 case CharacterFlags.Katana:
-                    skilldata = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.KatanaSkillModel).SkillList;
+                    tempSO = SoManager.Instance.GetSkillSo<SkillListSO>(SkillSoFlags.KatanaSkillModel);
                     break;
             }
 
-            
-            await DataManager.Instance.PlayerStore.CreatePlayerDataAsync(statData, skilldata);
+            if (tempSO == null) throw new NullReferenceException("not found skill scriptable object asset");
+
+            defaultSkills = tempSO.DefaultSkills;
+            uniqueSkills = tempSO.UniqueSkills;
+
+
+            await DataManager.Instance.PlayerStore.CreatePlayerDataAsync(statData, defaultSkills, uniqueSkills);
 
             SceneManager.Instance.LoadSceneAsync(((short)SceneFlags.StageAxe), () => 
             {

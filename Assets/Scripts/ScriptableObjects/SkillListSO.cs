@@ -8,8 +8,11 @@ namespace wwild.scriptableObjects
     public class SkillListSO : ScriptableObject
     {
         [SerializeField]
-        private SkillData[] m_skillList;
+        private SkillData[] m_defaultSkills;
+        [SerializeField]
+        private SkillData[] m_uniqueSkills;
 
-        public SkillData[] SkillList => m_skillList;
+        public SkillData[] DefaultSkills => m_defaultSkills;
+        public SkillData[] UniqueSkills => m_uniqueSkills;
     }
 }
