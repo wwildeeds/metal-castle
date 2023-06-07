@@ -25,6 +25,8 @@ namespace wwild.controller
 
         public IGuiSystem GuiSystem { get; private set; }
 
+        public ISkillSystem SkillSystem { get; private set; }
+
         private void Start()
         {
             InitAsync().Forget();
@@ -42,12 +44,14 @@ namespace wwild.controller
             MoveSystem = new PlayerMoveSystem(this);
             StateSystem = new PlayerStateSystem(this);
             GuiSystem = new PlayerGuiSystem(this);
+            SkillSystem = new PlayerSkillSystem(this);
 
             await FsmSystem.InitAsync();
             await InputSystem.InitAsync();
             await MoveSystem.InitAsync();
             await StateSystem.InitAsync();
             await GuiSystem.InitAsync();
+            await SkillSystem.InitAsync();
 
             Initialized = true;
         }

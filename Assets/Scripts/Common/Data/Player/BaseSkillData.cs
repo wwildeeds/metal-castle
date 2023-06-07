@@ -14,13 +14,13 @@ namespace wwild.common.data
         [SerializeField]
         private string m_skillDesc;
         [SerializeField]
-        private float m_skillMinCooltime;
+        protected float m_skillMinCooltime;
         [SerializeField]
-        private float m_skillMaxCooltime;
+        protected float m_skillMaxCooltime;
         [SerializeField]
-        private bool m_skillCoolDone;
+        protected bool m_skillCoolDone;
         [SerializeField]
-        private Sprite m_skillIcon;
+        protected Sprite m_skillIcon;
 
         [SerializeField]
         private string m_animName;
@@ -53,7 +53,7 @@ namespace wwild.common.data
         public BaseSkillData()
         { }
 
-        public BaseSkillData(SkillData data)
+        public BaseSkillData(SkillSo data)
         {
             m_skillName = data.SkillName;
             m_skillDesc = data.SkillDesc;

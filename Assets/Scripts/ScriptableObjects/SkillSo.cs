@@ -7,7 +7,7 @@ namespace wwild.scriptableObjects
     using wwild.common.flags;
 
     [CreateAssetMenu(fileName = "SkillData", menuName = "SkillData")]
-    public class SkillData : ScriptableObject
+    public class SkillSo : ScriptableObject
     {
         [SerializeField]
         private string m_skillName;

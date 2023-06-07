@@ -27,7 +27,7 @@ namespace wwild.common.data
         public PlayerData()
         { }
 
-        public PlayerData(PlayerUnitData state, SkillData[] defaultSkill, SkillData[] uniqueSkill)
+        public PlayerData(PlayerUnitData state, SkillSo[] defaultSkill, SkillSo[] uniqueSkill)
         {
             m_stateData = new PlayerStateData(state);
             m_skillData = new PlayerSkillData(defaultSkill, uniqueSkill);

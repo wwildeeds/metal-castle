@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14b8b78d8fbd4bb45a886e1725f59ee5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d3ed845662c15546ba61c62dcf7b89d, type: 3}
   m_Name: SkillCData
   m_EditorClassIdentifier: 
   m_skillName: Skill C
   m_skillDesc: 
   m_skillCooltime: 5
-  m_skillIcon: {fileID: 0}
+  m_skillIcon: {fileID: 21300000, guid: 5ff051f847ca0b1499176d786eae97f0, type: 3}
   m_animFlag: 10
   m_animFrameLength: 165
   m_animTranslationFrame: 155

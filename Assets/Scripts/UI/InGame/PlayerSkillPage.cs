@@ -7,13 +7,19 @@ namespace wwild.ui.ingame
 {
     using Cysharp.Threading.Tasks;
     using wwild.common.itf;
+    using wwild.common.data;
+    using wwild.ui.slot;
 
     public interface ISkillPage
-    { }
-    public class PlayerSkillPage : BaseContentPage, IContentPage
+    {
+        void RegisterSkills(CharacterSkillData[] skillsData);
+    }
+    public class PlayerSkillPage : BaseContentPage, IContentPage, ISkillPage
     {
         [SerializeField]
         private Button m_buttonCancel;
+        [SerializeField]
+        private List<SkillSlot> m_skillList;
 
         public int InstanceID { get; private set; }
 
@@ -31,7 +37,6 @@ namespace wwild.ui.ingame
 
         protected override void Init()
         {
-
             InstanceID = this.GetInstanceID();
         }
 
@@ -57,9 +62,19 @@ namespace wwild.ui.ingame
             canvas.gameObject.SetActive(false);
         }
 
+        public void RegisterSkills(CharacterSkillData[] skillsData)
+        {
+            for (int i = 0; i < m_skillList.Count; i++)
+            {
+                m_skillList[i].RegisterSkill(skillsData[i]);
+            }
+        }
+
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            m_skillList.ForEach(s => s.Dispose());
+            m_skillList.Clear();
+            m_skillList = null;
         }
 
         #region button events
@@ -76,6 +91,7 @@ namespace wwild.ui.ingame
 
             return finded ? cmp : null;
         }
+
         #endregion
     }
 }

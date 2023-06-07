@@ -97,8 +97,8 @@ namespace wwild.ui.newgame
             var statData = SoManager.Instance.GetCharacterSo<PlayerUnitData>(m_selectedCharSoFlag);
 
             SkillListSO tempSO = null;
-            SkillData[] defaultSkills = null;
-            SkillData[] uniqueSkills = null;
+            SkillSo[] defaultSkills = null;
+            SkillSo[] uniqueSkills = null;
             switch (statData.CharacterFlag)
             {
                 case CharacterFlags.Assassin:

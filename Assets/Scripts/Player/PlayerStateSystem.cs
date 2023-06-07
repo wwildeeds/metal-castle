@@ -8,9 +8,10 @@ namespace wwild.player
 
     public class PlayerStateSystem : BaseSystem, IStateSystem
     {
-        private PlayerData m_playerData;
+        //private PlayerData m_playerData;
+        private PlayerStateData m_stateData;
 
-        public UnitStateFlags CurStateFlag => m_playerData.StateData.StateFlag;
+        public UnitStateFlags CurStateFlag => m_stateData.StateFlag;
 
         public bool Initialized { get; private set; }
 
@@ -25,7 +26,7 @@ namespace wwild.player
         public async UniTask InitAsync()
         {
             await UniTask.WaitUntil(() => DataManager.Instance.Initialized);
-            m_playerData = DataManager.Instance.PlayerStore.PlayerData;
+            m_stateData = DataManager.Instance.PlayerStore.PlayerData.StateData;
 
             Initialized = true;
         }
@@ -39,17 +40,17 @@ namespace wwild.player
         {
             if (CompareFsmState(AnimClipFlags.Idle) || CompareFsmState(AnimClipFlags.Run))
             {
-                m_playerData.StateData.ChangePlayerState(UnitStateFlags.Normal);
+                m_stateData.ChangePlayerState(UnitStateFlags.Normal);
             }
             else if (CompareFsmState(AnimClipFlags.AttackA) || CompareFsmState(AnimClipFlags.AttackB) ||
                      CompareFsmState(AnimClipFlags.AttackC) || CompareFsmState(AnimClipFlags.AttackD))
             {
-                m_playerData.StateData.ChangePlayerState(UnitStateFlags.Attack);
+                m_stateData.ChangePlayerState(UnitStateFlags.Attack);
             }
             else if (CompareFsmState(AnimClipFlags.SkillA) || CompareFsmState(AnimClipFlags.SkillB) ||
                      CompareFsmState(AnimClipFlags.SkillC) || CompareFsmState(AnimClipFlags.SkillD))
             {
-                m_playerData.StateData.ChangePlayerState(UnitStateFlags.Skill);
+                m_stateData.ChangePlayerState(UnitStateFlags.Skill);
             }
         }
 

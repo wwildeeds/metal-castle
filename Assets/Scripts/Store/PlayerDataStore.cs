@@ -31,7 +31,7 @@ namespace wwild.store
             m_historyData = await LoadHistoryDataAsync();
         }
 
-        public async UniTask CreatePlayerDataAsync(PlayerUnitData state, SkillData[] defaultSkill, SkillData[] uniqueSkill)
+        public async UniTask CreatePlayerDataAsync(PlayerUnitData state, SkillSo[] defaultSkill, SkillSo[] uniqueSkill)
         {
             m_playerData = new PlayerData(state, defaultSkill, uniqueSkill);
             m_historyData.AddData(m_playerData);
